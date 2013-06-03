@@ -28,7 +28,6 @@
     
     [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
     
-    [extendedAuthRequest release];
     
     if(IS_HEIGHT_GTE_568){
         CGRect frame = self.activityIndicator.frame;
@@ -75,7 +74,6 @@
                 
                 [QBContent blobsWithPagedRequest:pagedRequest delegate:self];
                 
-                [pagedRequest release];
             }
         
         // Get User's files result
@@ -86,7 +84,7 @@
                 QBCBlobPagedResult *res = (QBCBlobPagedResult *)result; 
                 
                 // Save user's filelist
-                [DataManager instance].fileList = [[res.blobs mutableCopy] autorelease];
+                [DataManager instance].fileList = [res.blobs mutableCopy];
                 
                 // hid splash screen
                 [self performSelector:@selector(hideSplashScreen) withObject:self afterDelay:1];

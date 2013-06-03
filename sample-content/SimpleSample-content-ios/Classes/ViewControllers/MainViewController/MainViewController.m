@@ -29,10 +29,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [imageViews release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -50,9 +46,7 @@
     }
     
     [toolbar setItems:[NSArray arrayWithObject:uploadItem]];
-    [uploadItem release];
     [self.view addSubview:toolbar];
-    [toolbar release];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -103,7 +97,6 @@
     image.userInteractionEnabled = YES;
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullScreenPicture:)];
     [image addGestureRecognizer:tapRecognizer];
-    [tapRecognizer release];
     
     [scroll addSubview:image];
     currentImageX += IMAGE_WIDTH;
@@ -127,7 +120,6 @@
     UIImageView* selectedImageView = (UIImageView*)[tapRecognizer view];
     PhotoViewController* photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
     [self.navigationController pushViewController:photoController animated:YES];
-    [photoController release];
 }
 
 // Show Picker for select picture from iPhone gallery to add to your gallery
@@ -152,9 +144,7 @@
     // Show image on gallery
     UIImageView* imageView = [[UIImageView alloc] initWithImage:selectedImage];
     [self showImage:imageView];
-    [imageView release];
     [imagePicker dismissModalViewControllerAnimated:NO];
-    [imagePicker release];
     
     
     // Upload file to QuickBlox server
@@ -163,7 +153,6 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [imagePicker dismissModalViewControllerAnimated:NO];
-    [imagePicker release];
 }
 
 
@@ -186,7 +175,6 @@
                 [[DataManager instance] savePicture:[UIImage imageWithData:[res file]]];
                 UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[res file]]];
                 [self showImage:imageView];
-                [imageView release];
                 //
                 [[[DataManager instance] fileList] removeLastObject];
                 

@@ -29,7 +29,6 @@
         photoDisplayer.opaque = NO;
         [photoDisplayer setImage:imageToDisplay];
         [self.view addSubview:photoDisplayer];
-        [photoDisplayer release];
     }
     return self;
 }
