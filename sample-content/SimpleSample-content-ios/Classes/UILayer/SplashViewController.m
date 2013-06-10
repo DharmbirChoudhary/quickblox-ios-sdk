@@ -7,10 +7,11 @@
 //
 
 #import "SplashViewController.h"
+#import "MainViewController.h"
 
 @interface SplashViewController ()
 
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -22,13 +23,9 @@
     
     // Your app connects to QuickBlox server here.
     //
-    // QuickBlox session creation
-    QBASessionCreationRequest *extendedAuthRequest = [[QBASessionCreationRequest alloc] init];
-    extendedAuthRequest.userLogin = @"emma";
-    extendedAuthRequest.userPassword = @"emma";
+    // QuickBlox session creation   
     
-    [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
-    
+    [self createQBSession];
     
     if(IS_HEIGHT_GTE_568){
         CGRect frame = self.activityIndicator.frame;
@@ -38,6 +35,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setActivityIndicator:nil];
     [self setActivityIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -49,12 +47,20 @@
 
 -(void)hideSplashScreen {
     [_activityIndicator stopAnimating];
-    [self dismissModalViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 #pragma mark -
 #pragma mark QBActionStatusDelegate
+
+- (void)createQBSession {
+    QBASessionCreationRequest *extendedAuthRequest = [[QBASessionCreationRequest alloc] init];
+    extendedAuthRequest.userLogin = @"emma";
+    extendedAuthRequest.userPassword = @"emma";
+    
+    [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
+}
 
 // QuickBlox API queries delegate
 -(void)completedWithResult:(Result *)result {
@@ -76,7 +82,7 @@
             }
         
         // Get User's files result
-        } else if ([result isKindOfClass:[QBCBlobPagedResult class]]){
+        } else if ([result isKindOfClass:[QBCBlobPagedResult class]]) {
             
             // Success result
             if(result.success){

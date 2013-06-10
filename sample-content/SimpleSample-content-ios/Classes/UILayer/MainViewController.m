@@ -11,7 +11,7 @@
 
 #define IMAGE_WIDTH 100
 #define IMAGE_HEIGHT 100
-#define START_POSITION_X 30
+#define START_POSITION_X 5
 #define START_POSITION_Y 10
 #define MARGING 5
 #define IMAGES_IN_ROW 3
@@ -33,25 +33,8 @@
 
 @implementation MainViewController
 
-
-
-
 #pragma mark -
 #pragma mark UIViewController lifecycle methods
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        currentImageX = START_POSITION_X;
-        currentImageY = START_POSITION_Y;
-        picturesInRowCounter = 0;
-        imageViews = [[NSMutableArray alloc] init];
-    }
-    
-    return self;
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,6 +42,12 @@
     CGRect appframe = [[UIScreen mainScreen] bounds];
     [_scroll setContentSize:appframe.size];
     [_scroll setMaximumZoomScale:4];
+    
+    currentImageX = START_POSITION_X;
+    currentImageY = START_POSITION_Y;
+    picturesInRowCounter = 0;
+    imageViews = [[NSMutableArray alloc] init];
+
     
     // Show toolbar
     UIBarButtonItem* uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"Add new image" style:UIBarButtonSystemItemAdd  target:self action:@selector(selectPicture)];
@@ -73,7 +62,7 @@
     [self.view addSubview:toolbar];
     
 
-    
+    [self performSegueWithIdentifier:@"splash" sender:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -134,29 +123,22 @@
         currentImageY += MARGING;
         picturesInRowCounter = 0;
     }
+    
+    if (currentImageY + IMAGE_HEIGHT > _scroll.contentSize.height) {
+        CGSize newContentSize = _scroll.contentSize;
+        
+        newContentSize.height += IMAGE_HEIGHT;
+        
+        [_scroll setContentSize:newContentSize];
+    }
 }
+
+#pragma mark -
+#pragma mark UIGestureRecognizer delegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
-
-- (void)showFullScreenPicture:(id)sender {
-    UITapGestureRecognizer* tapRecognizer = (UITapGestureRecognizer*)sender;
-    UIImageView* selectedImageView = (UIImageView*)[tapRecognizer view];
-    PhotoViewController* photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
-    [self.navigationController pushViewController:photoController animated:YES];
-}
-
-// Show Picker for select picture from iPhone gallery to add to your gallery
-- (void)selectPicture {
-    _imagePicker = [[UIImagePickerController alloc] init];
-    _imagePicker.allowsEditing = NO;
-    _imagePicker.delegate = self;
-    _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentModalViewController:_imagePicker animated:NO];
-}
-
 
 #pragma mark -
 #pragma mark UIImagePickerControllerDelegate
@@ -178,6 +160,26 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [_imagePicker dismissModalViewControllerAnimated:NO];
+}
+
+#pragma mark -
+#pragma mark ImagePicker Controller methods 
+
+- (void)showFullScreenPicture:(id)sender {
+    UITapGestureRecognizer* tapRecognizer = (UITapGestureRecognizer*)sender;
+    UIImageView* selectedImageView = (UIImageView*)[tapRecognizer view];
+    PhotoViewController* photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
+    [self.navigationController pushViewController:photoController animated:YES];
+}
+
+// Show Picker for select picture from iPhone gallery to add to your gallery
+- (void)selectPicture {
+    _imagePicker = [[UIImagePickerController alloc] init];
+    _imagePicker.allowsEditing = NO;
+    _imagePicker.delegate = self;
+    _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentModalViewController:_imagePicker animated:NO];
 }
 
 
