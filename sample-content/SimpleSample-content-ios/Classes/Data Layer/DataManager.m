@@ -12,17 +12,14 @@ static DataManager* instance = nil;
 
 @implementation DataManager
 
-@synthesize fileList = _fileList;
-@synthesize images = _images;
-
-+(DataManager*)instance{
++ (DataManager*)instance {
     if (!instance) {
         instance = [[DataManager alloc] init];
     }
     return instance;
 }
 
--(void)savePicture:(UIImage *)image{
+- (void)savePicture:(UIImage *)image {
     if (!_images) {
         _images = [[NSMutableArray alloc] init];
     }

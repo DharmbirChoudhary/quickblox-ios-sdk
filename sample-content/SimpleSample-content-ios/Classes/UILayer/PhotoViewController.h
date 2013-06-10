@@ -13,6 +13,6 @@
 
 @interface PhotoViewController : UIViewController
 
--(id)initWithImage:(UIImage*)imageToDisplay;
+- (id)initWithImage:(UIImage*)imageToDisplay;
 
 @end

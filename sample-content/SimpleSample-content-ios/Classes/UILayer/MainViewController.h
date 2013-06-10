@@ -12,24 +12,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#define IMAGE_WIDTH 100
-#define IMAGE_HEIGHT 100
-#define START_POSITION_X 22
-#define START_POSITION_Y 10
-#define MARGING 5
-#define IMAGES_IN_ROW 3
+#import "SplashViewController.h"
 
 @interface MainViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate, QBActionStatusDelegate,UIGestureRecognizerDelegate>{
-    
-    int currentImageX;
-    int currentImageY;
-    int picturesInRowCounter;
-    
-    NSMutableArray* imageViews;
 }
-@property (strong, nonatomic) IBOutlet UIScrollView *scroll;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic,strong) UIImagePickerController* imagePicker;
 
 @end

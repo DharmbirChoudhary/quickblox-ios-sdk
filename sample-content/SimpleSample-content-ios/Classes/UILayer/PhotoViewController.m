@@ -14,7 +14,7 @@
 
 @implementation PhotoViewController
 
--(id)initWithImage:(UIImage*)imageToDisplay{
+- (id)initWithImage:(UIImage*)imageToDisplay {
     self = [super init];
     if (self) {
         
@@ -33,8 +33,7 @@
     return self;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

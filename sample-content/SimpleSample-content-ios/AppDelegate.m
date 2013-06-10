@@ -25,18 +25,18 @@
     [QBSettings setAuthorizationSecret:@"BTFsj7Rtt27DAmT"];
     
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    MainViewController *_mainController = [[MainViewController alloc] init];
-    [_mainController setTitle:@"User's Gallery"];
-    _navController = [[UINavigationController alloc] initWithRootViewController:_mainController];
-    
-    self.window.rootViewController = _navController;
-    [self.window makeKeyAndVisible];
-
-    SplashViewController *splashController = [[SplashViewController alloc] initWithNibName:@"SplashViewController" bundle:nil];
-    [_navController presentModalViewController:splashController animated:NO];
+//    MainViewController *_mainController = [[MainViewController alloc] init];
+//    [_mainController setTitle:@"User's Gallery"];
+//    _navController = [[UINavigationController alloc] initWithRootViewController:_mainController];
+//    
+//    self.window.rootViewController = _navController;
+//    [self.window makeKeyAndVisible];
+//
+//    SplashViewController *splashController = [[SplashViewController alloc] initWithNibName:@"SplashViewController" bundle:nil];
+//    [_navController presentModalViewController:splashController animated:NO];
 
     return YES;
 }

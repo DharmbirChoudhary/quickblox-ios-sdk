@@ -8,14 +8,36 @@
 
 #import "MainViewController.h"
 #import "PhotoViewController.h"
-@interface MainViewController ()
+
+#define IMAGE_WIDTH 100
+#define IMAGE_HEIGHT 100
+#define START_POSITION_X 30
+#define START_POSITION_Y 10
+#define MARGING 5
+#define IMAGES_IN_ROW 3
+
+
+@interface MainViewController () {
+    int currentImageX;
+    int currentImageY;
+    int picturesInRowCounter;
+    
+    NSMutableArray* imageViews;
+}
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scroll;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic,strong) UIImagePickerController* imagePicker;
 
 @end
 
 @implementation MainViewController
-@synthesize scroll;
-@synthesize activityIndicator;
-@synthesize imagePicker;
+
+
+
+
+#pragma mark -
+#pragma mark UIViewController lifecycle methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,15 +48,17 @@
         picturesInRowCounter = 0;
         imageViews = [[NSMutableArray alloc] init];
     }
+    
     return self;
 }
 
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
+        
     CGRect appframe = [[UIScreen mainScreen] bounds];
-    [scroll setContentSize:appframe.size];
-    [scroll setMaximumZoomScale:4];
+    [_scroll setContentSize:appframe.size];
+    [_scroll setMaximumZoomScale:4];
     
     // Show toolbar
     UIBarButtonItem* uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"Add new image" style:UIBarButtonSystemItemAdd  target:self action:@selector(selectPicture)];
@@ -47,29 +71,30 @@
     
     [toolbar setItems:[NSArray arrayWithObject:uploadItem]];
     [self.view addSubview:toolbar];
+    
+
+    
 }
 
--(void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     if (![[DataManager instance] images]) {
         
         // Download user's files
         [self downloadFile];
         
-        [activityIndicator startAnimating];
+        [_activityIndicator startAnimating];
         
         return;
     }    
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setActivityIndicator:nil];
     [self setScroll:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -77,7 +102,7 @@
 #pragma mark -
 #pragma mark Core
 
--(void)downloadFile{
+- (void)downloadFile {
     int fileID = [(QBCBlob *)[[[DataManager instance] fileList] lastObject] ID];
     if(fileID > 0){
         // Download file from QuickBlox server
@@ -86,19 +111,19 @@
     
     // end of files
     if ([[DataManager instance] fileList].count == 0) {
-        [activityIndicator stopAnimating];
-        activityIndicator.hidden = YES;
+        [_activityIndicator stopAnimating];
+        _activityIndicator.hidden = YES;
     }
 }
 
 // Show image on your gallery
--(void)showImage:(UIImageView*) image{
+- (void)showImage:(UIImageView*) image {
     image.frame = CGRectMake(currentImageX, currentImageY, IMAGE_WIDTH, IMAGE_HEIGHT);
     image.userInteractionEnabled = YES;
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullScreenPicture:)];
     [image addGestureRecognizer:tapRecognizer];
     
-    [scroll addSubview:image];
+    [_scroll addSubview:image];
     currentImageX += IMAGE_WIDTH;
     currentImageX += MARGING; // distance between two images
     picturesInRowCounter++;
@@ -111,11 +136,11 @@
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
 
--(void)showFullScreenPicture:(id)sender{
+- (void)showFullScreenPicture:(id)sender {
     UITapGestureRecognizer* tapRecognizer = (UITapGestureRecognizer*)sender;
     UIImageView* selectedImageView = (UIImageView*)[tapRecognizer view];
     PhotoViewController* photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
@@ -123,13 +148,13 @@
 }
 
 // Show Picker for select picture from iPhone gallery to add to your gallery
--(void)selectPicture{
-    imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.allowsEditing = NO;
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+- (void)selectPicture {
+    _imagePicker = [[UIImagePickerController alloc] init];
+    _imagePicker.allowsEditing = NO;
+    _imagePicker.delegate = self;
+    _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentModalViewController:imagePicker animated:NO];
+    [self presentModalViewController:_imagePicker animated:NO];
 }
 
 
@@ -137,22 +162,22 @@
 #pragma mark UIImagePickerControllerDelegate
 
 // when photo is selected from gallery - > upload it to server
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* selectedImage = [info valueForKey:UIImagePickerControllerOriginalImage];   
     NSData* imageData = UIImagePNGRepresentation(selectedImage);
     
     // Show image on gallery
     UIImageView* imageView = [[UIImageView alloc] initWithImage:selectedImage];
     [self showImage:imageView];
-    [imagePicker dismissModalViewControllerAnimated:NO];
+    [_imagePicker dismissModalViewControllerAnimated:NO];
     
     
     // Upload file to QuickBlox server
     [QBContent TUploadFile:imageData fileName:@"Great Image" contentType:@"image/png" isPublic:NO delegate:self];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-    [imagePicker dismissModalViewControllerAnimated:NO];
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [_imagePicker dismissModalViewControllerAnimated:NO];
 }
 
 
@@ -160,7 +185,7 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result{
+-(void)completedWithResult:(Result *)result {
     
     // Download file result
     if ([result isKindOfClass:QBCFileDownloadTaskResult.class]) {

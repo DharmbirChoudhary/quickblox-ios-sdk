@@ -7,17 +7,18 @@
 //
 
 #import "SplashViewController.h"
+
 @interface SplashViewController ()
+
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
 @implementation SplashViewController
-@synthesize activityIndicator;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    [activityIndicator startAnimating];
+    [_activityIndicator startAnimating];
     
     // Your app connects to QuickBlox server here.
     //
@@ -36,20 +37,18 @@
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setActivityIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)hideSplashScreen{
-    [activityIndicator stopAnimating];
+-(void)hideSplashScreen {
+    [_activityIndicator stopAnimating];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -58,7 +57,7 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result{
+-(void)completedWithResult:(Result *)result {
     // Success result
     if(result.success){
         
