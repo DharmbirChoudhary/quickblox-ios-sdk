@@ -56,7 +56,7 @@
         
     }else {
         UIAlertView *allert = [[UIAlertView alloc] initWithTitle:@"Errors"
-                                                         message:@"Please feel both Note & Comment fields"
+                                                         message:@"Please fill both Note & Comment fields"
                                                         delegate:self
                                                cancelButtonTitle:@"Ok"
                                                otherButtonTitles:nil];

@@ -54,7 +54,7 @@
         
         UILabel *date = [[UILabel alloc] init];
         [date setFrame:CGRectMake(10, 50, 60, 20)];
-        [date setText:@"Data: "];
+        [date setText:@"Date: "];
         [date setBackgroundColor:[UIColor clearColor]];
         [date setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:17]];
         [self addSubview:date];
