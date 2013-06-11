@@ -17,6 +17,10 @@
 
 @implementation SplashViewController
 
+
+#pragma mark -
+#pragma mark UIViewController lifecycle methods 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_activityIndicator startAnimating];
@@ -41,9 +45,9 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
+
+#pragma mark -
+#pragma mark Interface methods
 
 -(void)hideSplashScreen {
     [_activityIndicator stopAnimating];
@@ -63,7 +67,7 @@
 }
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result {
+- (void)completedWithResult:(Result *)result {
     // Success result
     if(result.success){
         

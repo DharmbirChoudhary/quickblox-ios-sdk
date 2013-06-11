@@ -83,13 +83,8 @@
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
 #pragma mark -
-#pragma mark Core
+#pragma mark Core logic
 
 - (void)downloadFile {
     int fileID = [(QBCBlob *)[[[DataManager instance] fileList] lastObject] ID];
@@ -187,8 +182,8 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result {
-    
+- (void)completedWithResult:(Result *)result {
+    NSLog(@" RESULT%@",result);
     // Download file result
     if ([result isKindOfClass:QBCFileDownloadTaskResult.class]) {
         
@@ -203,17 +198,18 @@
                 UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[res file]]];
                 [self showImage:imageView];
                 //
-                [[[DataManager instance] fileList] removeLastObject];
-                
-                // Download next file
-                [self downloadFile];
             }          
-        }else{
-            [[[DataManager instance] fileList] removeLastObject];
-            
-            // download next file
-            [self downloadFile];
         }
+        
+        [[[DataManager instance] fileList] removeLastObject];
+        
+        // Download next file
+        [self downloadFile];
+
+    }
+    
+    else {
+        NSLog(@"%@",result.errors);
     }
 }
 
