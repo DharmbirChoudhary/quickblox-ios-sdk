@@ -74,30 +74,22 @@
         // QuickBlox session creation  result
         if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
             
-            // Success result
-            if (result.success) {
-                
-                // send request for getting user's filelist
-                PagedRequest *pagedRequest = [[PagedRequest alloc] init];    
-                [pagedRequest setPerPage:10];
-                
-                [QBContent blobsWithPagedRequest:pagedRequest delegate:self];
-                
-            }
-        
-        // Get User's files result
-        } else if ([result isKindOfClass:[QBCBlobPagedResult class]]) {
+            // send request for getting user's filelist
+            PagedRequest *pagedRequest = [[PagedRequest alloc] init];    
+            [pagedRequest setPerPage:10];
             
-            // Success result
-            if (result.success) {
-                QBCBlobPagedResult *res = (QBCBlobPagedResult *)result; 
-                
-                // Save user's filelist
-                [DataManager instance].fileList = [res.blobs mutableCopy];
-                
-                // hid splash screen
-                [self performSelector:@selector(hideSplashScreen) withObject:self afterDelay:1];
-            }
+            [QBContent blobsWithPagedRequest:pagedRequest delegate:self];
+            
+        // Get User's files result
+        }
+        else if ([result isKindOfClass:[QBCBlobPagedResult class]]) {
+            QBCBlobPagedResult *res = (QBCBlobPagedResult *)result;
+            
+            // Save user's filelist
+            [DataManager instance].fileList = [res.blobs mutableCopy];
+            
+            // hid splash screen
+            [self performSelector:@selector(hideSplashScreen) withObject:self afterDelay:1];
         }
     }
 }

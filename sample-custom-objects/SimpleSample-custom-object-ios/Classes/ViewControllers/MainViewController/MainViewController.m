@@ -105,9 +105,13 @@
     [formatter setDateFormat: @"yyyy-MMMM-dd HH:mm"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
     NSString *stringFromDate;
-    if ([[[[DataManager shared] notes] objectAtIndex:indexPath.row] updatedAt]) {
+    
+    QBCOCustomObject* customObject = [[[DataManager shared] notes] objectAtIndex:indexPath.row];
+    
+    if ([customObject updatedAt]) {
         stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] updatedAt]];
-    } else {
+    }
+    else {
         stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] createdAt]];
     }
     [cell.dateLabel setText:stringFromDate];
