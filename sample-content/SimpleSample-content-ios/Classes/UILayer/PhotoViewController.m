@@ -14,28 +14,12 @@
 
 @implementation PhotoViewController
 
-- (id)initWithImage:(UIImage *)imageToDisplay {
-    self = [super init];
-    if (self) {
-        
-        // Show full screen image
-        UIImageView *photoDisplayer = [[UIImageView alloc] init];
-        
-        if(IS_HEIGHT_GTE_568){
-            [photoDisplayer setFrame:CGRectMake(0, 0, 400, 508)];
-        }else{
-            [photoDisplayer setFrame:CGRectMake(0, 0, 400, 420)];
-        }
-        
-        photoDisplayer.opaque = NO;
-        [photoDisplayer setImage:imageToDisplay];
-        [self.view addSubview:photoDisplayer];
-    }
-    return self;
+- (void)viewDidLoad {
+    [self.photoDisplayer setImage:self.photoImage];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)viewDidUnload {
+    [self setPhotoDisplayer:nil];
+    [super viewDidUnload];
 }
-
 @end

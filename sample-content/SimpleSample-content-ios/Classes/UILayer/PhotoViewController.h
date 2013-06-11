@@ -13,6 +13,6 @@
 
 @interface PhotoViewController : UIViewController
 
-- (id)initWithImage:(UIImage *)imageToDisplay;
-
+@property (weak, nonatomic) IBOutlet UIImageView *photoDisplayer;
+@property (weak, nonatomic) UIImage *photoImage;
 @end

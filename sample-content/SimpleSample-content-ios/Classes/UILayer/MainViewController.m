@@ -20,7 +20,7 @@
 @interface MainViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, QBActionStatusDelegate,UIGestureRecognizerDelegate> {
     int currentImageX;
     int currentImageY;
-    int picturesInRowCounter;    
+    int picturesInRowCounter;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll;
@@ -77,6 +77,13 @@
     [self setActivityIndicator:nil];
     [self setScroll:nil];
     [super viewDidUnload];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"photoControllerSegue"]) {
+        UIImageView* selectedView = (UIImageView*)sender;
+        ((PhotoViewController *)segue.destinationViewController).photoImage = selectedView.image;
+    }
 }
 
 #pragma mark -
@@ -153,16 +160,6 @@
     [_imagePicker dismissModalViewControllerAnimated:NO];
 }
 
-#pragma mark -
-#pragma mark ImagePicker Controller methods 
-
-- (void)showFullScreenPicture:(id)sender {
-    UITapGestureRecognizer *tapRecognizer = (UITapGestureRecognizer *)sender;
-    UIImageView *selectedImageView = (UIImageView *)[tapRecognizer view];
-    PhotoViewController *photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
-    [self.navigationController pushViewController:photoController animated:YES];
-}
-
 // Show Picker for select picture from iPhone gallery to add to your gallery
 - (void)selectPicture {
     _imagePicker = [[UIImagePickerController alloc] init];
@@ -171,6 +168,17 @@
     _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentModalViewController:_imagePicker animated:NO];
+}
+
+
+#pragma mark -
+#pragma mark ImagePicker Controller methods 
+
+- (void)showFullScreenPicture:(id)sender {
+    UITapGestureRecognizer *tapRecognizer = (UITapGestureRecognizer *)sender;
+    UIImageView *selectedImageView = (UIImageView *)[tapRecognizer view];
+   
+    [self performSegueWithIdentifier:@"photoControllerSegue" sender:selectedImageView];    
 }
 
 

@@ -448,8 +448,8 @@
 		8A2F267914F7F0D300292876 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Khomenko Igor (67859YS754)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khomenko Igor (67859YS754)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -470,8 +470,8 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "SimpleSample-location_users-ios";
-				PROVISIONING_PROFILE = "CF0288AA-998C-4684-9C01-C6670357947E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CF0288AA-998C-4684-9C01-C6670357947E";
+				PROVISIONING_PROFILE = "1576CACB-6248-4BD8-B223-5B9427767808";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1576CACB-6248-4BD8-B223-5B9427767808";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -480,7 +480,8 @@
 		8A2F267A14F7F0D300292876 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Khomenko Igor (67859YS754)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -496,7 +497,8 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "SimpleSample-location_users-ios";
-				PROVISIONING_PROFILE = "CF0288AA-998C-4684-9C01-C6670357947E";
+				PROVISIONING_PROFILE = "1576CACB-6248-4BD8-B223-5B9427767808";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1576CACB-6248-4BD8-B223-5B9427767808";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
