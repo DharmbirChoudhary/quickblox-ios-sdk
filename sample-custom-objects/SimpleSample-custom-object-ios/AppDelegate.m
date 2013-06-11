@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "SplashViewController.h"
-#import "MainViewController.h"
 
 @implementation AppDelegate
 
