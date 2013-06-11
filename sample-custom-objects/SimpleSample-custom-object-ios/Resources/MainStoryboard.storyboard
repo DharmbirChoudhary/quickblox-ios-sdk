@@ -99,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFN-z1-wxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="-363"/>
+            <point key="canvasLocation" x="-340" y="-465"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="OiC-03-HrZ">
@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9as-la-Jbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="317" y="-363"/>
+            <point key="canvasLocation" x="325" y="-465"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TVj-KZ-SN2">
@@ -131,31 +131,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIp-86-oXE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-824" y="-363"/>
+            <point key="canvasLocation" x="-990" y="-465"/>
         </scene>
     </scenes>
     <resources>
         <image name="imagesbackground.jpeg" width="225" height="225"/>
     </resources>
-    <classes>
-        <class className="CustomTableViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomTableViewCell.h"/>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addNewNote:"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SplashViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activitiIndicator" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -14,12 +14,12 @@
 
 @implementation PhotoViewController
 
-- (id)initWithImage:(UIImage*)imageToDisplay {
+- (id)initWithImage:(UIImage *)imageToDisplay {
     self = [super init];
     if (self) {
         
         // Show full screen image
-        UIImageView* photoDisplayer = [[UIImageView alloc] init];
+        UIImageView *photoDisplayer = [[UIImageView alloc] init];
         
         if(IS_HEIGHT_GTE_568){
             [photoDisplayer setFrame:CGRectMake(0, 0, 400, 508)];

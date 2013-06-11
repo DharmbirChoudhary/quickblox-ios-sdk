@@ -10,14 +10,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataManager : NSObject{
-}
+@interface DataManager : NSObject
 
-@property (nonatomic,strong) NSMutableArray* fileList;
-@property (nonatomic,strong) NSMutableArray* images;
+@property (nonatomic,strong) NSMutableArray *fileList;
+@property (nonatomic,strong) NSMutableArray *images;
 
-+ (DataManager*)instance;
++ (DataManager *)instance;
 
-- (void)savePicture:(UIImage*)image;
+- (void)savePicture:(UIImage *)image;
 
 @end

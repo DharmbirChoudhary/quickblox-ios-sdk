@@ -8,22 +8,29 @@
 
 #import "DataManager.h"
 
-static DataManager* instance = nil;
+static DataManager *instance = nil;
 
 @implementation DataManager
 
-+ (DataManager*)instance {
-    if (!instance) {
-        instance = [[DataManager alloc] init];
-    }
++ (DataManager *)instance {    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    
     return instance;
 }
 
 - (void)savePicture:(UIImage *)image {
+    [self.images addObject:image];
+}
+
+- (NSMutableArray *)images {
     if (!_images) {
         _images = [[NSMutableArray alloc] init];
     }
-    [_images addObject:image];
+    
+    return _images;
 }
 
 @end

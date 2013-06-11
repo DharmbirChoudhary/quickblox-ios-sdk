@@ -17,18 +17,15 @@
 #define IMAGES_IN_ROW 3
 
 
-@interface MainViewController () {
+@interface MainViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, QBActionStatusDelegate,UIGestureRecognizerDelegate> {
     int currentImageX;
     int currentImageY;
-    int picturesInRowCounter;
-    
-    NSMutableArray* imageViews;
+    int picturesInRowCounter;    
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic,strong) UIImagePickerController* imagePicker;
-
+@property (nonatomic,strong) UIImagePickerController *imagePicker;
 @end
 
 @implementation MainViewController
@@ -46,11 +43,10 @@
     currentImageX = START_POSITION_X;
     currentImageY = START_POSITION_Y;
     picturesInRowCounter = 0;
-    imageViews = [[NSMutableArray alloc] init];
 
     
     // Show toolbar
-    UIBarButtonItem* uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"Add new image" style:UIBarButtonSystemItemAdd  target:self action:@selector(selectPicture)];
+    UIBarButtonItem *uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"Add new image" style:UIBarButtonItemStyleBordered  target:self action:@selector(selectPicture)];
     UIToolbar *toolbar = [[UIToolbar alloc] init];
     if(IS_HEIGHT_GTE_568){
         toolbar.frame = CGRectMake(0, self.view.frame.size.height+1, self.view.frame.size.width, 44);
@@ -66,7 +62,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (![[DataManager instance] images]) {
+    if ([[DataManager instance] images].count == 0) {
         
         // Download user's files
         [self downloadFile];
@@ -101,13 +97,13 @@
 }
 
 // Show image on your gallery
-- (void)showImage:(UIImageView*) image {
+- (void)showImage:(UIImageView *) image {
     image.frame = CGRectMake(currentImageX, currentImageY, IMAGE_WIDTH, IMAGE_HEIGHT);
     image.userInteractionEnabled = YES;
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullScreenPicture:)];
     [image addGestureRecognizer:tapRecognizer];
     
-    [_scroll addSubview:image];
+    [self.scroll addSubview:image];
     currentImageX += IMAGE_WIDTH;
     currentImageX += MARGING; // distance between two images
     picturesInRowCounter++;
@@ -124,7 +120,7 @@
         
         newContentSize.height += IMAGE_HEIGHT;
         
-        [_scroll setContentSize:newContentSize];
+        [self.scroll setContentSize:newContentSize];
     }
 }
 
@@ -140,11 +136,11 @@
 
 // when photo is selected from gallery - > upload it to server
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage* selectedImage = [info valueForKey:UIImagePickerControllerOriginalImage];   
-    NSData* imageData = UIImagePNGRepresentation(selectedImage);
+    UIImage *selectedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
+    NSData *imageData = UIImagePNGRepresentation(selectedImage);
     
     // Show image on gallery
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:selectedImage];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:selectedImage];
     [self showImage:imageView];
     [_imagePicker dismissModalViewControllerAnimated:NO];
     
@@ -161,9 +157,9 @@
 #pragma mark ImagePicker Controller methods 
 
 - (void)showFullScreenPicture:(id)sender {
-    UITapGestureRecognizer* tapRecognizer = (UITapGestureRecognizer*)sender;
-    UIImageView* selectedImageView = (UIImageView*)[tapRecognizer view];
-    PhotoViewController* photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
+    UITapGestureRecognizer *tapRecognizer = (UITapGestureRecognizer *)sender;
+    UIImageView *selectedImageView = (UIImageView *)[tapRecognizer view];
+    PhotoViewController *photoController = [[PhotoViewController alloc] initWithImage:selectedImageView.image];
     [self.navigationController pushViewController:photoController animated:YES];
 }
 
@@ -191,13 +187,11 @@
         if (result.success) {
             
             QBCFileDownloadTaskResult *res = (QBCFileDownloadTaskResult *)result;
-            if ([res file]) {   
-                
+            if ([res file]) {
                 // Add image to gallery
                 [[DataManager instance] savePicture:[UIImage imageWithData:[res file]]];
-                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[res file]]];
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[res file]]];
                 [self showImage:imageView];
-                //
             }          
         }
         

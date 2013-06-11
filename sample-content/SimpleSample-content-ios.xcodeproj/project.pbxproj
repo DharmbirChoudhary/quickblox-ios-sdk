@@ -18,7 +18,6 @@
 		618F2011175C7FA6007CD823 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 618F2001175C7FA6007CD823 /* logo.png */; };
 		618F2012175C7FA6007CD823 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 618F2002175C7FA6007CD823 /* MainStoryboard.storyboard */; };
 		618F2014175C7FA6007CD823 /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 618F2005175C7FA6007CD823 /* PhotoViewController.xib */; };
-		618F2015175C7FA6007CD823 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 618F2006175C7FA6007CD823 /* SplashViewController.xib */; };
 		ED49FAA815B56E5200154AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED49FAA715B56E5200154AE8 /* UIKit.framework */; };
 		ED49FAAA15B56E5200154AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED49FAA915B56E5200154AE8 /* Foundation.framework */; };
 		ED49FAAC15B56E5200154AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED49FAAB15B56E5200154AE8 /* CoreGraphics.framework */; };
@@ -55,7 +54,6 @@
 		618F2001175C7FA6007CD823 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		618F2002175C7FA6007CD823 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		618F2005175C7FA6007CD823 /* PhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoViewController.xib; sourceTree = "<group>"; };
-		618F2006175C7FA6007CD823 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		618F2007175C7FA6007CD823 /* SimpleSample-content-ios-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SimpleSample-content-ios-Info.plist"; sourceTree = "<group>"; };
 		618F2008175C7FA6007CD823 /* SimpleSample-content-ios-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SimpleSample-content-ios-Prefix.pch"; sourceTree = "<group>"; };
 		ED49FAA315B56E5200154AE8 /* SimpleSample-content-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleSample-content-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				618F2005175C7FA6007CD823 /* PhotoViewController.xib */,
-				618F2006175C7FA6007CD823 /* SplashViewController.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -276,7 +273,6 @@
 				618F2011175C7FA6007CD823 /* logo.png in Resources */,
 				618F2012175C7FA6007CD823 /* MainStoryboard.storyboard in Resources */,
 				618F2014175C7FA6007CD823 /* PhotoViewController.xib in Resources */,
-				618F2015175C7FA6007CD823 /* SplashViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

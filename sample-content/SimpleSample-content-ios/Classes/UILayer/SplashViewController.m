@@ -9,7 +9,7 @@
 #import "SplashViewController.h"
 #import "MainViewController.h"
 
-@interface SplashViewController ()
+@interface SplashViewController ()<QBActionStatusDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 

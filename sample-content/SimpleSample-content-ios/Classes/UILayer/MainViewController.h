@@ -14,7 +14,7 @@
 #import <UIKit/UIKit.h>
 #import "SplashViewController.h"
 
-@interface MainViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate, QBActionStatusDelegate,UIGestureRecognizerDelegate>{
+@interface MainViewController : UIViewController {
 }
 
 @end

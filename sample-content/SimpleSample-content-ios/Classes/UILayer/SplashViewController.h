@@ -14,6 +14,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SplashViewController : UIViewController<QBActionStatusDelegate>
+@interface SplashViewController : UIViewController
 
 @end
