@@ -97,22 +97,27 @@
     CustomTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
    
     // set note name & status
-    [cell.noteLabel setText:[[[self.searchArray objectAtIndex:indexPath.row] fields] objectForKey:@"note"]];
-    [cell.statusLabel setText:[[[self.searchArray objectAtIndex:indexPath.row] fields] objectForKey:@"status"]];
+    QBCOCustomObject* customObjectForCell = [self.searchArray objectAtIndex:indexPath.row];
+    NSString* noteText = [[customObjectForCell fields] objectForKey:@"note"];
+    NSString* statusText = [[customObjectForCell fields] objectForKey:@"status"];
+    
+    [cell.noteLabel setText:noteText];
+    [cell.statusLabel setText:statusText];
     
     // set createdAt/updatedAt date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"yyyy-MMMM-dd HH:mm"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
     NSString *stringFromDate;
     
     QBCOCustomObject* customObject = [[[DataManager shared] notes] objectAtIndex:indexPath.row];
     
     if ([customObject updatedAt]) {
-        stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] updatedAt]];
+        NSDate* updateDate = [[self.searchArray objectAtIndex:indexPath.row] updatedAt];
+        stringFromDate = [formatter stringFromDate:updateDate];
     }
     else {
-        stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] createdAt]];
+        NSDate* creationDate = [[self.searchArray objectAtIndex:indexPath.row] createdAt];
+        stringFromDate = [formatter stringFromDate:creationDate];
     }
     [cell.dateLabel setText:stringFromDate];
     
@@ -136,12 +141,15 @@
         
     // search
     } else {
-        for (QBCOCustomObject *object in [[DataManager shared] notes]) {
-            NSRange note = [[object.fields objectForKey:@"note"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if(note.location != NSNotFound){
-                [self.searchArray addObject:object];
-            }
-        }
+       
+        DataManager *dataManager = [DataManager shared];
+        NSIndexSet *foundObjectsIndexes = [dataManager.notes indexesOfObjectsPassingTest:^BOOL(QBCOCustomObject *note, NSUInteger idx, BOOL *stop) {
+            NSRange range = [note.fields[@"note"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            return range.location != NSNotFound;
+        }];
+        
+        [self.searchArray addObjectsFromArray:[dataManager.notes objectsAtIndexes:foundObjectsIndexes]];
+        
     }
     
     [self.tableView reloadData];

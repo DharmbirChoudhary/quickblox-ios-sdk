@@ -148,9 +148,11 @@
     } else {
         switch (buttonIndex) {
             case 1:{
+                NSString* noteComment = [[self.customObject fields] objectForKey:@"comment"];
+                NSString* alertText = ((UITextField *)[alertView viewWithTag:101]).text;
                 // change comments & update custom object
-                NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", [[self.customObject fields] objectForKey:@"comment"],
-                                      ((UITextField *)[alertView viewWithTag:101]).text];
+                
+                NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", noteComment,alertText];
 
                 [[self.customObject fields] setObject:comments forKey:@"comment"];
             
