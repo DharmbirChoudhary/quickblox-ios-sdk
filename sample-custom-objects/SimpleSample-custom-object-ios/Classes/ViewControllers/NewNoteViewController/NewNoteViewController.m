@@ -9,13 +9,17 @@
 #import "NewNoteViewController.h"
 #import "DataManager.h"
 
-@interface NewNoteViewController ()
+@interface NewNoteViewController () <QBActionStatusDelegate, UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextView *noteTextField;
+@property (weak, nonatomic) IBOutlet UITextView *commentTextField;
+
+- (IBAction)back:(id)sender;
+- (IBAction)next:(id)sender;
 
 @end
 
 @implementation NewNoteViewController
-@synthesize commentTextField;
-@synthesize noteTextField;
 
 - (void)viewDidUnload
 {
@@ -26,12 +30,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
 - (IBAction)back:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -40,14 +38,7 @@
     
     if(self.noteTextField.text.length && self.commentTextField.text.length){
         
-        // Create note
-        QBCOCustomObject *object = [QBCOCustomObject customObject];
-        object.className = customClassName;
-        [object.fields setObject:self.noteTextField.text forKey:@"note"];
-        [object.fields setObject:self.commentTextField.text forKey:@"comment"];
-        [object.fields setObject:@"New" forKey:@"status"];
-        
-        [QBCustomObjects createObject:object delegate:self];
+        [self createNote];
         
     }else {
         UIAlertView *allert = [[UIAlertView alloc] initWithTitle:@"Errors"
@@ -57,6 +48,17 @@
                                                otherButtonTitles:nil];
         [allert show];
     }
+}
+
+
+- (void)createNote {
+    QBCOCustomObject *object = [QBCOCustomObject customObject];
+    object.className = customClassName;
+    [object.fields setObject:self.noteTextField.text forKey:@"note"];
+    [object.fields setObject:self.commentTextField.text forKey:@"comment"];
+    [object.fields setObject:@"New" forKey:@"status"];
+    
+    [QBCustomObjects createObject:object delegate:self];
 }
 
 

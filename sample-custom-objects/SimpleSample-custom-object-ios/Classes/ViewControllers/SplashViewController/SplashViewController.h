@@ -17,6 +17,6 @@
 
 @interface SplashViewController : UIViewController <QBActionStatusDelegate>
 
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activitiIndicator;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitiIndicator;
 
 @end

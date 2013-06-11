@@ -11,17 +11,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NoteDetailsViewController : UIViewController <QBActionStatusDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
+@interface NoteDetailsViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *noteLabel;
-@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
-@property (strong, nonatomic) IBOutlet UITextView *comentsTextView;
 @property (strong, nonatomic) QBCOCustomObject *customObject;
 
 - (void) reloadData;
-
-- (IBAction)addComment:(id)sender;
-- (IBAction)changeStatus:(id)sender;
-- (IBAction)deleteNote:(id)sender;
 
 @end

@@ -12,9 +12,6 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize navigationController;
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -23,21 +20,7 @@
     [QBSettings setApplicationID:92];
     [QBSettings setAuthorizationKey:@"wJHdOcQSxXQGWx5"];
     [QBSettings setAuthorizationSecret:@"BTFsj7Rtt27DAmT"];
-    
-//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-//    [self.window makeKeyAndVisible];
-//    
-//    // show main controller
-//    MainViewController *mainViewController = [[MainViewController alloc] init];
-//    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:mainViewController]  autorelease];
-//    [mainViewController release];
-//    [self.window setRootViewController:self.navigationController];
-//    
-//    // show Splash screen
-//    SplashViewController *splashViewController = [[SplashViewController alloc] init];
-//    [self.navigationController presentModalViewController:splashViewController animated:NO];
-//    [splashViewController release];
-    
+        
     return YES;
 }
 

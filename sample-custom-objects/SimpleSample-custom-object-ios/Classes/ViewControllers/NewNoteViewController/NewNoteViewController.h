@@ -11,12 +11,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewNoteViewController : UIViewController <QBActionStatusDelegate, UITextViewDelegate>
-
-@property (strong, nonatomic) IBOutlet UITextView *noteTextField;
-@property (strong, nonatomic) IBOutlet UITextView *commentTextField;
-
-- (IBAction)back:(id)sender;
-- (IBAction)next:(id)sender;
+@interface NewNoteViewController : UIViewController 
 
 @end

@@ -19,7 +19,6 @@
 		43658B4716031E43000F6748 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 43658B4416031E43000F6748 /* logo.png */; };
 		43658B4E16031FC8000F6748 /* NoteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43658B4C16031FC8000F6748 /* NoteDetailsViewController.xib */; };
 		43658B5316031FE7000F6748 /* NewNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43658B5116031FE7000F6748 /* NewNoteViewController.xib */; };
-		43658B5A16032572000F6748 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43658B5816032572000F6748 /* SplashViewController.xib */; };
 		4382D7601607474D00DA7A38 /* imagesbackground.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4382D75F1607474D00DA7A38 /* imagesbackground.jpeg */; };
 		43900C01162443CF0041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C00162443CF0041381B /* Default-568h@2x.png */; };
 		43E141461603340300891AD7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E141451603340300891AD7 /* CoreData.framework */; };
@@ -62,7 +61,6 @@
 		43658B4416031E43000F6748 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		43658B4C16031FC8000F6748 /* NoteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteDetailsViewController.xib; sourceTree = "<group>"; };
 		43658B5116031FE7000F6748 /* NewNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewNoteViewController.xib; sourceTree = "<group>"; };
-		43658B5816032572000F6748 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		4382D75F1607474D00DA7A38 /* imagesbackground.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imagesbackground.jpeg; sourceTree = "<group>"; };
 		43900C00162443CF0041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		43E141451603340300891AD7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -212,7 +210,6 @@
 		43658B3816031D8D000F6748 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				43658B5816032572000F6748 /* SplashViewController.xib */,
 				43658B5116031FE7000F6748 /* NewNoteViewController.xib */,
 				43658B4C16031FC8000F6748 /* NoteDetailsViewController.xib */,
 				43658B3916031D8D000F6748 /* MainViewController.xib */,
@@ -354,7 +351,6 @@
 				43658B4716031E43000F6748 /* logo.png in Resources */,
 				43658B4E16031FC8000F6748 /* NoteDetailsViewController.xib in Resources */,
 				43658B5316031FE7000F6748 /* NewNoteViewController.xib in Resources */,
-				43658B5A16032572000F6748 /* SplashViewController.xib in Resources */,
 				4382D7601607474D00DA7A38 /* imagesbackground.jpeg in Resources */,
 				43900C01162443CF0041381B /* Default-568h@2x.png in Resources */,
 				618D16891766235F001C638F /* MainStoryboard.storyboard in Resources */,

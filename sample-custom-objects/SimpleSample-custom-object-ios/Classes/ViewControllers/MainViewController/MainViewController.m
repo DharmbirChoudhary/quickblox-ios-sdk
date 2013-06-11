@@ -11,84 +11,92 @@
 #import "NewNoteViewController.h"
 #import "CustomTableViewCell.h"
 
-@interface MainViewController ()
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) NSMutableArray *searchArray;
+
+- (IBAction)addNewNote:(id)sender;
 
 @end
 
 @implementation MainViewController
-@synthesize tableView;
-@synthesize searchBar;
-@synthesize searchArray;
 
-- (id)init{
+- (id)init {
     self = [super init];
+    
     if (self) {
-        searchArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Notes"];
+- (NSMutableArray*)searchArray {
+    if (!_searchArray) {
+        _searchArray = [[NSMutableArray alloc] init];
+    }
+    
+    return _searchArray;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self performSegueWithIdentifier:@"splashSegue" sender:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self.searchArray removeAllObjects];
     [self.searchArray addObjectsFromArray:[[DataManager shared] notes]];
     [self.tableView reloadData];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setTableView:nil];
     [self setSearchBar:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (IBAction)addNewNote:(id)sender {
+    [self performSegueWithIdentifier:@"newNoteSegue" sender:self];
 }
 
-
-
-- (IBAction)addNewNote:(id)sender {
-    NewNoteViewController *newNoteViewController = [[NewNoteViewController alloc] init];
-    [self presentModalViewController:newNoteViewController animated:YES];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"noteDetailsSegue"]) {
+        CustomTableViewCell* selectedCell = (CustomTableViewCell*)sender;
+        
+        NSIndexPath* selectedIndexPath = [self.tableView indexPathForCell:selectedCell];
+        
+        QBCOCustomObject* selectedObject = [[DataManager shared].notes objectAtIndex:selectedIndexPath.row];
+        
+        ((NoteDetailsViewController *)segue.destinationViewController).customObject = selectedObject;
+    }
 }
 
 
 #pragma mark -
 #pragma mark TableViewDataSource & TableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.searchBar resignFirstResponder];
-    
-    // Show particular note
-    NoteDetailsViewController *noteDetailsViewController = [[NoteDetailsViewController alloc] init];
-    QBCOCustomObject *customObject = (QBCOCustomObject *)[[[DataManager shared] notes] objectAtIndex:indexPath.row];
-    noteDetailsViewController.customObject = customObject;
-    [self.navigationController pushViewController:noteDetailsViewController animated:YES];
+        
+    CustomTableViewCell* selectedCell = (CustomTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+
+    [self performSegueWithIdentifier:@"noteDetailsSegue" sender:selectedCell];    
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.searchArray count];
 }
 
 // Making table view using custom cells
-- (UITableViewCell*)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString* SimpleTableIdentifier = @"SimpleTableIdentifier";
     
-    CustomTableViewCell* cell = [_tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
-    if (cell == nil){
-        cell = [[CustomTableViewCell alloc] init];
-    }
-    
+    CustomTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
+   
     // set note name & status
     [cell.noteLabel setText:[[[self.searchArray objectAtIndex:indexPath.row] fields] objectForKey:@"note"]];
     [cell.statusLabel setText:[[[self.searchArray objectAtIndex:indexPath.row] fields] objectForKey:@"status"]];
@@ -103,34 +111,29 @@
     }else{
         stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] createdAt]];
     }
-    [cell.dataLabel setText:stringFromDate];
+    [cell.dateLabel setText:stringFromDate];
     
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80;
-}
-
-
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
--(void) searchBarSearchButtonClicked:(UISearchBar *)SearchBar{
+-(void) searchBarSearchButtonClicked:(UISearchBar *)SearchBar {
     [self.searchBar resignFirstResponder];
 }
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     [self.searchArray removeAllObjects];
     
-    if([searchText length] == 0){
+    if([searchText length] == 0) {
         [self.searchArray addObjectsFromArray:[[DataManager shared] notes]];
         [self.searchBar resignFirstResponder];
         
     // search
-    }else{
+    }
+    else {
         for(QBCOCustomObject *object in [[DataManager shared] notes]){
             NSRange note = [[object.fields objectForKey:@"note"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if(note.location != NSNotFound){

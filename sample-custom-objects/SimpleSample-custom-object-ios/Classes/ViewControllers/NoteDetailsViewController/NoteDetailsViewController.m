@@ -8,19 +8,23 @@
 
 #import "NoteDetailsViewController.h"
 
-@interface NoteDetailsViewController ()
+@interface NoteDetailsViewController ()<QBActionStatusDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UITextView *comentsTextView;
+
+- (IBAction)addComment:(id)sender;
+- (IBAction)changeStatus:(id)sender;
+- (IBAction)deleteNote:(id)sender;
 
 @end
 
+
+
 @implementation NoteDetailsViewController
 
-@synthesize noteLabel;
-@synthesize statusLabel;
-@synthesize comentsTextView;
-@synthesize customObject;
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self reloadData];
     
@@ -28,19 +32,15 @@
     
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setNoteLabel:nil];
     [self setStatusLabel:nil];
     [self setComentsTextView:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
+#pragma mark -
+#pragma mark Interface methods
 
 - (IBAction)addComment:(id)sender {
     // Show alert for enter new comment
@@ -63,7 +63,6 @@
 }
 
 - (IBAction)changeStatus:(id)sender {
-    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select status"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -75,18 +74,18 @@
 
 - (IBAction)deleteNote:(id)sender {
     // remove note
-    [QBCustomObjects deleteObjectWithID: customObject.ID className:customClassName delegate:self];
+    [QBCustomObjects deleteObjectWithID: self.customObject.ID className:customClassName delegate:self];
     
-    [[[DataManager shared] notes] removeObjectIdenticalTo:customObject];
+    [[[DataManager shared] notes] removeObjectIdenticalTo:self.customObject];
 }
 
 - (void) reloadData{
     // set note & status
-    self.noteLabel.text = [[customObject fields] objectForKey:@"note"];
-    self.statusLabel.text = [[customObject fields] objectForKey:@"status"];
+    self.noteLabel.text = [[self.customObject fields] objectForKey:@"note"];
+    self.statusLabel.text = [[self.customObject fields] objectForKey:@"status"];
     
     // set comments
-    NSString *commentsAsString = [[customObject fields] objectForKey:@"comment"];
+    NSString *commentsAsString = [[self.customObject fields] objectForKey:@"comment"];
     if(![commentsAsString isKindOfClass:NSNull.class]){
         NSArray *comments = [commentsAsString componentsSeparatedByString:@"-c-"];
         [self.comentsTextView setText:nil];
@@ -128,8 +127,8 @@
     if(status){
         
         // chabge status & update custom object
-        [[customObject fields] setObject:status forKey:@"status"];
-        [QBCustomObjects updateObject:customObject delegate:self];
+        [[self.customObject fields] setObject:status forKey:@"status"];
+        [QBCustomObjects updateObject:self.customObject delegate:self];
         
         // refresh table
         [self reloadData];
@@ -150,11 +149,12 @@
         switch (buttonIndex) {
             case 1:{
                 // change comments & update custom object
-                NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", [[customObject fields] objectForKey:@"comment"], ((UITextField *)[alertView viewWithTag:101]).text];
+                NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", [[self.customObject fields] objectForKey:@"comment"],
+                                      ((UITextField *)[alertView viewWithTag:101]).text];
 
-                [[customObject fields] setObject:comments forKey:@"comment"];
+                [[self.customObject fields] setObject:comments forKey:@"comment"];
             
-                [QBCustomObjects updateObject:customObject delegate:self];
+                [QBCustomObjects updateObject:self.customObject delegate:self];
             
                 // refresh table
                 [self reloadData];
