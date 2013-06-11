@@ -124,7 +124,7 @@
         }
     }
     
-    if(status){
+    if (status) {
         
         // chabge status & update custom object
         [[self.customObject fields] setObject:status forKey:@"status"];
@@ -141,11 +141,11 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     // delete note alert
-    if(alertView.tag == 2){
+    if (alertView.tag == 2) {
         [self.navigationController popViewControllerAnimated:YES];
         
     // Add new comment alert
-    }else{
+    } else {
         switch (buttonIndex) {
             case 1:{
                 // change comments & update custom object

@@ -11,8 +11,7 @@
 #import "NewNoteViewController.h"
 #import "CustomTableViewCell.h"
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
-}
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -106,9 +105,9 @@
     [formatter setDateFormat: @"yyyy-MMMM-dd HH:mm"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
     NSString *stringFromDate;
-    if([[[[DataManager shared] notes] objectAtIndex:indexPath.row] updatedAt]){
+    if ([[[[DataManager shared] notes] objectAtIndex:indexPath.row] updatedAt]) {
         stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] updatedAt]];
-    }else{
+    } else {
         stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] createdAt]];
     }
     [cell.dateLabel setText:stringFromDate];
@@ -119,11 +118,11 @@
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
--(void) searchBarSearchButtonClicked:(UISearchBar *)SearchBar {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)SearchBar {
     [self.searchBar resignFirstResponder];
 }
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     [self.searchArray removeAllObjects];
     
@@ -132,9 +131,8 @@
         [self.searchBar resignFirstResponder];
         
     // search
-    }
-    else {
-        for(QBCOCustomObject *object in [[DataManager shared] notes]){
+    } else {
+        for (QBCOCustomObject *object in [[DataManager shared] notes]) {
             NSRange note = [[object.fields objectForKey:@"note"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if(note.location != NSNotFound){
                 [self.searchArray addObject:object];

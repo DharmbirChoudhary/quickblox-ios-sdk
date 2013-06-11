@@ -36,11 +36,11 @@
 
 - (IBAction)next:(id)sender {
     
-    if(self.noteTextField.text.length && self.commentTextField.text.length){
+    if (self.noteTextField.text.length && self.commentTextField.text.length) {
         
         [self createNote];
         
-    }else {
+    } else {
         UIAlertView *allert = [[UIAlertView alloc] initWithTitle:@"Errors"
                                                          message:@"Please fill both Note & Comment fields"
                                                         delegate:self

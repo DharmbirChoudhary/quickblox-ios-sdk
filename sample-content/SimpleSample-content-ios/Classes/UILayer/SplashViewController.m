@@ -31,7 +31,7 @@
     
     [self createQBSession];
     
-    if(IS_HEIGHT_GTE_568){
+    if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.activityIndicator.frame;
         frame.origin.y += 44;
         [self.activityIndicator setFrame:frame];
@@ -50,7 +50,7 @@
 #pragma mark Interface methods
 
 -(void)hideSplashScreen {
-    [_activityIndicator stopAnimating];
+    [self.activityIndicator stopAnimating];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -69,13 +69,13 @@
 // QuickBlox API queries delegate
 - (void)completedWithResult:(Result *)result {
     // Success result
-    if(result.success){
+    if (result.success) {
         
         // QuickBlox session creation  result
         if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
             
             // Success result
-            if(result.success){
+            if (result.success) {
                 
                 // send request for getting user's filelist
                 PagedRequest *pagedRequest = [[PagedRequest alloc] init];    
@@ -89,7 +89,7 @@
         } else if ([result isKindOfClass:[QBCBlobPagedResult class]]) {
             
             // Success result
-            if(result.success){
+            if (result.success) {
                 QBCBlobPagedResult *res = (QBCBlobPagedResult *)result; 
                 
                 // Save user's filelist

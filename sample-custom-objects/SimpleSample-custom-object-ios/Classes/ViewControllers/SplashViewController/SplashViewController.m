@@ -8,7 +8,7 @@
 
 #import "SplashViewController.h"
 
-@interface SplashViewController ()
+@interface SplashViewController () <QBActionStatusDelegate>
 
 @end
 
@@ -29,7 +29,7 @@
     [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
     
     
-    if(IS_HEIGHT_GTE_568){
+    if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.activitiIndicator.frame;
         frame.origin.y += 44;
         [self.activitiIndicator setFrame:frame];
@@ -43,7 +43,7 @@
     // e.g. self.myOutlet = nil;
 }
 
--(void)hideSplashScreen{
+-(void)hideSplashScreen {
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -52,9 +52,9 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+-(void)completedWithResult:(Result*)result {
     // QuickBlox session creation result
-    if([result isKindOfClass:[QBAAuthSessionCreationResult class]]){
+    if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
         
         // Success result
         if(result.success){
@@ -64,10 +64,10 @@
         }
         
     // Get all notes result
-    } else if([result isKindOfClass:QBCOCustomObjectPagedResult.class]){
+    } else if ([result isKindOfClass:QBCOCustomObjectPagedResult.class]) {
         
         // Success result
-        if(result.success){
+        if (result.success) {
 
             // save all notes
             QBCOCustomObjectPagedResult *res = (QBCOCustomObjectPagedResult *)result;
