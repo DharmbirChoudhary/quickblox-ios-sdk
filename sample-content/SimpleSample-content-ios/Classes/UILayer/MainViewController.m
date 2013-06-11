@@ -37,8 +37,8 @@
     [super viewDidLoad];
         
     CGRect appframe = [[UIScreen mainScreen] bounds];
-    [_scroll setContentSize:appframe.size];
-    [_scroll setMaximumZoomScale:4];
+    [self.scroll setContentSize:appframe.size];
+    [self.scroll setMaximumZoomScale:4];
     
     currentImageX = START_POSITION_X;
     currentImageY = START_POSITION_Y;
@@ -48,9 +48,9 @@
     // Show toolbar
     UIBarButtonItem *uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"Add new image" style:UIBarButtonItemStyleBordered  target:self action:@selector(selectPicture)];
     UIToolbar *toolbar = [[UIToolbar alloc] init];
-    if(IS_HEIGHT_GTE_568){
+    if (IS_HEIGHT_GTE_568) {
         toolbar.frame = CGRectMake(0, self.view.frame.size.height+1, self.view.frame.size.width, 44);
-    }else{
+    } else {
         toolbar.frame = CGRectMake(0, self.view.frame.size.height-87, self.view.frame.size.width, 44);
     }
     
@@ -67,7 +67,7 @@
         // Download user's files
         [self downloadFile];
         
-        [_activityIndicator startAnimating];
+        [self.activityIndicator startAnimating];
         
         return;
     }    
@@ -84,15 +84,15 @@
 
 - (void)downloadFile {
     int fileID = [(QBCBlob *)[[[DataManager instance] fileList] lastObject] ID];
-    if(fileID > 0){
+    if(fileID > 0) {
         // Download file from QuickBlox server
         [QBContent TDownloadFileWithBlobID:fileID delegate:self];
     }
     
     // end of files
     if ([[DataManager instance] fileList].count == 0) {
-        [_activityIndicator stopAnimating];
-        _activityIndicator.hidden = YES;
+        [self.activityIndicator stopAnimating];
+        self.activityIndicator.hidden = YES;
     }
 }
 
@@ -142,7 +142,7 @@
     // Show image on gallery
     UIImageView *imageView = [[UIImageView alloc] initWithImage:selectedImage];
     [self showImage:imageView];
-    [_imagePicker dismissModalViewControllerAnimated:NO];
+    [self.imagePicker dismissModalViewControllerAnimated:NO];
     
     
     // Upload file to QuickBlox server
@@ -150,7 +150,7 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [_imagePicker dismissModalViewControllerAnimated:NO];
+    [self.imagePicker dismissModalViewControllerAnimated:NO];
 }
 
 #pragma mark -
@@ -165,12 +165,12 @@
 
 // Show Picker for select picture from iPhone gallery to add to your gallery
 - (void)selectPicture {
-    _imagePicker = [[UIImagePickerController alloc] init];
-    _imagePicker.allowsEditing = NO;
-    _imagePicker.delegate = self;
-    _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.allowsEditing = NO;
+    self.imagePicker.delegate = self;
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentModalViewController:_imagePicker animated:NO];
+    [self presentModalViewController:self.imagePicker animated:NO];
 }
 
 
@@ -200,9 +200,7 @@
         // Download next file
         [self downloadFile];
 
-    }
-    
-    else {
+    } else {
         NSLog(@"%@",result.errors);
     }
 }
