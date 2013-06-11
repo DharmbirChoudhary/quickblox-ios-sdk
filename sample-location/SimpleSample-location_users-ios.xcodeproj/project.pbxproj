@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43900C2616245E3F0041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C2516245E3F0041381B /* Default-568h@2x.png */; };
+		618D168B1767737C001C638F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 618D168A1767737C001C638F /* MainStoryboard.storyboard */; };
 		8A2F265C14F7F0D300292876 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F265B14F7F0D300292876 /* UIKit.framework */; };
 		8A2F265E14F7F0D300292876 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F265D14F7F0D300292876 /* Foundation.framework */; };
 		8A2F266014F7F0D300292876 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F265F14F7F0D300292876 /* CoreGraphics.framework */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		43900C2516245E3F0041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		618D168A1767737C001C638F /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		8A2F265714F7F0D300292876 /* SimpleSample-location_users-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleSample-location_users-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A2F265B14F7F0D300292876 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8A2F265D14F7F0D300292876 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -294,6 +296,7 @@
 			children = (
 				FA39FB6D15EF6F85002F9D26 /* images */,
 				FA43AE14152B965E000A2EF7 /* xibs */,
+				618D168A1767737C001C638F /* MainStoryboard.storyboard */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				BB9A7D311611C64B00292E44 /* tab_icon_chekin.png in Resources */,
 				BBEB4A9F1614479000940E63 /* tab_icon_globe.png in Resources */,
 				43900C2616245E3F0041381B /* Default-568h@2x.png in Resources */,
+				618D168B1767737C001C638F /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +452,7 @@
 		8A2F267914F7F0D300292876 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -458,7 +463,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleSample-location_users-ios/Supporting Files/SimpleSample-location_users-ios-Prefix.pch";
 				INFOPLIST_FILE = "SimpleSample-location_users-ios/Supporting Files/SimpleSample-location_users-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-ObjC",
@@ -480,6 +485,7 @@
 		8A2F267A14F7F0D300292876 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -490,7 +496,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleSample-location_users-ios/Supporting Files/SimpleSample-location_users-ios-Prefix.pch";
 				INFOPLIST_FILE = "SimpleSample-location_users-ios/Supporting Files/SimpleSample-location_users-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-ObjC",
