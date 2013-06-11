@@ -41,13 +41,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [noteLabel release];
-    [statusLabel release];
-    [comentsTextView release];
-    [customObject release];
-    [super dealloc];
-}
 
 - (IBAction)addComment:(id)sender {
     // Show alert for enter new comment
@@ -65,10 +58,8 @@
     [theTextField setTextAlignment:UITextAlignmentCenter];
     theTextField.tag = 101;
     [alert addSubview:theTextField];
-    [theTextField release];
     
     [alert show];
-    [alert release];
 }
 
 - (IBAction)changeStatus:(id)sender {
@@ -80,7 +71,6 @@
                                                     otherButtonTitles:@"New", @"In Progress", @"Done", nil];
     
     [actionSheet showInView:self.view];
-    [actionSheet release];
 }
 
 - (IBAction)deleteNote:(id)sender {
@@ -105,11 +95,9 @@
             if(count == 1){
                 NSString *str = [[NSString alloc] initWithFormat:@"#%d %@\n\n",count, comment];
                 [self.comentsTextView setText:str];
-                [str release];
             }else{
                 NSString *str = [[NSString alloc] initWithFormat:@"%@#%d %@\n\n", self.comentsTextView.text, count, comment];
                 [self.comentsTextView setText:str];
-                [str release];
             }
             count++;
         }
@@ -162,7 +150,7 @@
         switch (buttonIndex) {
             case 1:{
                 // change comments & update custom object
-                NSString *comments = [[[NSString alloc] initWithFormat:@"%@-c-%@", [[customObject fields] objectForKey:@"comment"], ((UITextField *)[alertView viewWithTag:101]).text] autorelease];
+                NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", [[customObject fields] objectForKey:@"comment"], ((UITextField *)[alertView viewWithTag:101]).text];
 
                 [[customObject fields] setObject:comments forKey:@"comment"];
             
@@ -201,7 +189,6 @@
                                                       otherButtonTitles:nil];
                 [alert setTag:2];
                 [alert show];
-                [alert release];
                 
             }
         }

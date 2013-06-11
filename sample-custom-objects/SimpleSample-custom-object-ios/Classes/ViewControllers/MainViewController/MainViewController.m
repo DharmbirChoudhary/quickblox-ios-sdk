@@ -52,18 +52,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [tableView release];
-    [searchBar release];
-    [searchArray release];
-    [super dealloc];
-}
 
 
 - (IBAction)addNewNote:(id)sender {
     NewNoteViewController *newNoteViewController = [[NewNoteViewController alloc] init];
     [self presentModalViewController:newNoteViewController animated:YES];
-    [newNoteViewController release];
 }
 
 
@@ -79,7 +72,6 @@
     QBCOCustomObject *customObject = (QBCOCustomObject *)[[[DataManager shared] notes] objectAtIndex:indexPath.row];
     noteDetailsViewController.customObject = customObject;
     [self.navigationController pushViewController:noteDetailsViewController animated:YES];
-    [noteDetailsViewController release];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -94,7 +86,7 @@
     
     CustomTableViewCell* cell = [_tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
     if (cell == nil){
-        cell = [[[CustomTableViewCell alloc] init] autorelease];
+        cell = [[CustomTableViewCell alloc] init];
     }
     
     // set note name & status
@@ -112,7 +104,6 @@
         stringFromDate = [formatter stringFromDate:[[self.searchArray objectAtIndex:indexPath.row] createdAt]];
     }
     [cell.dataLabel setText:stringFromDate];
-    [formatter release];
     
     return cell;
 }

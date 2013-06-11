@@ -31,11 +31,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [noteTextField release];
-    [commentTextField release];
-    [super dealloc];
-}
 
 - (IBAction)back:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
@@ -61,7 +56,6 @@
                                                cancelButtonTitle:@"Ok"
                                                otherButtonTitles:nil];
         [allert show];
-        [allert release];
     }
 }
 

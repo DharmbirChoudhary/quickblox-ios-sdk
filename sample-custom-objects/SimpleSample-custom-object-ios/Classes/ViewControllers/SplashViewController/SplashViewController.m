@@ -29,7 +29,6 @@
     
     [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
     
-    [extendedAuthRequest release];
     
     if(IS_HEIGHT_GTE_568){
         CGRect frame = self.activitiIndicator.frame;
@@ -51,10 +50,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [activitiIndicator release];
-    [super dealloc];
-}
 
 -(void)hideSplashScreen{
     [self dismissModalViewControllerAnimated:YES];

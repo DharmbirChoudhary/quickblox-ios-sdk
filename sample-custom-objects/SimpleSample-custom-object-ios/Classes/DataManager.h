@@ -13,8 +13,8 @@
 
 @interface DataManager : NSObject
 
-@property (nonatomic, retain) NSMutableArray *notes;
+@property (nonatomic, strong) NSMutableArray *notes;
 
-+(DataManager *)shared;
++ (DataManager *)shared;
 
 @end

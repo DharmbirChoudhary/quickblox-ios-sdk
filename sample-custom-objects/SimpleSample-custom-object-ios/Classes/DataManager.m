@@ -14,12 +14,21 @@ static DataManager *dataManager = nil;
 
 @synthesize notes;
 
-+(DataManager *)shared{
-    if(!dataManager){
-        dataManager = [[DataManager alloc] init];
-        dataManager.notes = [[[NSMutableArray alloc] init] autorelease];
-    }
++(DataManager *)shared{    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dataManager = [[self alloc] init];
+    });
+    
     return dataManager;
+}
+
+- (NSMutableArray *)notes {
+    if (!notes) {
+        notes = [[NSMutableArray alloc] init];
+    }
+    
+    return notes;
 }
 
 @end
