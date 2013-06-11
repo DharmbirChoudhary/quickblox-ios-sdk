@@ -20,17 +20,6 @@
 @synthesize loginController;
 @synthesize registrationController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-		self.title = NSLocalizedString(@"Map", nil);
-		self.tabBarItem.image = [UIImage imageNamed:@"tab_icon_globe.png"];
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -42,7 +31,9 @@
      // add pins to map
     if([mapView.annotations count] <= 1){
         for(QBLGeoData *geodata in [DataManager shared].checkinArray){
-            CLLocationCoordinate2D coord = {.latitude= geodata.latitude, .longitude= geodata.longitude};
+            CLLocationCoordinate2D coord = {.latitude = geodata.latitude,
+                                            .longitude = geodata.longitude};
+            
             MapPin *pin = [[MapPin alloc] initWithCoordinate:coord];
             pin.subtitle = geodata.status;
             pin.title = geodata.user.login ? geodata.user.login : geodata.user.email;
@@ -50,10 +41,6 @@
             [pin release];
         }
     }
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 // Show checkin view
@@ -137,23 +124,24 @@
 #pragma mark -
 #pragma mark UIAlertViewDelegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     // User didn't auth  alert
     if(alertView.tag == 1) {
         switch (buttonIndex) {
             case 1:
-                [self presentModalViewController:registrationController animated:YES];
+                [self performSegueWithIdentifier:@"registrationSegue" sender:self];
                 break;
             case 2:
-                [self presentModalViewController:loginController animated:YES];
+                [self performSegueWithIdentifier:@"loginSegue" sender:self];
                 break;
             default:
                 break;
         }
         
     // Check in   alert
-    }else if(alertView.tag == 2){
+    }
+    else if(alertView.tag == 2){
         switch (buttonIndex) {
             case 1:
                 

@@ -34,11 +34,8 @@
     }
 }
 
-- (void)hideSplash {
-
-    AppDelegate* myDelegate = (((AppDelegate*) [UIApplication sharedApplication].delegate));
-    
-    [self presentModalViewController:myDelegate.tabBarController animated:YES];
+- (void)hideSplash {    
+    [self performSegueWithIdentifier:@"tabBarSegue" sender:self];    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{

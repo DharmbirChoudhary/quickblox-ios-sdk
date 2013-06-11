@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4b9-pC-CSl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wyb-qQ-swx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -38,17 +38,16 @@
                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="9Oe-kQ-PbK"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="tab_icon_globe.png" id="9Oe-kQ-PbK"/>
                     <connections>
                         <outlet property="mapView" destination="aaG-Dq-25E" id="1fB-YV-BXX"/>
-                        <segue destination="wyb-qQ-swx" kind="modal" identifier="splashSegue" id="QoX-fX-eUm"/>
                         <segue destination="o8R-kD-3ue" kind="modal" identifier="loginSegue" id="vOJ-vC-JnF"/>
                         <segue destination="RPO-OU-NTT" kind="modal" identifier="registrationSegue" id="Dmb-DQ-P2q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V09-0B-OIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="225" y="356"/>
+            <point key="canvasLocation" x="166" y="358"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="IhV-4n-zjU">
@@ -181,37 +180,12 @@
                     </view>
                     <connections>
                         <outlet property="wheel" destination="pPI-Bf-rQP" id="wMK-Tx-R3s"/>
+                        <segue destination="4b9-pC-CSl" kind="modal" identifier="tabBarSegue" id="Krt-n2-QsR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mST-4X-yd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="731" y="-368"/>
-        </scene>
-        <!--Latest Checkins View Controller - Latest checkins-->
-        <scene sceneID="pGp-s4-Jfq">
-            <objects>
-                <viewController id="tmU-iJ-xK0" customClass="LatestCheckinsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vf6-wL-ZLc">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hKv-kf-xBs">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="tmU-iJ-xK0" id="y6u-u3-M3s"/>
-                                    <outlet property="delegate" destination="tmU-iJ-xK0" id="yq0-sj-wqx"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Latest checkins" id="ooD-0e-KkT"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0pH-Po-31b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="129" y="-340"/>
+            <point key="canvasLocation" x="-993" y="-12"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="CLk-k2-vHN">
@@ -225,12 +199,67 @@
                     </tabBar>
                     <connections>
                         <segue destination="UWV-Ah-qNb" kind="relationship" relationship="viewControllers" id="NdI-uY-yfN"/>
-                        <segue destination="tmU-iJ-xK0" kind="relationship" relationship="viewControllers" id="BdG-mr-KPO"/>
+                        <segue destination="e8N-ho-nAu" kind="relationship" relationship="viewControllers" id="cwQ-zw-msK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jq9-6C-QaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-474" y="-12"/>
+        </scene>
+        <!--Latest Checkins View Controller - Latest checkins-->
+        <scene sceneID="qcT-EL-vnu">
+            <objects>
+                <tableViewController id="e8N-ho-nAu" customClass="LatestCheckinsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kPI-mN-33p">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Checkins" rowHeight="52" id="fPu-e5-tgW" customClass="CustomCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="QXq-Qr-KAv">
+                                            <rect key="frame" x="20" y="4" width="42" height="38"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vs7-ka-NMi">
+                                            <rect key="frame" x="85" y="2" width="155" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.17254901959999999" green="0.2784313725" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N4Y-dr-GdS">
+                                            <rect key="frame" x="85" y="20" width="155" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="avatar" destination="QXq-Qr-KAv" id="KPA-Jh-ddj"/>
+                                    <outlet property="checkinMessage" destination="N4Y-dr-GdS" id="f45-hP-z4H"/>
+                                    <outlet property="name" destination="vs7-ka-NMi" id="177-cH-7W9"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="e8N-ho-nAu" id="jrZ-ST-PYL"/>
+                            <outlet property="delegate" destination="e8N-ho-nAu" id="gPW-T0-i1e"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Latest checkins" image="tab_icon_chekin.png" id="Ib3-Iy-Hkv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H7H-Jm-q6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="-582"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="kjL-Yd-Dr0">
@@ -334,9 +363,19 @@
     <resources>
         <image name="fcebook_login.png" width="300" height="50"/>
         <image name="logo.png" width="200" height="157"/>
+        <image name="tab_icon_chekin.png" width="31" height="25"/>
+        <image name="tab_icon_globe.png" width="24" height="24"/>
         <image name="twitter_login.png" width="249" height="49"/>
     </resources>
     <classes>
+        <class className="CustomCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="avatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="checkinMessage" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="LatestCheckinsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LatestCheckinsViewController.h"/>
         </class>

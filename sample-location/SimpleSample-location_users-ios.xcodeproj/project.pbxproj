@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		43900C2616245E3F0041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C2516245E3F0041381B /* Default-568h@2x.png */; };
 		618D168B1767737C001C638F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 618D168A1767737C001C638F /* MainStoryboard.storyboard */; };
+		61EB52C7176784FB00DB9321 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EB52C6176784FB00DB9321 /* CustomCell.m */; };
 		8A2F265C14F7F0D300292876 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F265B14F7F0D300292876 /* UIKit.framework */; };
 		8A2F265E14F7F0D300292876 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F265D14F7F0D300292876 /* Foundation.framework */; };
 		8A2F266014F7F0D300292876 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F265F14F7F0D300292876 /* CoreGraphics.framework */; };
@@ -55,6 +56,8 @@
 /* Begin PBXFileReference section */
 		43900C2516245E3F0041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		618D168A1767737C001C638F /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		61EB52C5176784FB00DB9321 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		61EB52C6176784FB00DB9321 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		8A2F265714F7F0D300292876 /* SimpleSample-location_users-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleSample-location_users-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A2F265B14F7F0D300292876 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8A2F265D14F7F0D300292876 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -229,6 +232,8 @@
 				FA38CC6A1614767600BDD29A /* DataManager.m */,
 				FA39FB8D15EF7110002F9D26 /* MapPin.h */,
 				FA39FB8E15EF7110002F9D26 /* MapPin.m */,
+				61EB52C5176784FB00DB9321 /* CustomCell.h */,
+				61EB52C6176784FB00DB9321 /* CustomCell.m */,
 			);
 			name = Objects;
 			path = "SimpleSample-location_users-ios/Objects";
@@ -398,6 +403,7 @@
 				FA39FBA515EF715A002F9D26 /* SplashViewController.m in Sources */,
 				BB1234501608829200491A31 /* LatestCheckinsViewController.m in Sources */,
 				FA38CC6B1614767600BDD29A /* DataManager.m in Sources */,
+				61EB52C7176784FB00DB9321 /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
