@@ -14,7 +14,7 @@ static DataManager *dataManager = nil;
 
 @synthesize notes;
 
-+(DataManager *)shared{    
++ (DataManager *)shared {    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         dataManager = [[self alloc] init];
