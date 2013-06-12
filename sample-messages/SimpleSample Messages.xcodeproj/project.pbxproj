@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		43900C32162468880041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C31162468880041381B /* Default-568h@2x.png */; };
 		43900C39162469680041381B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43900C38162469680041381B /* libxml2.dylib */; };
+		61EB52C91768A6DC00DB9321 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61EB52C81768A6DC00DB9321 /* MainStoryboard.storyboard */; };
+		61EB52CC1768B1B600DB9321 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EB52CB1768B1B600DB9321 /* CustomCell.m */; };
 		ED6EE60316773C46004BCAC7 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6EE60216773C46004BCAC7 /* Quickblox.framework */; };
 		FA19A32315FE4F5C00B5B2CC /* RichContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA19A32215FE4F5C00B5B2CC /* RichContentViewController.xib */; };
 		FA19A33215FE4F6A00B5B2CC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA19A32A15FE4F6A00B5B2CC /* MainViewController.m */; };
@@ -44,6 +46,9 @@
 		43900C31162468880041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		43900C38162469680041381B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		43EB468A16241A9C00A88FF1 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		61EB52C81768A6DC00DB9321 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		61EB52CA1768B1B600DB9321 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		61EB52CB1768B1B600DB9321 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		ED6EE60216773C46004BCAC7 /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quickblox.framework; path = ../Framework/Quickblox.framework; sourceTree = "<group>"; };
 		FA19A32215FE4F5C00B5B2CC /* RichContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RichContentViewController.xib; sourceTree = "<group>"; };
 		FA19A32915FE4F6A00B5B2CC /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -116,6 +121,8 @@
 			children = (
 				FA19A33515FE4F9F00B5B2CC /* PushMessage.h */,
 				FA19A33615FE4F9F00B5B2CC /* PushMessage.m */,
+				61EB52CA1768B1B600DB9321 /* CustomCell.h */,
+				61EB52CB1768B1B600DB9321 /* CustomCell.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -192,6 +199,7 @@
 			children = (
 				FA39FB5F15EF56B0002F9D26 /* xibs */,
 				FA39FB5115EF55BB002F9D26 /* images */,
+				61EB52C81768A6DC00DB9321 /* MainStoryboard.storyboard */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 				FA19A32315FE4F5C00B5B2CC /* RichContentViewController.xib in Resources */,
 				FA19A33D15FE697700B5B2CC /* media_icon.jpeg in Resources */,
 				43900C32162468880041381B /* Default-568h@2x.png in Resources */,
+				61EB52C91768A6DC00DB9321 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +346,7 @@
 				FA19A33315FE4F6A00B5B2CC /* RichContentViewController.m in Sources */,
 				FA19A33415FE4F6A00B5B2CC /* SplashViewController.m in Sources */,
 				FA19A33715FE4F9F00B5B2CC /* PushMessage.m in Sources */,
+				61EB52CC1768B1B600DB9321 /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +427,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleSample Messages/SimpleSample Messages-Prefix.pch";
 				INFOPLIST_FILE = "SimpleSample Messages/SimpleSample Messages-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-ObjC",
@@ -429,8 +439,8 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7576ABE7-8CB3-42F5-B1C1-22D1C88F0C68";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7576ABE7-8CB3-42F5-B1C1-22D1C88F0C68";
+				PROVISIONING_PROFILE = "8A37E6EF-9D98-46E2-9EC2-74E6745251E8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8A37E6EF-9D98-46E2-9EC2-74E6745251E8";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -440,8 +450,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Injoit LTD";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Injoit LTD";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -450,15 +460,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleSample Messages/SimpleSample Messages-Prefix.pch";
 				INFOPLIST_FILE = "SimpleSample Messages/SimpleSample Messages-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-ObjC",
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81C59E21-1F63-4B73-9E53-245195C190E9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81C59E21-1F63-4B73-9E53-245195C190E9";
+				PROVISIONING_PROFILE = "1576CACB-6248-4BD8-B223-5B9427767808";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1576CACB-6248-4BD8-B223-5B9427767808";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

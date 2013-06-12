@@ -9,16 +9,15 @@
 #import "MainViewController.h"
 #import "RichContentViewController.h"
 #import "PushMessage.h"
+#import "CustomCell.h"
 
 @implementation MainViewController
 @synthesize users = _users;
 @synthesize messageBody, receivedMassages, toUserName, usersPickerView;
-@synthesize messages;
 
 - (id)init{
     self = [super init];
     if(self){
-        self.messages = [NSMutableArray array];
     }
     return self;
 }
@@ -36,10 +35,19 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kPushDidReceive object:nil];
 }
 
+- (NSMutableArray*)messages {
+    if (!_messages) {
+        _messages = [[NSMutableArray alloc] init];
+    }
+    return _messages;
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     
     receivedMassages.layer.cornerRadius = 5;
+    
+    [self performSegueWithIdentifier:@"splashSegue" sender:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pushDidReceive:) 
@@ -66,7 +74,7 @@
 }
 
 // Send push notification
-- (IBAction)sendButtonDidPress:(id)sender{
+- (IBAction)sendButtonDidPress:(id)sender {
 
     // not selected receiver(user)
    if([toUserName.text length] == 0 || [_users count] == 0){
@@ -75,13 +83,15 @@
         [alert release];
         
     // empty text
-    }else if([messageBody.text length] == 0){
+    }
+    else if([messageBody.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter some text" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
         [alert release];
     
     // send push
-    }else{
+    }
+    else{
         
         // Create message
         NSString *mesage = [NSString stringWithFormat:@"%@: %@", 
@@ -103,12 +113,13 @@
 }
 
 // Select receiver
-- (IBAction)selectUserButtonDidPress:(id)sender{
+- (IBAction)selectUserButtonDidPress:(id)sender {
     if(_users != nil){
          [self showPickerWithUsers];
         
     // retrieve all users
-    }else{
+    }
+    else {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         // Retrieve QuickBlox users for current application
@@ -118,17 +129,17 @@
     }
 }
 
-- (void) showPickerWithUsers{
+- (void) showPickerWithUsers {
     [usersPickerView reloadAllComponents];
     [usersPickerView setHidden:NO];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [messageBody resignFirstResponder];
 }
 
 - (void) dealloc{
-    [messages release];
+    [self.messages release];
     [_users release];
     [super dealloc];
 }
@@ -138,7 +149,7 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+-(void)completedWithResult:(Result*)result {
     // QuickBlox get Users result
     
     if([result isKindOfClass:[QBUUserPagedResult  class]]){
@@ -175,31 +186,36 @@
     }
 }
 
-- (IBAction)buttonRichClicked:(UIButton*)sender{
+- (IBAction)buttonRichClicked:(UIButton*)tappedButton{
     // Show rich content
-    RichContentViewController *richContentViewController = [[RichContentViewController alloc] init];
-    richContentViewController.message = [self.messages objectAtIndex:sender.tag];
-    [self presentModalViewController:richContentViewController animated:YES];
-    [richContentViewController release];
+    [self performSegueWithIdentifier:@"richSegue" sender:tappedButton];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"richSegue"]) {
+        UIButton* tappedButton = (UIButton *)sender;
+        RichContentViewController* richContentViewController = segue.destinationViewController;
+        richContentViewController.message = [self.messages objectAtIndex:tappedButton.tag];
+    }
 }
 
 
 #pragma mark -
 #pragma mark UIPickerViewDataSource & UIPickerViewDelegate
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return [_users count];
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return ((QBUUser *)[_users objectAtIndex:row]).login;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [toUserName setText: ((QBUUser *)[_users objectAtIndex:row]).login];
      [usersPickerView setHidden:YES];
 }
@@ -208,48 +224,26 @@
 #pragma mark -
 #pragma mark TableViewDataSource & TableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.messages count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [messages count];
-}
-
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"PushCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+    CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     PushMessage *pushMessage = [self.messages objectAtIndex:indexPath.row];
-    if([[pushMessage richContentFilesIDs] count] > 0){
-        
-        // add rich button
-        UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        myButton.tag = indexPath.row;
-        myButton.frame = CGRectMake(260, 10, 40, 40);
-        [myButton setBackgroundImage:[UIImage imageNamed:@"media_icon.jpeg"] forState:UIControlStateNormal];
-        [myButton addTarget:self action:@selector(buttonRichClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [cell addSubview:myButton];
-    }
     
-    cell.textLabel.text = [pushMessage message];
-    cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+    if([[pushMessage richContentFilesIDs] count] > 0){
+        [cell.richContentButton setHidden:NO];
+        [cell.richContentButton setTag:indexPath.row];
+    }
+
+    cell.pushText.text = [pushMessage message];
     
     return cell;
 }
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
-}
-
 
 #pragma mark -
 #pragma mark UITextFieldDelegate

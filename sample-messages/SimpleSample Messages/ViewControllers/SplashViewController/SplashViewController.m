@@ -39,7 +39,8 @@
 
 - (void)hideSplash {
     // hide splash & show main controller
-    [self presentModalViewController:[[[MainViewController alloc] init] autorelease] animated:YES];
+//    [self presentModalViewController:[[[MainViewController alloc] init] autorelease] animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{

@@ -33,13 +33,13 @@
 #endif
     
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    
-    // show splash controller
-    self.splashViewController = [[[SplashViewController alloc] initWithNibName:@"SplashViewController" bundle:nil] autorelease];
-    self.window.rootViewController = (UIViewController*)self.splashViewController;
-    [self.window makeKeyAndVisible];
+//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+//    // Override point for customization after application launch.
+//    
+//    // show splash controller
+//    self.splashViewController = [[[SplashViewController alloc] initWithNibName:@"SplashViewController" bundle:nil] autorelease];
+//    self.window.rootViewController = (UIViewController*)self.splashViewController;
+//    [self.window makeKeyAndVisible];
     
     return YES;
 }
