@@ -11,9 +11,30 @@
 #import "PushMessage.h"
 #import "CustomCell.h"
 
+@interface MainViewController () <UIAlertViewDelegate,
+                                  QBActionStatusDelegate,
+                                  UIPickerViewDelegate,
+                                  UIPickerViewDataSource,
+                                  UITableViewDataSource,
+                                  UITableViewDelegate,
+                                  UITextFieldDelegate>
+
+@property (nonatomic, strong) NSArray *users;
+@property (nonatomic, strong) NSMutableArray *messages;
+
+@property (nonatomic, strong) IBOutlet UITextField *messageBody;
+@property (strong, nonatomic) IBOutlet UITableView *receivedMassages;
+@property (nonatomic, strong) IBOutlet UILabel *toUserName;
+@property (nonatomic, strong) IBOutlet UIPickerView *usersPickerView;
+
+- (IBAction)sendButtonDidPress:(id)sender;
+- (IBAction)selectUserButtonDidPress:(id)sender;
+- (IBAction)buttonRichClicked:(UIButton*)sender;
+
+- (void) showPickerWithUsers;
+@end
+
 @implementation MainViewController
-@synthesize users = _users;
-@synthesize messageBody, receivedMassages, toUserName, usersPickerView;
 
 - (id)init{
     self = [super init];
@@ -45,7 +66,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    receivedMassages.layer.cornerRadius = 5;
+    self.receivedMassages.layer.cornerRadius = 5;
     
     [self performSegueWithIdentifier:@"splashSegue" sender:self];
     
@@ -66,7 +87,7 @@
     PushMessage *pushMessage = [PushMessage pushMessageWithMessage:message richContentFilesIDs:pushRichContent];
     [self.messages addObject:pushMessage];
 
-    [receivedMassages reloadData];
+    [self.receivedMassages reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
@@ -77,17 +98,15 @@
 - (IBAction)sendButtonDidPress:(id)sender {
 
     // not selected receiver(user)
-   if([toUserName.text length] == 0 || [_users count] == 0){
+   if([self.toUserName.text length] == 0 || [_users count] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please select user." message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
-        [alert release];
         
     // empty text
     }
-    else if([messageBody.text length] == 0){
+    else if([self.messageBody.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter some text" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
-        [alert release];
     
     // send push
     }
@@ -95,11 +114,11 @@
         
         // Create message
         NSString *mesage = [NSString stringWithFormat:@"%@: %@", 
-                            ((QBUUser *)[_users objectAtIndex:[usersPickerView selectedRowInComponent:0]]).login,  
-                            messageBody.text];
+                            ((QBUUser *)[_users objectAtIndex:[self.usersPickerView selectedRowInComponent:0]]).login,
+                            self.messageBody.text];
         
         // receiver (user id)
-        NSUInteger userID = ((QBUUser *)[_users objectAtIndex:[usersPickerView selectedRowInComponent:0]]).ID;
+        NSUInteger userID = ((QBUUser *)[_users objectAtIndex:[self.usersPickerView selectedRowInComponent:0]]).ID;
         
         // Send push
         [QBMessages TSendPushWithText:mesage 
@@ -108,7 +127,7 @@
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        [messageBody resignFirstResponder];
+        [self.messageBody resignFirstResponder];
     }
 }
 
@@ -123,27 +142,21 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         // Retrieve QuickBlox users for current application
-        PagedRequest *pagetRequest = [[[PagedRequest alloc] init] autorelease];
+        PagedRequest *pagetRequest = [[PagedRequest alloc] init];
         pagetRequest.perPage = 30;
         [QBUsers usersWithPagedRequest:pagetRequest delegate:self];
     }
 }
 
 - (void) showPickerWithUsers {
-    [usersPickerView reloadAllComponents];
-    [usersPickerView setHidden:NO];
+    [self.usersPickerView reloadAllComponents];
+    [self.usersPickerView setHidden:NO];
+    [self.view bringSubviewToFront:self.usersPickerView];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [messageBody resignFirstResponder];
+    [self.messageBody resignFirstResponder];
 }
-
-- (void) dealloc{
-    [self.messages release];
-    [_users release];
-    [super dealloc];
-}
-
 
 #pragma mark -
 #pragma mark QBActionStatusDelegate
@@ -177,7 +190,6 @@
         if(result.success){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message sent successfully" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
-            [alert release];
             
         // Errors
         }else{
@@ -216,8 +228,8 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [toUserName setText: ((QBUUser *)[_users objectAtIndex:row]).login];
-     [usersPickerView setHidden:YES];
+    [self.toUserName setText: ((QBUUser *)[_users objectAtIndex:row]).login];
+     [self.usersPickerView setHidden:YES];
 }
 
 
@@ -249,7 +261,7 @@
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [messageBody resignFirstResponder];
+    [self.messageBody resignFirstResponder];
     return YES;
 }
 

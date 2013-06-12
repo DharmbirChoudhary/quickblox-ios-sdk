@@ -73,6 +73,10 @@
                             <pickerView hidden="YES" contentMode="scaleToFill" id="K4g-VG-ddY">
                                 <rect key="frame" x="6" y="136" width="159" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Mjr-jZ-aJR" id="IQM-yz-Mgo"/>
+                                    <outlet property="delegate" destination="Mjr-jZ-aJR" id="sBh-NF-ULD"/>
+                                </connections>
                             </pickerView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="BE9-CW-jQF">
                                 <rect key="frame" x="6" y="32" width="306" height="31"/>

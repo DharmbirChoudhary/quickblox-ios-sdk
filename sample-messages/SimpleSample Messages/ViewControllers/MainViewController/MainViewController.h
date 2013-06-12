@@ -15,20 +15,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController <UIAlertViewDelegate, QBActionStatusDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
+@interface MainViewController : UIViewController {
 }
-@property (nonatomic, retain) NSArray *users;
-@property (nonatomic, retain) NSMutableArray *messages;
-
-@property (nonatomic, retain) IBOutlet UITextField *messageBody;
-@property (retain, nonatomic) IBOutlet UITableView *receivedMassages;
-@property (nonatomic, retain) IBOutlet UILabel *toUserName;
-@property (nonatomic, retain) IBOutlet UIPickerView *usersPickerView;
-
-- (IBAction)sendButtonDidPress:(id)sender;
-- (IBAction)selectUserButtonDidPress:(id)sender;
-- (IBAction)buttonRichClicked:(UIButton*)sender;
-
-- (void) showPickerWithUsers;
 
 @end

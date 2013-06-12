@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomCell : UITableViewCell
-@property (retain, nonatomic) IBOutlet UIButton *richContentButton;
-@property (retain, nonatomic) IBOutlet UILabel *pushText;
+@property (strong, nonatomic) IBOutlet UIButton *richContentButton;
+@property (strong, nonatomic) IBOutlet UILabel *pushText;
 
 @end

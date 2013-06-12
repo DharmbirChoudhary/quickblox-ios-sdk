@@ -12,14 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "PushMessage.h"
 
-@interface RichContentViewController : UIViewController <QBActionStatusDelegate>{
-    int imageNumber;
+@interface RichContentViewController : UIViewController {
 }
-
-@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
-@property (retain, nonatomic) PushMessage *message;
-
-- (IBAction)back:(id)sender;
 
 @end

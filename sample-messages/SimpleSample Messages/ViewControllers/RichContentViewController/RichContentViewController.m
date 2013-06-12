@@ -8,44 +8,36 @@
 
 #import "RichContentViewController.h"
 
-@interface RichContentViewController ()
+@interface RichContentViewController () <QBActionStatusDelegate> {
+    int imageNumber;
+}
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
+@property (strong, nonatomic) PushMessage *message;
+
+- (IBAction)back:(id)sender;
 
 @end
 
 @implementation RichContentViewController
 
-@synthesize scrollView;
-@synthesize message;
-@synthesize downloadProgress;
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     imageNumber = 0;
     
     // Download rich content
-    for(NSString *fileID in self.message.richContentFilesIDs){
+    for(NSString *fileID in self.message.richContentFilesIDs) {
         [self.downloadProgress startAnimating];
         [QBContent TDownloadFileWithBlobID:[fileID intValue] delegate:self];
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setScrollView:nil];
     [self setDownloadProgress:nil];
     [super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)dealloc {
-    [message release];
-    [super dealloc];
 }
 
 - (IBAction)back:(id)sender {
@@ -57,14 +49,14 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+- (void)completedWithResult:(Result*)result {
             
     // Download rich content result
-    if([result isKindOfClass:[QBCFileDownloadTaskResult class]]){
+    if ([result isKindOfClass:[QBCFileDownloadTaskResult class]]) {
         QBCFileDownloadTaskResult *res = (QBCFileDownloadTaskResult *)result;
         
         // Success result
-        if(res.success){
+        if (res.success) {
 
             // show image
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, imageNumber * 420, 320, 420)];
@@ -75,12 +67,11 @@
             [self.scrollView setContentSize:CGSizeMake(320, 420 * (imageNumber + 1))];
             [self.scrollView addSubview:imageView];
             
-            [imageView release];
             
             ++imageNumber;
             
-            if(imageNumber == [message.richContentFilesIDs count]){
-                [downloadProgress stopAnimating];
+            if (imageNumber == [self.message.richContentFilesIDs count]) {
+                [self.downloadProgress stopAnimating];
             }
         }
     }

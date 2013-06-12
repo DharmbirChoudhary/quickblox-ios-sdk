@@ -10,9 +10,4 @@
 
 @implementation CustomCell
 
-- (void)dealloc {
-    [_richContentButton release];
-    [_pushText release];
-    [super dealloc];
-}
 @end

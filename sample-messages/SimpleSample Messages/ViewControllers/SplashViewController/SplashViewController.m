@@ -8,8 +8,14 @@
 
 #import "SplashViewController.h"
 
+@interface SplashViewController ()
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *wheel;
+
+- (void)hideSplash;
+
+@end
+
 @implementation SplashViewController
-@synthesize wheel = _wheel;
 
 - (void)viewDidUnload{
     self.wheel = nil;
@@ -39,47 +45,41 @@
 
 - (void)hideSplash {
     // hide splash & show main controller
-//    [self presentModalViewController:[[[MainViewController alloc] init] autorelease] animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 
 #pragma mark -
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
-- (void)completedWithResult:(Result *)result{
+- (void)completedWithResult:(Result *)result {
     
     // Success result
-    if(result.success){
+    if(result.success) {
         
         // QuickBlox session creation result
-        if([result isKindOfClass:[QBAAuthSessionCreationResult class]]){
+        if([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
             
             // Register as subscriber for Push Notifications
             [QBMessages TRegisterSubscriptionWithDelegate:self];
             
         // QuickBlox register for Push Notifications result
-        }else if([result isKindOfClass:[QBMRegisterSubscriptionTaskResult class]]){
+        }
+        else if([result isKindOfClass:[QBMRegisterSubscriptionTaskResult class]]) {
             
             // Hide splash & show main controller
             [self hideSplash];
         }
         
     // show Errors
-    }else{
+    }
+    else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                         message:[result.errors description]
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"OK", "")
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
