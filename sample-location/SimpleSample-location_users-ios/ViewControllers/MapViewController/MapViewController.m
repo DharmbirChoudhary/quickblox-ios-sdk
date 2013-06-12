@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    locationManager = [CLLocationManager new];
+    locationManager = [[CLLocationManager alloc] init];
     [locationManager startUpdatingLocation];
 }
 
@@ -100,7 +100,9 @@
             QBLGeoDataResult *geoDataRes = (QBLGeoDataResult *)result;
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in was successful!"
-                                                        message:[NSString stringWithFormat:@"Your coordinates: \n Latitude: %g \n Longitude: %g",geoDataRes.geoData.latitude, geoDataRes.geoData.longitude]
+                                                        message:[NSString stringWithFormat:@"Your coordinates: \n Latitude: %g \n Longitude: %g",
+                                                                 geoDataRes.geoData.latitude,
+                                                                 geoDataRes.geoData.longitude]
                                                         delegate:self 
                                                         cancelButtonTitle:@"Ok" 
                                                         otherButtonTitles: nil];

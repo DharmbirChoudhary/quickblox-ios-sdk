@@ -12,10 +12,6 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize navController = _navController;
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     

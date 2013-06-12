@@ -104,6 +104,9 @@
      [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark -
+#pragma mark Touches processing
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.password resignFirstResponder];
     [self.userName resignFirstResponder];

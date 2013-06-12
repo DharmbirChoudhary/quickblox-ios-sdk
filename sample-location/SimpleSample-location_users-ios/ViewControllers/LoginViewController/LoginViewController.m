@@ -100,21 +100,24 @@
 #pragma mark -
 #pragma mark UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)_textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)_textField {
     [_textField resignFirstResponder];
     [self next:nil];
     return YES;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+#pragma mark -
+#pragma mark Touches processing
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.password resignFirstResponder];
     [self.login resignFirstResponder];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag != 1){
         [self dismissModalViewControllerAnimated:YES];
     }

@@ -38,8 +38,12 @@
     }
 }
 
-- (void)hideSplash {    
-    [self performSegueWithIdentifier:@"tabBarSegue" sender:self];    
+- (void)hideSplash {
+    [self.wheel stopAnimating];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"tabBarSegue" sender:self];
+    });    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
@@ -87,9 +91,10 @@
         // Success result
         if (result.success) {
             // Hide splash & show main controller
-            [self performSelector:@selector(hideSplash) withObject:nil afterDelay:2];
             QBLGeoDataPagedResult *geoDataGetRes = (QBLGeoDataPagedResult *)result;
             [DataManager shared].checkinArray  = [geoDataGetRes.geodata mutableCopy];
+
+            [self performSelector:@selector(hideSplash) withObject:nil afterDelay:1];
         // Errors
         }
         else{
