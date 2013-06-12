@@ -15,7 +15,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController {
-}
-
+@interface MainViewController : UIViewController 
 @end

@@ -12,7 +12,6 @@
 #import <UIKit/UIKit.h>
 #import "PushMessage.h"
 
-@interface RichContentViewController : UIViewController {
-}
-
+@interface RichContentViewController : UIViewController
+@property (strong, nonatomic) PushMessage *message;
 @end

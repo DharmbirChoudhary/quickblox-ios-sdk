@@ -15,7 +15,6 @@
 
 @class MainViewController;
 
-@interface SplashViewController : UIViewController <QBActionStatusDelegate>{
-}
+@interface SplashViewController : UIViewController 
 
 @end

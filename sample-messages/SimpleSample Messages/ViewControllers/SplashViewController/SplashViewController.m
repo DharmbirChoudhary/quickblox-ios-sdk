@@ -8,7 +8,7 @@
 
 #import "SplashViewController.h"
 
-@interface SplashViewController ()
+@interface SplashViewController () <QBActionStatusDelegate>
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *wheel;
 
 - (void)hideSplash;
@@ -17,7 +17,7 @@
 
 @implementation SplashViewController
 
-- (void)viewDidUnload{
+- (void)viewDidUnload {
     self.wheel = nil;
 
     [super viewDidUnload];
@@ -36,7 +36,7 @@
     // QuickBlox session creation
     [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
     
-    if(IS_HEIGHT_GTE_568){
+    if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.wheel.frame;
         frame.origin.y += 44;
         [self.wheel setFrame:frame];
@@ -58,19 +58,18 @@
     if(result.success) {
         
         // QuickBlox session creation result
-        if([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
+        if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
             
             // Register as subscriber for Push Notifications
             [QBMessages TRegisterSubscriptionWithDelegate:self];
             
         // QuickBlox register for Push Notifications result
         }
-        else if([result isKindOfClass:[QBMRegisterSubscriptionTaskResult class]]) {
+        else if ([result isKindOfClass:[QBMRegisterSubscriptionTaskResult class]]) {
             
             // Hide splash & show main controller
             [self hideSplash];
         }
-        
     // show Errors
     }
     else {

@@ -22,16 +22,17 @@
 @property (nonatomic, strong) NSArray *users;
 @property (nonatomic, strong) NSMutableArray *messages;
 
-@property (nonatomic, strong) IBOutlet UITextField *messageBody;
-@property (strong, nonatomic) IBOutlet UITableView *receivedMassages;
-@property (nonatomic, strong) IBOutlet UILabel *toUserName;
-@property (nonatomic, strong) IBOutlet UIPickerView *usersPickerView;
+@property (nonatomic, weak) IBOutlet UITextField *messageBody;
+@property (nonatomic, weak) IBOutlet UITableView *receivedMassages;
+@property (nonatomic, weak) IBOutlet UILabel *toUserName;
+@property (nonatomic, weak) IBOutlet UIPickerView *usersPickerView;
 
 - (IBAction)sendButtonDidPress:(id)sender;
 - (IBAction)selectUserButtonDidPress:(id)sender;
 - (IBAction)buttonRichClicked:(UIButton*)sender;
 
 - (void) showPickerWithUsers;
+
 @end
 
 @implementation MainViewController
@@ -43,7 +44,7 @@
     return self;
 }
 
-- (void)viewDidUnload{
+- (void)viewDidUnload {
     
     self.messageBody = nil;
     self.receivedMassages = nil;
@@ -133,7 +134,7 @@
 
 // Select receiver
 - (IBAction)selectUserButtonDidPress:(id)sender {
-    if(_users != nil){
+    if (_users != nil) {
          [self showPickerWithUsers];
         
     // retrieve all users
@@ -148,13 +149,13 @@
     }
 }
 
-- (void) showPickerWithUsers {
+- (void)showPickerWithUsers {
     [self.usersPickerView reloadAllComponents];
     [self.usersPickerView setHidden:NO];
     [self.view bringSubviewToFront:self.usersPickerView];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.messageBody resignFirstResponder];
 }
 
@@ -162,14 +163,14 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result {
+- (void)completedWithResult:(Result*)result {
     // QuickBlox get Users result
     
-    if([result isKindOfClass:[QBUUserPagedResult  class]]){
+    if ([result isKindOfClass:[QBUUserPagedResult  class]]) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
         // Success result
-		if(result.success){
+		if (result.success) {
             
             // save users & show picker
             QBUUserPagedResult *res = (QBUUserPagedResult  *)result;
@@ -177,28 +178,31 @@
             [self showPickerWithUsers];
         
         // Errors
-		}else {
+		}
+        else {
             NSLog(@"Errors=%@", result.errors);
 		}
         
     
     // Send Push result
-    }else if([result isKindOfClass:[QBMSendPushTaskResult class]]){
+    }
+    else if ([result isKindOfClass:[QBMSendPushTaskResult class]]) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
         // Success result
-        if(result.success){
+        if(result.success) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message sent successfully" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
             
         // Errors
-        }else{
+        }
+        else {
             NSLog(@"Errors=%@", result.errors);
         }
     }
 }
 
-- (IBAction)buttonRichClicked:(UIButton*)tappedButton{
+- (IBAction)buttonRichClicked:(UIButton*)tappedButton {
     // Show rich content
     [self performSegueWithIdentifier:@"richSegue" sender:tappedButton];
 }
@@ -206,6 +210,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"richSegue"]) {
         UIButton* tappedButton = (UIButton *)sender;
+        
         RichContentViewController* richContentViewController = segue.destinationViewController;
         richContentViewController.message = [self.messages objectAtIndex:tappedButton.tag];
     }
@@ -229,7 +234,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self.toUserName setText: ((QBUUser *)[_users objectAtIndex:row]).login];
-     [self.usersPickerView setHidden:YES];
+    [self.usersPickerView setHidden:YES];
 }
 
 
@@ -247,7 +252,7 @@
     
     PushMessage *pushMessage = [self.messages objectAtIndex:indexPath.row];
     
-    if([[pushMessage richContentFilesIDs] count] > 0){
+    if ([[pushMessage richContentFilesIDs] count] > 0) {
         [cell.richContentButton setHidden:NO];
         [cell.richContentButton setTag:indexPath.row];
     }
@@ -260,7 +265,7 @@
 #pragma mark -
 #pragma mark UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.messageBody resignFirstResponder];
     return YES;
 }

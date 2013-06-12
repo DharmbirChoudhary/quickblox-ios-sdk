@@ -12,9 +12,8 @@
     int imageNumber;
 }
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
-@property (strong, nonatomic) PushMessage *message;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
 
 - (IBAction)back:(id)sender;
 
