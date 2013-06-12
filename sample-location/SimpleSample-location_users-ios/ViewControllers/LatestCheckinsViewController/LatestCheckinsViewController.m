@@ -13,7 +13,7 @@
 #import "LoginViewController.h"
 #import "CustomCell.h"
 
-@interface LatestCheckinsViewController ()
+@interface LatestCheckinsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -52,7 +52,6 @@
     }
     
     [cell.checkinMessage setText:geodata.user.fullName];
-    cell.contentView.tag = indexPath.row;
         
     return cell;
 }

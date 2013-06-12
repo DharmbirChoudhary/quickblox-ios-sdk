@@ -9,17 +9,19 @@
 #import "LoginViewController.h"
 #import "DataManager.h"
 
-@implementation LoginViewController
-@synthesize login;
-@synthesize password;
-@synthesize activityIndicator;
+@interface LoginViewController () <QBActionStatusDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
-- (void)dealloc {
-    [login release];
-    [password release];
-    [activityIndicator release];
-    [super dealloc];
-}
+@property (nonatomic, weak) IBOutlet UITextField *login;
+@property (nonatomic, weak) IBOutlet UITextField *password;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+- (IBAction)next:(id)sender;
+- (IBAction)back:(id)sender;
+
+@end
+
+@implementation LoginViewController
+
 
 - (void)viewDidUnload {
     [self setLogin:nil];
@@ -38,9 +40,9 @@
 // User Sign In
 - (IBAction)next:(id)sender {
     // Authenticate user
-    [QBUsers logInWithUserLogin:login.text password:password.text delegate:self];
+    [QBUsers logInWithUserLogin:self.login.text password:self.password.text delegate:self];
     
-    [activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
 }
 
 - (IBAction)back:(id)sender {
@@ -77,7 +79,6 @@
                                                             cancelButtonTitle:@"Ok"
                                                             otherButtonTitles: nil];
             [alert show];
-            [alert release];
             
         // Errors
         }else{
@@ -88,12 +89,11 @@
                                                             otherButtonTitles: nil];
             alert.tag = 1;
             [alert show];
-            [alert release];
         
         }
     }
     
-    [activityIndicator stopAnimating];
+    [self.activityIndicator stopAnimating];
 }
 
 
@@ -109,8 +109,8 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [password resignFirstResponder];
-    [login resignFirstResponder];
+    [self.password resignFirstResponder];
+    [self.login resignFirstResponder];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

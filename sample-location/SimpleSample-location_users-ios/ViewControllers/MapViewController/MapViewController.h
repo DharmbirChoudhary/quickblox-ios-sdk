@@ -13,13 +13,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MapViewController : UIViewController <QBActionStatusDelegate, UIAlertViewDelegate> {
-    CLLocationManager* locationManager;
+@interface MapViewController : UIViewController  {
 }
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) IBOutlet UIViewController *loginController;
-@property (nonatomic, retain) IBOutlet UIViewController *registrationController;
-
-- (IBAction) checkIn:(id)sender;
 
 @end

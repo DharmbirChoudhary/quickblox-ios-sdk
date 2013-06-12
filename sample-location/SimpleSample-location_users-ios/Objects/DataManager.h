@@ -14,8 +14,8 @@
 @interface DataManager : NSObject{
 }
 
-@property (nonatomic, retain) NSMutableArray		*checkinArray;
-@property (nonatomic, retain) QBUUser *currentUser;
+@property (nonatomic, strong) NSMutableArray *checkinArray;
+@property (nonatomic, strong) QBUUser *currentUser;
 
 + (DataManager *) shared;
 

@@ -10,9 +10,13 @@
 #import "AppDelegate.h"
 #import "DataManager.h"
 
+@interface SplashViewController ()<QBActionStatusDelegate>
 
-@implementation SplashViewController
-@synthesize wheel = _wheel;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *wheel;
+
+@end
+
+@implementation SplashViewController 
 
 - (void)viewDidUnload{
     self.wheel = nil;
@@ -48,7 +52,7 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
-- (void)completedWithResult:(Result *)result{
+- (void)completedWithResult:(Result *)result {
     
     // QuickBlox application authorization result
     if([result isKindOfClass:[QBAAuthSessionCreationResult class]]){
@@ -65,17 +69,16 @@
             
             // retieve user's points
             [QBLocation geoDataWithRequest:getRequest delegate:self];
-            [getRequest release];
             
         // show Errors
-        }else{
+        }
+        else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                 message:[result.errors description]
                                                 delegate:nil
                                                 cancelButtonTitle:NSLocalizedString(@"OK", "")
                                                 otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
     }
     // Retrieve users' points result
@@ -86,9 +89,10 @@
             // Hide splash & show main controller
             [self performSelector:@selector(hideSplash) withObject:nil afterDelay:2];
             QBLGeoDataPagedResult *geoDataGetRes = (QBLGeoDataPagedResult *)result;
-            [DataManager shared].checkinArray  = [[geoDataGetRes.geodata mutableCopy] autorelease];
+            [DataManager shared].checkinArray  = [geoDataGetRes.geodata mutableCopy];
         // Errors
-        }else{
+        }
+        else{
             NSLog(@"Errors=%@", result.errors);
         }
     }

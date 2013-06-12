@@ -9,22 +9,15 @@
 #import "MapPin.h"
 
 @implementation MapPin
-@synthesize  coordinate;
-@synthesize title, subtitle;
 
-- (id)initWithCoordinate: (CLLocationCoordinate2D) _coordinate{
+- (id)initWithCoordinate: (CLLocationCoordinate2D) coordinate{
     self = [super init];
     if(self){
-        self.coordinate = _coordinate;
+        self.coordinate = coordinate;
     }
     
 	return self;
 }
 
-- (void)dealloc{
-    [title release];
-    [subtitle release];
-    [super dealloc];
-}
 
 @end

@@ -12,14 +12,12 @@
 #import <Foundation/Foundation.h>
 
 @interface MapPin : NSObject <MKAnnotation> {
-	CLLocationCoordinate2D coordinate;
-    NSString *title;
-    NSString *subtitle;
 }
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *subtitle;
-@property (nonatomic,assign) CLLocationCoordinate2D coordinate;
 
-- (id)initWithCoordinate: (CLLocationCoordinate2D) _coordinate;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *subtitle;
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+
+- (id)initWithCoordinate: (CLLocationCoordinate2D) coordinate;
 
 @end

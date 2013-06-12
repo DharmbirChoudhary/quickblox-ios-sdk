@@ -14,17 +14,6 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-//@synthesize tabBarController = _tabBarController;
-//@synthesize splashController;
-
-- (void)dealloc
-{
-//    [splashController release];
-    [_window release];
-//    [_tabBarController release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -32,27 +21,6 @@
     [QBSettings setApplicationID:92];
     [QBSettings setAuthorizationKey:@"wJHdOcQSxXQGWx5"];
     [QBSettings setAuthorizationSecret:@"BTFsj7Rtt27DAmT"];
-    
-//    // create two  UIViewControllers
-//    UIViewController *mapViewControleler, *latestCheckinsViewControleler;
-//    mapViewControleler = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
-//    latestCheckinsViewControleler = [[LatestCheckinsViewController alloc] initWithNibName:@"LatestCheckinsViewController" bundle:nil];
-//    
-//    // connect views to tabBar
-//    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-//    self.tabBarController.viewControllers = [NSArray arrayWithObjects:mapViewControleler, latestCheckinsViewControleler, nil];
-//    [mapViewControleler release];
-//    [latestCheckinsViewControleler release];
-//    
-//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-//    
-//    // Override point for customization after application launch.
-//    
-//    // show splash controller
-//    self.splashController = [[[SplashViewController alloc] initWithNibName:@"SplashViewController" bundle:nil] autorelease];
-//    
-//    self.window.rootViewController = (UIViewController*)self.splashController;
-//    [self.window makeKeyAndVisible];
     
     return YES;
 }

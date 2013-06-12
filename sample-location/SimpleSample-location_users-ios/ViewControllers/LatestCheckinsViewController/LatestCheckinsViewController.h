@@ -11,6 +11,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LatestCheckinsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface LatestCheckinsViewController : UITableViewController 
 
 @end

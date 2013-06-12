@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomCell : UITableViewCell
-@property (retain, nonatomic) IBOutlet UILabel *name;
-@property (retain, nonatomic) IBOutlet UILabel *checkinMessage;
-@property (retain, nonatomic) IBOutlet UIImageView *avatar;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *checkinMessage;
+@property (weak, nonatomic) IBOutlet UIImageView *avatar;
 
 @end

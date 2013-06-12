@@ -2,7 +2,7 @@
 //  CustomCell.m
 //  SimpleSample-location_users-ios
 //
-//  Created by System Administrator on 6/11/13.
+//  Created by kirill on 6/11/13.
 //
 //
 
@@ -10,8 +10,4 @@
 
 @implementation CustomCell
 
-- (void)dealloc {
-    [_avatar release];
-    [super dealloc];
-}
 @end

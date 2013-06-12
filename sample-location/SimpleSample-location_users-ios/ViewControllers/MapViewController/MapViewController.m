@@ -10,15 +10,17 @@
 #import "MapPin.h"
 #import "DataManager.h"
 
-@interface MapViewController ()
+@interface MapViewController () <QBActionStatusDelegate, UIAlertViewDelegate,UITextFieldDelegate> {
+    CLLocationManager* locationManager;
+}
+
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+
+- (IBAction) checkIn:(id)sender;
 
 @end
 
 @implementation MapViewController
-
-@synthesize mapView;
-@synthesize loginController;
-@synthesize registrationController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,17 +31,16 @@
 
 -(void)viewWillAppear:(BOOL)animated{
      // add pins to map
-    if([mapView.annotations count] <= 1){
-        for(QBLGeoData *geodata in [DataManager shared].checkinArray){
+    if([self.mapView.annotations count] <= 1){        
+        [[DataManager shared].checkinArray enumerateObjectsUsingBlock:^(QBLGeoData* geodata, NSUInteger idx, BOOL *stop) {
             CLLocationCoordinate2D coord = {.latitude = geodata.latitude,
                                             .longitude = geodata.longitude};
-            
+
             MapPin *pin = [[MapPin alloc] initWithCoordinate:coord];
             pin.subtitle = geodata.status;
             pin.title = geodata.user.login ? geodata.user.login : geodata.user.email;
-            [mapView addAnnotation:pin];
-            [pin release];
-        }
+            [self.mapView addAnnotation:pin];
+        }];
     }
 }
 
@@ -48,7 +49,7 @@
     
     // Show alert if user did not logged in
     
-    if([DataManager shared].currentUser == nil){
+    if ([DataManager shared].currentUser == nil) {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You must first be authorized."
                                                         message:nil
@@ -57,10 +58,10 @@
                                                         otherButtonTitles:@"Sign Up", @"Sign In", nil];
         alert.tag = 1;
         [alert show];
-        [alert release];
 
     // Show alert for check in
-    }else{
+    }
+    else {
 
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter your message"
                                                         message:@"\n"
@@ -76,12 +77,11 @@
         [theTextField setBorderStyle:UITextBorderStyleRoundedRect];
         [theTextField setBackgroundColor:[UIColor whiteColor]];
         [theTextField setTextAlignment:UITextAlignmentCenter];
+        [theTextField setDelegate:self];
         theTextField.tag = 101;
         
         [alert addSubview:theTextField];
-        [theTextField release];
         [alert show];
-        [alert release];
     }
 }
 
@@ -92,11 +92,11 @@
 // QuickBlox API queries delegate
 - (void)completedWithResult:(Result *)result  {
      
-     if ([result isKindOfClass:[QBLGeoDataResult class]]){
+     if ([result isKindOfClass:[QBLGeoDataResult class]]) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         // Success result
-        if (result.success){
+        if (result.success) {
             QBLGeoDataResult *geoDataRes = (QBLGeoDataResult *)result;
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in was successful!"
@@ -105,19 +105,26 @@
                                                         cancelButtonTitle:@"Ok" 
                                                         otherButtonTitles: nil];
             [alert show];
-            [alert release];
             
         // Errors
-        }else{
+        }
+        else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in wasn't successful"
                                                         message:[result.errors description]
                                                         delegate:self 
                                                         cancelButtonTitle:@"Ok" 
                                                         otherButtonTitles: nil];
             [alert show];
-            [alert release];
         }
     }
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 
@@ -142,35 +149,23 @@
     // Check in   alert
     }
     else if(alertView.tag == 2){
-        switch (buttonIndex) {
-            case 1:
-                
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-                
-                // Check in
-                //
-                // create QBLGeoData entity
-                QBLGeoData *geoData = [QBLGeoData geoData];
-                geoData.latitude = locationManager.location.coordinate.latitude;
-                geoData.longitude = locationManager.location.coordinate.longitude;
-                geoData.status = ((UITextField *)[alertView viewWithTag:101]).text;
-                
-                // post own location
-                [QBLocation createGeoData:geoData delegate:self];
-                
-                break;
-            default:
-                break;
-        }
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            
+            // Check in
+            //
+            // create QBLGeoData entity
+            QBLGeoData *geoData = [QBLGeoData geoData];
+            geoData.latitude = locationManager.location.coordinate.latitude;
+            geoData.longitude = locationManager.location.coordinate.longitude;
+            geoData.status = ((UITextField *)[alertView viewWithTag:101]).text;
+            
+            // post own location
+            [QBLocation createGeoData:geoData delegate:self];
+
+        }        
     }
 }
 
-- (void)dealloc {
-    [locationManager release];
-    [mapView release];
-    [loginController release];
-    [registrationController release];    
-    [super dealloc];
-}
 
 @end

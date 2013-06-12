@@ -16,8 +16,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 
-//@property (nonatomic, retain) SplashViewController* splashController;
 @property (strong, nonatomic) UIWindow *window;
-//@property (strong, nonatomic) UITabBarController *tabBarController;
 
 @end
