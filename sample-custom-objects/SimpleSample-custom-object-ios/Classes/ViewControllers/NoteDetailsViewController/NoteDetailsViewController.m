@@ -28,7 +28,7 @@
     [super viewDidLoad];
     [self reloadData];
     
-    [self setTitle:@"Note"];
+    self.title = @"Note";
     
 }
 
@@ -81,20 +81,20 @@
 
 - (void) reloadData{
     // set note & status
-    self.noteLabel.text = [[self.customObject fields] objectForKey:@"note"];
-    self.statusLabel.text = [[self.customObject fields] objectForKey:@"status"];
+    self.noteLabel.text = self.customObject.fields[@"note"];
+    self.statusLabel.text = self.customObject.fields[@"status"];
     
     // set comments
-    NSString *commentsAsString = [[self.customObject fields] objectForKey:@"comment"];
-    if(![commentsAsString isKindOfClass:NSNull.class]){
+    NSString *commentsAsString = [self.customObject fields][@"comment"];
+    if  (![commentsAsString isKindOfClass:NSNull.class]) {
         NSArray *comments = [commentsAsString componentsSeparatedByString:@"-c-"];
         [self.comentsTextView setText:nil];
         int count = 1;
-        for(NSString *comment in comments){
-            if(count == 1){
+        for (NSString *comment in comments) {
+            if (count == 1) {
                 NSString *str = [[NSString alloc] initWithFormat:@"#%d %@\n\n",count, comment];
                 [self.comentsTextView setText:str];
-            }else{
+            } else {
                 NSString *str = [[NSString alloc] initWithFormat:@"%@#%d %@\n\n", self.comentsTextView.text, count, comment];
                 [self.comentsTextView setText:str];
             }
@@ -127,7 +127,7 @@
     if (status) {
         
         // chabge status & update custom object
-        [[self.customObject fields] setObject:status forKey:@"status"];
+        self.customObject.fields[@"status"] = status;
         [QBCustomObjects updateObject:self.customObject delegate:self];
         
         // refresh table
@@ -148,13 +148,13 @@
     } else {
         switch (buttonIndex) {
             case 1:{
-                NSString* noteComment = [[self.customObject fields] objectForKey:@"comment"];
+                NSString* noteComment = self.customObject.fields[@"comment"];
                 NSString* alertText = ((UITextField *)[alertView viewWithTag:101]).text;
                 // change comments & update custom object
                 
                 NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", noteComment,alertText];
 
-                [[self.customObject fields] setObject:comments forKey:@"comment"];
+                self.customObject.fields[@"comment"] = comments;
             
                 [QBCustomObjects updateObject:self.customObject delegate:self];
             
@@ -174,16 +174,16 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+- (void)completedWithResult:(Result*)result {
     
     // Update/Delete note result
-    if([result isKindOfClass:QBCOCustomObjectResult.class]){
+    if ([result isKindOfClass:QBCOCustomObjectResult.class]) {
         
         // Success result
         if(result.success){
             QBCOCustomObjectResult *res = (QBCOCustomObjectResult *)result;
             
-            if(!res.object){
+            if (!res.object) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note successfully deleted"
                                                                 message:@""
                                                                delegate:self
