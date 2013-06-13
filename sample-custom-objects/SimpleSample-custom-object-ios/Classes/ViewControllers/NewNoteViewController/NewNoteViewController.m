@@ -37,9 +37,7 @@
 - (IBAction)next:(id)sender {
     
     if (self.noteTextField.text.length && self.commentTextField.text.length) {
-        
         [self createNote];
-        
     } else {
         UIAlertView *allert = [[UIAlertView alloc] initWithTitle:@"Errors"
                                                          message:@"Please fill both Note & Comment fields"
@@ -78,13 +76,13 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+- (void)completedWithResult:(Result*)result {
     
     // Create custom object result
-    if([result isKindOfClass:QBCOCustomObjectResult.class]){
+    if ([result isKindOfClass:QBCOCustomObjectResult.class]) {
 
         // Success result
-        if(result.success){
+        if (result.success) {
             QBCOCustomObjectResult *res = (QBCOCustomObjectResult *)result;
             
             // add note to storage

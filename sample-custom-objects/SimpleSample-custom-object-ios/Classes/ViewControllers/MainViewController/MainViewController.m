@@ -118,6 +118,7 @@
         NSDate* creationDate = [[self.searchArray objectAtIndex:indexPath.row] createdAt];
         stringFromDate = [formatter stringFromDate:creationDate];
     }
+    
     [cell.dateLabel setText:stringFromDate];
     
     return cell;

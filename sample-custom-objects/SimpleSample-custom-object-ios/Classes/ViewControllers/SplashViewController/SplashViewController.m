@@ -51,7 +51,7 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result {
+-(void)completedWithResult:(Result *)result {
     // QuickBlox session creation result
     if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
         

@@ -79,7 +79,7 @@
     [[[DataManager shared] notes] removeObjectIdenticalTo:self.customObject];
 }
 
-- (void) reloadData{
+- (void)reloadData {
     // set note & status
     self.noteLabel.text = self.customObject.fields[@"note"];
     self.statusLabel.text = self.customObject.fields[@"status"];
@@ -110,22 +110,21 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     NSString *status = nil;
     switch (buttonIndex) {
-        case 0:{
+        case 0: {
             status = @"New";
             break;
         }
-        case 1:{
+        case 1: {
             status = @"In Progress";
             break;
         }
-        case 2:{
+        case 2: {
             status = @"Done";
             break;
         }
     }
     
     if (status) {
-        
         // chabge status & update custom object
         self.customObject.fields[@"status"] = status;
         [QBCustomObjects updateObject:self.customObject delegate:self];
@@ -139,7 +138,7 @@
 #pragma mark -
 #pragma mark UIAlertViewDelegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // delete note alert
     if (alertView.tag == 2) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -147,7 +146,7 @@
     // Add new comment alert
     } else {
         switch (buttonIndex) {
-            case 1:{
+            case 1: {
                 NSString* noteComment = self.customObject.fields[@"comment"];
                 NSString* alertText = ((UITextField *)[alertView viewWithTag:101]).text;
                 // change comments & update custom object
@@ -180,7 +179,7 @@
     if ([result isKindOfClass:QBCOCustomObjectResult.class]) {
         
         // Success result
-        if(result.success){
+        if (result.success) {
             QBCOCustomObjectResult *res = (QBCOCustomObjectResult *)result;
             
             if (!res.object) {
