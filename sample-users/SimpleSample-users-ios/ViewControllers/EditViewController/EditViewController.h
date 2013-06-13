@@ -14,7 +14,7 @@
 
 @class MainViewController;
 
-@interface EditViewController : UIViewController <QBActionStatusDelegate>{
+@interface EditViewController : UIViewController{
 }
 @property (nonatomic, weak) QBUUser* user;
 

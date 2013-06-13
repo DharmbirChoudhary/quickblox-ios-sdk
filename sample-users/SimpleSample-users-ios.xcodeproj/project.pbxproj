@@ -22,12 +22,6 @@
 		FA43AD84152B8B3F000A2EF7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA43AD83152B8B3F000A2EF7 /* libz.dylib */; };
 		FA43AD8A152B8BAE000A2EF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA43AD86152B8BAE000A2EF7 /* InfoPlist.strings */; };
 		FA43AD8B152B8BAE000A2EF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA43AD87152B8BAE000A2EF7 /* main.m */; };
-		FA43ADE7152B95A3000A2EF7 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA43ADDB152B95A3000A2EF7 /* CustomTableViewCell.xib */; };
-		FA43ADE8152B95A3000A2EF7 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA43ADDC152B95A3000A2EF7 /* EditViewController.xib */; };
-		FA43ADE9152B95A3000A2EF7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA43ADDD152B95A3000A2EF7 /* LoginViewController.xib */; };
-		FA43ADEA152B95A3000A2EF7 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA43ADDE152B95A3000A2EF7 /* MainViewController.xib */; };
-		FA43ADEB152B95A3000A2EF7 /* RegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA43ADDF152B95A3000A2EF7 /* RegistrationViewController.xib */; };
-		FA43ADED152B95A3000A2EF7 /* UserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA43ADE1152B95A3000A2EF7 /* UserDetailsViewController.xib */; };
 		FAC8B9EB16D2D59400F03311 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8B9EA16D2D59400F03311 /* CoreMedia.framework */; };
 		FAC8B9ED16D2D59A00F03311 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8B9EC16D2D59A00F03311 /* CoreVideo.framework */; };
 		FAC8B9EF16D2D59F00F03311 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8B9EE16D2D59F00F03311 /* AVFoundation.framework */; };
@@ -47,7 +41,6 @@
 		FAF4BB5115F4F6E6009E15D4 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FAF4BB4A15F4F6E6009E15D4 /* logo.png */; };
 		FAF4BB5215F4F6E6009E15D4 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FAF4BB4B15F4F6E6009E15D4 /* pin.png */; };
 		FAF4BB5415F4F6E6009E15D4 /* twitter_login.png in Resources */ = {isa = PBXBuildFile; fileRef = FAF4BB4D15F4F6E6009E15D4 /* twitter_login.png */; };
-		FAF4BB5615F4F6F7009E15D4 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAF4BB5515F4F6F7009E15D4 /* SplashViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,12 +63,6 @@
 		FA43AD87152B8BAE000A2EF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA43AD88152B8BAE000A2EF7 /* SimpleSample-users-ios-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SimpleSample-users-ios-Info.plist"; sourceTree = "<group>"; };
 		FA43AD89152B8BAE000A2EF7 /* SimpleSample-users-ios-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SimpleSample-users-ios-Prefix.pch"; sourceTree = "<group>"; };
-		FA43ADDB152B95A3000A2EF7 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
-		FA43ADDC152B95A3000A2EF7 /* EditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
-		FA43ADDD152B95A3000A2EF7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		FA43ADDE152B95A3000A2EF7 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		FA43ADDF152B95A3000A2EF7 /* RegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationViewController.xib; sourceTree = "<group>"; };
-		FA43ADE1152B95A3000A2EF7 /* UserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDetailsViewController.xib; sourceTree = "<group>"; };
 		FAC8B9EA16D2D59400F03311 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FAC8B9EC16D2D59A00F03311 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		FAC8B9EE16D2D59F00F03311 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -102,7 +89,6 @@
 		FAF4BB4A15F4F6E6009E15D4 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		FAF4BB4B15F4F6E6009E15D4 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		FAF4BB4D15F4F6E6009E15D4 /* twitter_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_login.png; sourceTree = "<group>"; };
-		FAF4BB5515F4F6F7009E15D4 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,25 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				FAF4BB4615F4F6E6009E15D4 /* images */,
-				FA43ADDA152B95A3000A2EF7 /* xibs */,
 				61EB52CD1769AAC400DB9321 /* MainStoryboard.storyboard */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		FA43ADDA152B95A3000A2EF7 /* xibs */ = {
-			isa = PBXGroup;
-			children = (
-				FA43ADDB152B95A3000A2EF7 /* CustomTableViewCell.xib */,
-				FA43ADDC152B95A3000A2EF7 /* EditViewController.xib */,
-				FA43ADDD152B95A3000A2EF7 /* LoginViewController.xib */,
-				FAF4BB5515F4F6F7009E15D4 /* SplashViewController.xib */,
-				FA43ADDE152B95A3000A2EF7 /* MainViewController.xib */,
-				FA43ADDF152B95A3000A2EF7 /* RegistrationViewController.xib */,
-				FA43ADE1152B95A3000A2EF7 /* UserDetailsViewController.xib */,
-			);
-			name = xibs;
-			path = iPhone/xibs;
 			sourceTree = "<group>";
 		};
 		FAF4BB2915F4F6A0009E15D4 /* ViewControllers */ = {
@@ -364,19 +334,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA43AD8A152B8BAE000A2EF7 /* InfoPlist.strings in Resources */,
-				FA43ADE7152B95A3000A2EF7 /* CustomTableViewCell.xib in Resources */,
-				FA43ADE8152B95A3000A2EF7 /* EditViewController.xib in Resources */,
-				FA43ADE9152B95A3000A2EF7 /* LoginViewController.xib in Resources */,
-				FA43ADEA152B95A3000A2EF7 /* MainViewController.xib in Resources */,
-				FA43ADEB152B95A3000A2EF7 /* RegistrationViewController.xib in Resources */,
-				FA43ADED152B95A3000A2EF7 /* UserDetailsViewController.xib in Resources */,
 				FAF4BB4E15F4F6E6009E15D4 /* Default.png in Resources */,
 				FAF4BB4F15F4F6E6009E15D4 /* fcebook_login.png in Resources */,
 				FAF4BB5015F4F6E6009E15D4 /* icon.png in Resources */,
 				FAF4BB5115F4F6E6009E15D4 /* logo.png in Resources */,
 				FAF4BB5215F4F6E6009E15D4 /* pin.png in Resources */,
 				FAF4BB5415F4F6E6009E15D4 /* twitter_login.png in Resources */,
-				FAF4BB5615F4F6F7009E15D4 /* SplashViewController.xib in Resources */,
 				43900C1B16245DCA0041381B /* Default-568h@2x.png in Resources */,
 				61EB52CE1769AAC400DB9321 /* MainStoryboard.storyboard in Resources */,
 			);

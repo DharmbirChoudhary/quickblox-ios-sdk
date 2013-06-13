@@ -70,21 +70,22 @@
     self.searchBar = nil;
     self.myTableView = nil;
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidUnload];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
     if ([segue.identifier isEqualToString:@"userDetailsSegue"]) {
-        CustomTableViewCellCell* cell = (CustomTableViewCellCell *)sender;
-        NSIndexPath* selectedIndexPath = [self.myTableView indexPathForCell:cell];
+        CustomTableViewCellCell *cell = (CustomTableViewCellCell *)sender;
+        NSIndexPath *selectedIndexPath = [self.myTableView indexPathForCell:cell];
         
-        UserDetailsViewController* detailsController = segue.destinationViewController;
+        UserDetailsViewController *detailsController = segue.destinationViewController;
         detailsController.choosedUser = [self.searchUsers objectAtIndex:[selectedIndexPath row]];
     }
     
     else if ([segue.identifier isEqualToString:@"editSegue"]) {
-        EditViewController* editController = segue.destinationViewController;
+        EditViewController *editController = segue.destinationViewController;
         
         editController.user = self.currentUser;
     }

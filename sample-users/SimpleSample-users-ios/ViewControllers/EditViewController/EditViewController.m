@@ -8,7 +8,7 @@
 
 #import "EditViewController.h"
 
-@interface EditViewController ()
+@interface EditViewController () <QBActionStatusDelegate, UITextFieldDelegate>
 - (IBAction) update:(id)sender;
 - (IBAction) back:(id)sender;
 - (IBAction) hideKeyboard:(id)sender;
@@ -19,7 +19,9 @@
 @property (nonatomic, weak) IBOutlet UITextField* emailField;
 @property (nonatomic, weak) IBOutlet UITextField* websiteField;
 @property (nonatomic, weak) IBOutlet UITextField *tagsField;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak,nonatomic) UITextField* activeField;
 @end
 
 @implementation EditViewController
@@ -33,7 +35,10 @@
     self.websiteField = nil;
     self.tagsField = nil;
     
+    [self setScrollView:nil];
     [super viewDidUnload];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -54,14 +59,15 @@
             self.tagsField.text = [NSString stringWithFormat:@"%@, %@", self.tagsField.text, tag];
         }
     }
+    
+    [self registerForKeyboardNotifications];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.loginFiled resignFirstResponder];
     [self.fullNameField resignFirstResponder];
     [self.phoneField resignFirstResponder];
@@ -72,6 +78,42 @@
 - (IBAction) hideKeyboard:(id)sender {
     [sender resignFirstResponder];
 }
+
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.activeField.frame.origin.y - kbSize.height);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
 
 // Update user
 - (void)update:(id)sender {    
@@ -143,6 +185,22 @@
             [alert show];
         }
     }
+}
+
+#pragma mark -
+#pragma mark QBActionStatusDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.activeField = nil;
 }
 
 @end

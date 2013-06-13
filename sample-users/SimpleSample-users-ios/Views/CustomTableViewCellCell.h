@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomTableViewCellCell : UITableViewCell
-{
-    UILabel* userLogin;
-    UILabel* userTag;
-}
 
 @property (nonatomic, weak) IBOutlet UILabel* userLogin;
 @property (nonatomic, weak) IBOutlet UILabel* userTag;
