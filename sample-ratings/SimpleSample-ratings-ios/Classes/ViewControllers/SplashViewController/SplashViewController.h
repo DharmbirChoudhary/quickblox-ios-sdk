@@ -16,7 +16,7 @@
 
 @interface SplashViewController : UIViewController<QBActionStatusDelegate>
 
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 -(void)hideSplashScreen;
 

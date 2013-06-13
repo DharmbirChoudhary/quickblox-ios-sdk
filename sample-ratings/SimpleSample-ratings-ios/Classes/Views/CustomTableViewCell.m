@@ -41,10 +41,4 @@
     return self;
 }
 
-- (void)dealloc {
-    [_ratingView release];
-    [_movieName release];
-    [_movieImageView release];
-    [super dealloc];
-}
 @end

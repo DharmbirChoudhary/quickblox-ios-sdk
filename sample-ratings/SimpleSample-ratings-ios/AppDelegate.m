@@ -11,12 +11,6 @@
 @implementation AppDelegate
 
 
-- (void)dealloc
-{
-    [_window release];
-//    [navigationController release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

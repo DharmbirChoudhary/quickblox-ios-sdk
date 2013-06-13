@@ -17,6 +17,6 @@
 @interface MovieDetailsViewController : UIViewController
 
 
-@property (nonatomic, retain) Movie *movie;
+@property (nonatomic, strong) Movie *movie;
 
 @end

@@ -14,7 +14,7 @@
 #import "DataManager.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation MainViewController
@@ -37,10 +37,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-//    [tableView release];
-    [super dealloc];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"movieDetailsSegue"]) {

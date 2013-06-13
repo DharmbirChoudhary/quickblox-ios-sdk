@@ -18,13 +18,5 @@
 @synthesize rating;
 
 
--(void) dealloc{
-    [movieName release];
-    [movieImage release];
-    [movieRating release];
-    [movieDetails release];
-    
-    [super dealloc];
-}
 
 @end

@@ -31,7 +31,6 @@
     
     [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
     
-    [extendedAuthRequest release];
     
     if(IS_HEIGHT_GTE_568) {
         CGRect frame = self.activityIndicator.frame;
@@ -54,10 +53,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)dealloc {
-//    [delegate release];
-    [super dealloc];
-}
 #pragma mark -
 #pragma mark QBActionStatusDelegate
 
@@ -81,7 +76,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", "")
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
         
     // Get average ratings result
@@ -104,7 +98,6 @@
                 }
             }
             
-//            [((MainViewController*)self.delegate).tableView reloadData];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainControllerWillUpdateTable" object:nil];
             // hide splash
             [self performSelector:@selector(hideSplashScreen) withObject:self afterDelay:1];
