@@ -17,10 +17,8 @@
 
 @implementation SplashViewController
 @synthesize activityIndicator;
-@synthesize delegate;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [activityIndicator startAnimating];  
     
@@ -35,31 +33,29 @@
     
     [extendedAuthRequest release];
     
-    if(IS_HEIGHT_GTE_568){
+    if(IS_HEIGHT_GTE_568) {
         CGRect frame = self.activityIndicator.frame;
         frame.origin.y += 44;
         [self.activityIndicator setFrame:frame];
     }
 }
 
-- (void)viewDidUnload
-{
-    [self setDelegate:nil];
+- (void)viewDidUnload {
+//    [self setDelegate:nil];
     [self setActivityIndicator:nil];
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)hideSplashScreen{
+-(void)hideSplashScreen {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)dealloc{
-    [delegate release];
+- (void)dealloc {
+//    [delegate release];
     [super dealloc];
 }
 #pragma mark -
@@ -108,7 +104,8 @@
                 }
             }
             
-            [((MainViewController*)self.delegate).tableView reloadData];
+//            [((MainViewController*)self.delegate).tableView reloadData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"mainControllerWillUpdateTable" object:nil];
             // hide splash
             [self performSelector:@selector(hideSplashScreen) withObject:self afterDelay:1];
         }

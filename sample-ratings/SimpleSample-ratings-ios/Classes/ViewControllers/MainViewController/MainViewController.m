@@ -13,70 +13,69 @@
 #import "Movie.h"
 #import "DataManager.h"
 
-@interface MainViewController ()
-
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation MainViewController
-@synthesize tableView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.title = @"Movies";
-    }
-    return self;
-}
-
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setTableView:nil];
     [super viewDidUnload];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self performSegueWithIdentifier:@"splashSegue" sender:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainControllerWillUpdateTable) name:@"mainControllerWillUpdateTable" object:nil];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)dealloc {
-    [tableView release];
+//    [tableView release];
     [super dealloc];
 }
 
-- (void) showMovieDetails:(int)index{
-    MovieDetailsViewController *detailsViewController = [[MovieDetailsViewController alloc] init];
-    [detailsViewController setMovie:[[[DataManager shared] movies] objectAtIndex:index]];
-    [self.navigationController pushViewController:detailsViewController animated:YES];
-    [detailsViewController release];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"movieDetailsSegue"]) {
+        CustomTableViewCell *selectedCell = (CustomTableViewCell *)sender;
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:selectedCell];
+        
+        MovieDetailsViewController* detailsController = segue.destinationViewController;
+        
+        Movie *selectedMovie = [[DataManager shared].movies objectAtIndex:indexPath.row];
+        [detailsController setMovie:selectedMovie];
+    }
 }
-
 
 #pragma mark -
 #pragma mark TableViewDataSource & TableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self showMovieDetails:indexPath.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CustomTableViewCell* cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"movieDetailsSegue" sender:cell];
 }
 
-- (void)tableView:(UITableView *)_tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    [self showMovieDetails:indexPath.row];
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    CustomTableViewCell* cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"movieDetailsSegue" sender:cell];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[[DataManager shared] movies] count];
 }
 
 // Making table view using custom cells
-- (UITableViewCell*)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell*)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString* SimpleTableIdentifier = @"SimpleTableIdentifier";
     
-    CustomTableViewCell* cell = [_tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
-    if (cell == nil){
-        cell = [[[CustomTableViewCell alloc] init] autorelease];
-    }
+    CustomTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
     
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
@@ -92,9 +91,8 @@
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
+- (void)mainControllerWillUpdateTable {
+    [self.tableView reloadData];
 }
-
 
 @end

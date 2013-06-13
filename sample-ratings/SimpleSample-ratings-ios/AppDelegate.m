@@ -7,18 +7,14 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
-#import "SplashViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize navigationController;
 
 - (void)dealloc
 {
     [_window release];
-    [navigationController release];
+//    [navigationController release];
     [super dealloc];
 }
 
@@ -30,21 +26,21 @@
     [QBSettings setAuthorizationSecret:@"BTFsj7Rtt27DAmT"];
     //
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    [self.window makeKeyAndVisible];
-
-    // create navigation controller with root main view controller
-    MainViewController *mainViewController = [[MainViewController alloc] init];
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:mainViewController] autorelease];
-    [mainViewController release];
-    
-    [self.window setRootViewController:self.navigationController];
-
-    // Show splash
-    SplashViewController* splashScreen = [[SplashViewController alloc] init];
-    [splashScreen setDelegate:mainViewController];
-    [navigationController presentModalViewController:splashScreen animated:NO];
-    [splashScreen release];
+//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+//    [self.window makeKeyAndVisible];
+//
+//    // create navigation controller with root main view controller
+//    MainViewController *mainViewController = [[MainViewController alloc] init];
+//    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:mainViewController] autorelease];
+//    [mainViewController release];
+//    
+//    [self.window setRootViewController:self.navigationController];
+//
+//    // Show splash
+//    SplashViewController* splashScreen = [[SplashViewController alloc] init];
+//    [splashScreen setDelegate:mainViewController];
+//    [navigationController presentModalViewController:splashScreen animated:NO];
+//    [splashScreen release];
 
     return YES;
 }

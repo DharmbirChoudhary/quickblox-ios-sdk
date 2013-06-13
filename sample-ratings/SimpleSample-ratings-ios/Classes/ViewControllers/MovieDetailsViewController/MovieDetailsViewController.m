@@ -11,32 +11,34 @@
 #import "DataManager.h"
 
 
-@interface MovieDetailsViewController ()
+@interface MovieDetailsViewController () <RateViewDelegate, QBActionStatusDelegate>
 
+@property (retain, nonatomic) IBOutlet UITextView *detailsText;
+@property (retain, nonatomic) IBOutlet UIImageView *moviImageView;
+@property (retain, nonatomic) IBOutlet UIButton *ratingButton;
+
+@property (nonatomic, retain) RateView *ratingView;
+@property (nonatomic, retain) RateView *alertRatingView;
+
+- (IBAction)rate:(id)sender;
 @end
 
 @implementation MovieDetailsViewController
-@synthesize ratingButton;
-@synthesize movie;
-@synthesize detailsText;
-@synthesize moviImageView;
-@synthesize alertRatingView;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = movie.movieName;
+    self.title = self.movie.movieName;
 
-    [self.detailsText setText:[movie movieDetails]];
+    [self.detailsText setText:[self.movie movieDetails]];
     [self.detailsText setEditable:NO];
-    [self.moviImageView setImage:[UIImage imageNamed:[movie movieImage]]];
+    [self.moviImageView setImage:[UIImage imageNamed:[self.movie movieImage]]];
     
     
     self.ratingView = [[[RateView alloc] initWithFrameBig:CGRectMake(40, 328, 240, 40)] autorelease];
     self.ratingView.alignment = RateViewAlignmentLeft;
     self.ratingView.editable = NO;
-    self.ratingView.rate = [movie rating];
+    self.ratingView.rate = [self.movie rating];
     [self.view addSubview:self.ratingView];
     
     self.alertRatingView = [[[RateView alloc] initWithFrameBig:CGRectMake(20, 80, 240, 30)] autorelease];
@@ -51,25 +53,21 @@
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setDetailsText:nil];
     [self setMoviImageView:nil];
     [self setRatingButton:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)dealloc {
-    [detailsText release];
-    [ratingButton release];
-    [alertRatingView release];
+//    [detailsText release];
+//    [ratingButton release];
+//    [alertRatingView release];
     [super dealloc];
 }
 
@@ -80,10 +78,10 @@
     [alert release];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{ 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex { 
     QBRScore *score = [QBRScore score];
-    score.gameModeID = [movie gameModeID];
-    score.value = alertRatingView.rate;
+    score.gameModeID = [self.movie gameModeID];
+    score.value = self.alertRatingView.rate;
     [QBRatings createScore:score delegate:nil];
 }
 

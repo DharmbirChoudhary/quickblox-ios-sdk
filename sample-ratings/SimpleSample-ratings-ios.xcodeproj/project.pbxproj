@@ -11,6 +11,7 @@
 		438146731600A13200A508F5 /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438146701600A13200A508F5 /* images.jpg */; };
 		43900C10162455930041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C0F162455930041381B /* Default-568h@2x.png */; };
 		43ECA73D1600984D005DC731 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43ECA73F1600984D005DC731 /* SplashViewController.xib */; };
+		61EB52D01769F35200DB9321 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61EB52CF1769F35200DB9321 /* MainStoryboard.storyboard */; };
 		ED3BA44B15AC1097002B8CFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3BA44A15AC1097002B8CFE /* UIKit.framework */; };
 		ED3BA44D15AC1097002B8CFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3BA44C15AC1097002B8CFE /* Foundation.framework */; };
 		ED3BA44F15AC1097002B8CFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3BA44E15AC1097002B8CFE /* CoreGraphics.framework */; };
@@ -53,7 +54,6 @@
 		FA6ECF8915BEA59D00833341 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6ECF6715BEA59D00833341 /* AppDelegate.m */; };
 		FA6ECF9115BEA59D00833341 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6ECF7915BEA59D00833341 /* InfoPlist.strings */; };
 		FA6ECF9215BEA59D00833341 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6ECF7B15BEA59D00833341 /* main.m */; };
-		FA6ECF9315BEA59D00833341 /* SimpleSample-ratings-ios-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA6ECF7C15BEA59D00833341 /* SimpleSample-ratings-ios-Info.plist */; };
 		FAC8B9E116D2D4A200F03311 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8B9E016D2D4A200F03311 /* CoreVideo.framework */; };
 		FAC8B9E316D2D4A700F03311 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8B9E216D2D4A600F03311 /* CoreMedia.framework */; };
 		FAC8B9E516D2D4AD00F03311 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8B9E416D2D4AD00F03311 /* AVFoundation.framework */; };
@@ -66,6 +66,7 @@
 		438146701600A13200A508F5 /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
 		43900C0F162455930041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		43ECA73E1600984D005DC731 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SplashViewController.xib; sourceTree = "<group>"; };
+		61EB52CF1769F35200DB9321 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		ED3BA44615AC1097002B8CFE /* SimpleSample-ratings-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleSample-ratings-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED3BA44A15AC1097002B8CFE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED3BA44C15AC1097002B8CFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -289,6 +290,7 @@
 			children = (
 				FA6ECF5815BEA59D00833341 /* images */,
 				FA6ECF6115BEA59D00833341 /* xibs */,
+				61EB52CF1769F35200DB9321 /* MainStoryboard.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -368,7 +370,7 @@
 		ED3BA43D15AC1097002B8CFE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = ED3BA44015AC1097002B8CFE /* Build configuration list for PBXProject "SimpleSample-ratings-ios" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -397,7 +399,6 @@
 				FA6ECF8315BEA59D00833341 /* logo.png in Resources */,
 				43ECA73D1600984D005DC731 /* SplashViewController.xib in Resources */,
 				FA6ECF9115BEA59D00833341 /* InfoPlist.strings in Resources */,
-				FA6ECF9315BEA59D00833341 /* SimpleSample-ratings-ios-Info.plist in Resources */,
 				438146731600A13200A508F5 /* images.jpg in Resources */,
 				431EE5151600A42A00E85366 /* images.jpeg in Resources */,
 				FA023ED01602335C00948B7E /* fight_club.jpg in Resources */,
@@ -418,6 +419,7 @@
 				FA023EFF160233E700948B7E /* MainViewController.xib in Resources */,
 				FA023F00160233E700948B7E /* MovieDetailsViewController.xib in Resources */,
 				43900C10162455930041381B /* Default-568h@2x.png in Resources */,
+				61EB52D01769F35200DB9321 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +485,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				COPY_PHASE_STRIP = NO;
@@ -498,7 +504,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "DAE2D3F8-2688-4CB9-9C29-64A223CB206C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DAE2D3F8-2688-4CB9-9C29-64A223CB206C";
 				SDKROOT = iphoneos;
@@ -510,6 +516,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
@@ -518,7 +528,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -530,8 +540,8 @@
 		ED3BA46515AC1097002B8CFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Filatov (6AVH4TA956)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Filatov (6AVH4TA956)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -540,7 +550,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleSample-ratings-ios/SimpleSample-ratings-ios-Prefix.pch";
 				INFOPLIST_FILE = "SimpleSample-ratings-ios/SimpleSample-ratings-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-ObjC",
@@ -552,8 +562,8 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "SimpleSample-ratings-ios";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "1576CACB-6248-4BD8-B223-5B9427767808";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1576CACB-6248-4BD8-B223-5B9427767808";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -571,7 +581,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleSample-ratings-ios/SimpleSample-ratings-ios-Prefix.pch";
 				INFOPLIST_FILE = "SimpleSample-ratings-ios/SimpleSample-ratings-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-ObjC",

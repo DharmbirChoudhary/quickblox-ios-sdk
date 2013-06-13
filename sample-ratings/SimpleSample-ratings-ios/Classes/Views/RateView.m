@@ -92,8 +92,7 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
             _origin = CGPointMake(0, 0);
             break;
         }
-        case RateViewAlignmentCenter:
-        {
+        case RateViewAlignmentCenter:         {
             _origin = CGPointMake((self.bounds.size.width - _numOfStars * _fullStarImage.size.width - (_numOfStars - 1) * _padding)/2, 0);
             break;
         }
