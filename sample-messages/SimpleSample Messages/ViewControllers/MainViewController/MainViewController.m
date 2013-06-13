@@ -37,9 +37,9 @@
 
 @implementation MainViewController
 
-- (id)init{
+- (id)init {
     self = [super init];
-    if(self){
+    if (self) {
     }
     return self;
 }
@@ -64,7 +64,7 @@
     return _messages;
 }
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.receivedMassages.layer.cornerRadius = 5;
@@ -76,7 +76,7 @@
                                                  name:kPushDidReceive object:nil];
 }
 
-- (void)pushDidReceive:(NSNotification *)notification{
+- (void)pushDidReceive:(NSNotification *)notification {
     // new push notification did receive - show it
     
     // push message
@@ -91,7 +91,7 @@
     [self.receivedMassages reloadData];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return NO;
 }
 
@@ -99,19 +99,17 @@
 - (IBAction)sendButtonDidPress:(id)sender {
 
     // not selected receiver(user)
-   if([self.toUserName.text length] == 0 || [_users count] == 0){
+   if ([self.toUserName.text length] == 0 || [_users count] == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please select user." message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
         
     // empty text
-    }
-    else if([self.messageBody.text length] == 0){
+    } else if([self.messageBody.text length] == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter some text" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     
     // send push
-    }
-    else{
+    } else {
         
         // Create message
         NSString *mesage = [NSString stringWithFormat:@"%@: %@", 
@@ -138,8 +136,7 @@
          [self showPickerWithUsers];
         
     // retrieve all users
-    }
-    else {
+    } else {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         // Retrieve QuickBlox users for current application
@@ -178,15 +175,13 @@
             [self showPickerWithUsers];
         
         // Errors
-		}
-        else {
+		} else {
             NSLog(@"Errors=%@", result.errors);
 		}
         
     
     // Send Push result
-    }
-    else if ([result isKindOfClass:[QBMSendPushTaskResult class]]) {
+    } else if ([result isKindOfClass:[QBMSendPushTaskResult class]]) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
         // Success result
@@ -195,8 +190,7 @@
             [alert show];
             
         // Errors
-        }
-        else {
+        } else {
             NSLog(@"Errors=%@", result.errors);
         }
     }

@@ -64,15 +64,12 @@
             [QBMessages TRegisterSubscriptionWithDelegate:self];
             
         // QuickBlox register for Push Notifications result
-        }
-        else if ([result isKindOfClass:[QBMRegisterSubscriptionTaskResult class]]) {
-            
+        } else if ([result isKindOfClass:[QBMRegisterSubscriptionTaskResult class]]) {
             // Hide splash & show main controller
             [self hideSplash];
         }
     // show Errors
-    }
-    else {
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                         message:[result.errors description]
                                                        delegate:nil

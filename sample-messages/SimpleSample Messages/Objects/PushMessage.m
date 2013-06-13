@@ -13,7 +13,7 @@
 @synthesize message;
 @synthesize richContentFilesIDs;
 
-+ (PushMessage *)pushMessageWithMessage:(NSString *)_message richContentFilesIDs:(NSString *)_richContentFilesIDs{
++ (PushMessage *)pushMessageWithMessage:(NSString *)_message richContentFilesIDs:(NSString *)_richContentFilesIDs {
     PushMessage *pushMessage = [[[self class] alloc] init];
     pushMessage.message = _message;
     pushMessage.richContentFilesIDs = [_richContentFilesIDs componentsSeparatedByString:@","];
