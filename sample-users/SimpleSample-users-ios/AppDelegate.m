@@ -11,16 +11,10 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize splashController;
+//@synthesize window = _window;
+//@synthesize splashController;
 
 
-- (void)dealloc
-{
-    [splashController release];
-    [_window release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -29,14 +23,7 @@
     [QBSettings setApplicationID:92];
     [QBSettings setAuthorizationKey:@"wJHdOcQSxXQGWx5"];
     [QBSettings setAuthorizationSecret:@"BTFsj7Rtt27DAmT"];
-    
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    
-    // Show Splash
-    self.splashController = [[[SplashController alloc] initWithNibName:@"SplashViewController" bundle:nil] autorelease];
-    self.window.rootViewController = (UIViewController*)self.splashController;
-    [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 

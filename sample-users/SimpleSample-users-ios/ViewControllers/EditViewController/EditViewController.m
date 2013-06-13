@@ -9,20 +9,23 @@
 #import "EditViewController.h"
 
 @interface EditViewController ()
+- (IBAction) update:(id)sender;
+- (IBAction) back:(id)sender;
+- (IBAction) hideKeyboard:(id)sender;
+
+@property (nonatomic, weak) IBOutlet UITextField* loginFiled;
+@property (nonatomic, weak) IBOutlet UITextField* fullNameField;
+@property (nonatomic, weak) IBOutlet UITextField* phoneField;
+@property (nonatomic, weak) IBOutlet UITextField* emailField;
+@property (nonatomic, weak) IBOutlet UITextField* websiteField;
+@property (nonatomic, weak) IBOutlet UITextField *tagsField;
 
 @end
 
 @implementation EditViewController
-@synthesize user, loginFiled, fullNameField, phoneField, emailField, websiteField, tagsField, mainController;
 
--(void)dealloc
-{
-    [mainController release];
-    [super dealloc];
-}
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     self.tagsField = nil;
     self.fullNameField = nil;
     self.phoneField = nil;
@@ -35,84 +38,76 @@
     // e.g. self.myOutlet = nil;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    loginFiled.text    = mainController.currentUser.login;
-    fullNameField.text = mainController.currentUser.fullName;
-    phoneField.text    = mainController.currentUser.phone;
-    emailField.text    = mainController.currentUser.email;
-    websiteField.text  = mainController.currentUser.website;
+    self.loginFiled.text    = self.user.login;
+    self.fullNameField.text = self.user.fullName;
+    self.phoneField.text    = self.user.phone;
+    self.emailField.text    = self.user.email;
+    self.websiteField.text  = self.user.website;
     
-    for(NSString *tag in mainController.currentUser.tags){
-        if([tagsField.text length] == 0){
-            tagsField.text = tag;
+    for(NSString *tag in self.user.tags) {
+        if([self.tagsField.text length] == 0) {
+            self.tagsField.text = tag;
         }else{
-            tagsField.text = [NSString stringWithFormat:@"%@, %@", tagsField.text, tag];
+            self.tagsField.text = [NSString stringWithFormat:@"%@, %@", self.tagsField.text, tag];
         }
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [loginFiled resignFirstResponder];
-    [fullNameField resignFirstResponder];
-    [phoneField resignFirstResponder];
-    [emailField resignFirstResponder];
-    [websiteField resignFirstResponder];
+    [self.loginFiled resignFirstResponder];
+    [self.fullNameField resignFirstResponder];
+    [self.phoneField resignFirstResponder];
+    [self.emailField resignFirstResponder];
+    [self.websiteField resignFirstResponder];
 }
 
-- (IBAction) hideKeyboard:(id)sender
-{
+- (IBAction) hideKeyboard:(id)sender {
     [sender resignFirstResponder];
 }
 
 // Update user
-- (void)update:(id)sender
-{
-    user = mainController.currentUser;
+- (void)update:(id)sender {    
+    if ( [self.loginFiled.text length] != 0) {
+        self.user.login = self.loginFiled.text;
+    }
     
-    if ( [loginFiled.text length] != 0)
-    {
-        user.login = loginFiled.text;
+    if ([self.fullNameField.text length] != 0) {
+        self.user.fullName = self.fullNameField.text;
     }
-    if ([fullNameField.text length] != 0)
-    {
-        user.fullName = fullNameField.text;
+    
+    if ([self.phoneField.text length] != 0) {
+        self.user.phone = self.phoneField.text;
     }
-    if ([phoneField.text length] != 0)
-    {
-        user.phone = phoneField.text;
+    
+    if ([self.emailField.text length] != 0) {
+        self.user.email = self.emailField.text;
     }
-    if ([emailField.text length] != 0) {
-        user.email = emailField.text;
+    
+    if ([self.websiteField.text length] != 0) {
+        self.user.website = self.websiteField.text;
     }
-    if ([websiteField.text length] != 0)
-    {
-        user.website = websiteField.text;
-    }
-    if([tagsField.text length] != 0)
-    {
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[[tagsField.text stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","]];
-        user.tags = array;
-        [array release];
+    
+    if([self.tagsField.text length] != 0) {
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[[self.tagsField.text stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","]];
+        self.user.tags = array;
     }
     
     // update user
-    [QBUsers updateUser:user delegate:self];
+    [QBUsers updateUser:self.user delegate:self];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
-- (IBAction)back:(id)sender
-{
-    loginFiled.text = nil;
+- (IBAction)back:(id)sender {
+    self.loginFiled.text = nil;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -121,35 +116,31 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result
-{
+-(void)completedWithResult:(Result *)result {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     // Edit user result
-    if([result isKindOfClass:[QBUUserResult class]])
-    {
+    if([result isKindOfClass:[QBUUserResult class]]) {
         // Success result
-        if (result.success)
-        {
+        if (result.success) { 
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil 
                                                             message:@"User was edit successfully" 
                                                            delegate:nil 
                                                   cancelButtonTitle:@"Ok" 
                                                   otherButtonTitles:nil, nil];
             [alert show];
-            [alert release];
-            
-            mainController.currentUser = user;
+                       
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userUpdatedSuccessfully" object:nil userInfo:@{@"user" : self.user}];
         
         // Errors
-        }else{
+        }
+        else {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                     message:[result.errors description]
                                                     delegate:nil 
                                                     cancelButtonTitle:@"Okay" 
                                                     otherButtonTitles:nil, nil];
             [alert show];
-            [alert release];
         }
     }
 }

@@ -8,25 +8,23 @@
 
 #import "UserDetailsViewController.h"
 
+@interface UserDetailsViewController ()
+
+@property (nonatomic, weak) IBOutlet UILabel *lastRequestAtLabel;
+@property (nonatomic, weak) IBOutlet UILabel *loginLabel;
+@property (nonatomic, weak) IBOutlet UILabel *fullNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *phoneLabel;
+@property (nonatomic, weak) IBOutlet UILabel *emailLabel;
+@property (nonatomic, weak) IBOutlet UILabel *websiteLabel;
+@property (nonatomic, weak) IBOutlet UILabel *tagLabel;
+
+- (IBAction)back:(id)sender;
+@end
+
 @implementation UserDetailsViewController
 
-@synthesize lastRequestAtLabel;
-@synthesize loginLabel;
-@synthesize fullNameLabel;
-@synthesize phoneLabel;
-@synthesize emailLabel;
-@synthesize websiteLabel;
-@synthesize tagLabel;
-@synthesize choosedUser;
 
--(void)dealloc
-{
-    [choosedUser release];
-    [super dealloc];
-}
-
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     self.lastRequestAtLabel = nil;
     self.loginLabel = nil;
     self.fullNameLabel = nil;
@@ -38,66 +36,62 @@
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // Show User's details
-    loginLabel.text = choosedUser.login;
+    self.loginLabel.text = self.choosedUser.login;
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    lastRequestAtLabel.text = [dateFormatter stringFromDate:choosedUser.lastRequestAt ?
-                               choosedUser.lastRequestAt : choosedUser.createdAt];
-    [dateFormatter release];
+    self.lastRequestAtLabel.text = [dateFormatter stringFromDate:self.choosedUser.lastRequestAt ?
+                               self.choosedUser.lastRequestAt : self.choosedUser.createdAt];
     
-    fullNameLabel.text = choosedUser.fullName;
-    phoneLabel.text = choosedUser.phone;
-    emailLabel.text = choosedUser.email;
-    websiteLabel.text = choosedUser.website;
+    self.fullNameLabel.text = self.choosedUser.fullName;
+    self.phoneLabel.text = self.choosedUser.phone;
+    self.emailLabel.text = self.choosedUser.email;
+    self.websiteLabel.text = self.choosedUser.website;
     
-    for(NSString *tag in choosedUser.tags){
-        if([tagLabel.text length] == 0){
-            tagLabel.text = tag;
-        }else{
-            tagLabel.text = [NSString stringWithFormat:@"%@, %@", tagLabel.text, tag];
+    for(NSString *tag in self.choosedUser.tags) {
+        if([self.tagLabel.text length] == 0) {
+            self.tagLabel.text = tag;
+        }
+        else {
+            self.tagLabel.text = [NSString stringWithFormat:@"%@, %@", self.tagLabel.text, tag];
         }
     }
     
-    if ([choosedUser.fullName length] == 0)
-    {
-        fullNameLabel.text = @"empty"; 
-        fullNameLabel.alpha = 0.3;
+    if ([self.choosedUser.fullName length] == 0) {
+        self.fullNameLabel.text = @"empty";
+        self.fullNameLabel.alpha = 0.3;
     }
-    if ([choosedUser.phone length] == 0) 
-    {
-        phoneLabel.text = @"empty"; 
-        phoneLabel.alpha = 0.3;
+    
+    if ([self.choosedUser.phone length] == 0) {
+        self.phoneLabel.text = @"empty"; 
+        self.phoneLabel.alpha = 0.3;
     }
-    if ([choosedUser.email length] == 0) 
-    {
-        emailLabel.text = @"empty"; 
-        emailLabel.alpha = 0.3;
+    
+    if ([self.choosedUser.email length] == 0) {
+        self.emailLabel.text = @"empty"; 
+        self.emailLabel.alpha = 0.3;
     }
-    if ([choosedUser.website length] == 0) 
-    {
-        websiteLabel.text = @"empty"; 
-        websiteLabel.alpha = 0.3;
+    
+    if ([self.choosedUser.website length] == 0) {
+        self.websiteLabel.text = @"empty"; 
+        self.websiteLabel.alpha = 0.3;
     }
-    if ([choosedUser.tags count] == 0)
-    {
-        tagLabel.text = @"empty";
-        tagLabel.alpha = 0.3;
+    
+    if ([self.choosedUser.tags count] == 0) {
+        self.tagLabel.text = @"empty";
+        self.tagLabel.alpha = 0.3;
     }
 }
 
-- (IBAction)back:(id)sender
-{
+- (IBAction)back:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
 

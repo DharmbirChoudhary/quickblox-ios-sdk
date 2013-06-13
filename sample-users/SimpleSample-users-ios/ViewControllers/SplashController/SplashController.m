@@ -8,8 +8,13 @@
 
 #import "SplashController.h"
 
+@interface SplashController () <QBActionStatusDelegate>
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *wheel;
+
+- (void)hideSplash;
+@end
+
 @implementation SplashController
-@synthesize wheel = _wheel;
 
 - (void)viewDidUnload{
     self.wheel = nil;
@@ -36,10 +41,9 @@
     }
 }
 
-- (void)hideSplash
-{
+- (void)hideSplash {
     // show main controller
-    [self presentModalViewController:[[[MainViewController alloc] init] autorelease] animated:YES];
+    [self performSegueWithIdentifier:@"mainSegue" sender:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
@@ -72,7 +76,6 @@
                                                   cancelButtonTitle:NSLocalizedString(@"OK", "")
                                                   otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
     }
 }

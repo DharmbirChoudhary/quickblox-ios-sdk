@@ -15,16 +15,7 @@
 
 @class MainViewController;
 
-@interface LoginViewController : UIViewController <QBActionStatusDelegate, UIAlertViewDelegate, UITextFieldDelegate> {    
+@interface LoginViewController : UIViewController {    
 }
-@property (nonatomic, retain) IBOutlet UITextField *login;
-@property (nonatomic, retain) IBOutlet UITextField *password;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, assign) IBOutlet MainViewController* mainController;
-
-- (IBAction)next:(id)sender;
-- (IBAction)back:(id)sender;
-- (IBAction)loginWithFaceBook:(id)sender;
-- (IBAction)loginWithTwitter:(id)sender;
 
 @end

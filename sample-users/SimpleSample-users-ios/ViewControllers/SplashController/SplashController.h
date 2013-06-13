@@ -14,11 +14,7 @@
 
 #import "MainViewController.h"
 
-@interface SplashController : UIViewController <QBActionStatusDelegate>{
-    UIActivityIndicatorView *wheel;
-}
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *wheel;
+@interface SplashController : UIViewController
 
-- (void)hideSplash;
 
 @end
