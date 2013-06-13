@@ -11,7 +11,10 @@
 #import "DataManager.h"
 #import "Movie.h"
 
-@interface SplashViewController ()
+@interface SplashViewController () <QBActionStatusDelegate>
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+- (void)hideSplashScreen;
 
 @end
 
@@ -67,8 +70,7 @@
             [QBRatings averagesForApplicationWithDelegate:self];
         
         // show Errors
-        }
-        else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                             message:[result.errors description]
                                                            delegate:nil
@@ -78,8 +80,7 @@
         }
         
     // Get average ratings result
-    }
-    else if ([result isKindOfClass:QBRAveragePagedResult.class]) {
+    } else if ([result isKindOfClass:QBRAveragePagedResult.class]) {
         
         // Success result
         if (result.success) {
@@ -87,10 +88,10 @@
             QBRAveragePagedResult *res = (QBRAveragePagedResult *)result;
             
             // set ratings for movies
-            for(QBRAverage *average in res.averages){
-                for(int i = 0; i < [[[DataManager shared] movies] count]; i++){
-                    Movie *movie = (Movie *)[[[DataManager shared] movies] objectAtIndex:i];
-                    if(average.gameModeID == [movie gameModeID]){
+            for (QBRAverage *average in res.averages) {
+                for (int i = 0; i < [[[DataManager shared] movies] count]; i++) {
+                    Movie *movie = [[DataManager shared].movies objectAtIndex:i];
+                    if (average.gameModeID == [movie gameModeID]) {
                         [movie setRating:average.value];
 
                         break;

@@ -80,7 +80,8 @@
     // Show movie's label, image & rate
     [cell.movieName setText:(NSString *)[movie movieName]];
     [cell.movieImageView setImage:[UIImage imageNamed:[movie movieImage]]];
-    if ([movie rating]){
+    
+    if ([movie rating]) {
         cell.ratingView.rate = [movie rating];
     }
     

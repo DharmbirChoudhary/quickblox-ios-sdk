@@ -11,7 +11,7 @@
 #import "DataManager.h"
 
 
-@interface MovieDetailsViewController () <RateViewDelegate, QBActionStatusDelegate>
+@interface MovieDetailsViewController () <QBActionStatusDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *detailsText;
 @property (weak, nonatomic) IBOutlet UIImageView *moviImageView;
@@ -44,7 +44,6 @@
     self.alertRatingView = [[RateView alloc] initWithFrameBig:CGRectMake(20, 80, 240, 30)];
     self.alertRatingView.alignment = RateViewAlignmentLeft;
     self.alertRatingView.editable = YES;
-    self.alertRatingView.delegate = self;
     
     if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.ratingView.frame;

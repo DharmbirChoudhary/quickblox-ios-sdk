@@ -18,7 +18,6 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
 
 - (void)commonSetup;
 - (void)handleTouchAtLocation:(CGPoint)location;
-- (void)notifyDelegate;
 
 @end
 
@@ -110,7 +109,6 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
 - (void)setRate:(CGFloat)rate {
     _rate = rate;
     [self setNeedsDisplay];
-    [self notifyDelegate];
 }
 
 - (void)setAlignment:(RateViewAlignment)alignment {
@@ -157,13 +155,6 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self];
     [self handleTouchAtLocation:touchLocation];
-}
-
-- (void)notifyDelegate {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(rateView:changedToNewRate:)]) {
-        [self.delegate performSelector:@selector(rateView:changedToNewRate:)
-                            withObject:self withObject:[NSNumber numberWithFloat:self.rate]];
-    }
 }
 
 @end

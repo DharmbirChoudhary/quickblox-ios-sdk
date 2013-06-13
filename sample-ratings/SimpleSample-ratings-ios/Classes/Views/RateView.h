@@ -38,8 +38,3 @@ typedef enum {
 - (RateView *)initWithFrame:(CGRect)rect fullStar:(UIImage *)fullStarImage emptyStar:(UIImage *)emptyStarImage;
 
 @end
-
-
-@protocol RateViewDelegate
-- (void)rateView:(RateView *)rateView changedToNewRate:(NSNumber *)rate;
-@end

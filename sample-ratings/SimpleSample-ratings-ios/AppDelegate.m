@@ -12,29 +12,11 @@
 
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Set QuickBlox credentials (You must create application in admin.quickblox.com)
     [QBSettings setApplicationID:92];
     [QBSettings setAuthorizationKey:@"wJHdOcQSxXQGWx5"];
     [QBSettings setAuthorizationSecret:@"BTFsj7Rtt27DAmT"];
-    //
-    
-//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-//    [self.window makeKeyAndVisible];
-//
-//    // create navigation controller with root main view controller
-//    MainViewController *mainViewController = [[MainViewController alloc] init];
-//    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:mainViewController] autorelease];
-//    [mainViewController release];
-//    
-//    [self.window setRootViewController:self.navigationController];
-//
-//    // Show splash
-//    SplashViewController* splashScreen = [[SplashViewController alloc] init];
-//    [splashScreen setDelegate:mainViewController];
-//    [navigationController presentModalViewController:splashScreen animated:NO];
-//    [splashScreen release];
 
     return YES;
 }
