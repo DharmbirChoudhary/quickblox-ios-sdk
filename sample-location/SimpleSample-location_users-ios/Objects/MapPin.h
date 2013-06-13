@@ -11,8 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MapPin : NSObject <MKAnnotation> {
-}
+@interface MapPin : NSObject <MKAnnotation>
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *subtitle;

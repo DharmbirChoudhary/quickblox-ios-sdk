@@ -46,8 +46,7 @@
     
     if (geodata.user.login != nil) {
         [cell.name setText:geodata.user.login];
-    }
-    else{
+    } else {
         [cell.name setText:geodata.user.fullName];
     }
     

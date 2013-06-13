@@ -11,8 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataManager : NSObject{
-}
+@interface DataManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *checkinArray;
 @property (nonatomic, strong) QBUUser *currentUser;

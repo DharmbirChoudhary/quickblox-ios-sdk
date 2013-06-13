@@ -10,9 +10,9 @@
 
 @implementation MapPin
 
-- (id)initWithCoordinate: (CLLocationCoordinate2D) coordinate{
+- (id)initWithCoordinate: (CLLocationCoordinate2D) coordinate {
     self = [super init];
-    if(self){
+    if (self) {
         self.coordinate = coordinate;
     }
     

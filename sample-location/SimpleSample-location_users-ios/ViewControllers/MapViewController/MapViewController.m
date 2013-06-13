@@ -29,9 +29,9 @@
     [locationManager startUpdatingLocation];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
      // add pins to map
-    if([self.mapView.annotations count] <= 1){        
+    if ([self.mapView.annotations count] <= 1) {        
         [[DataManager shared].checkinArray enumerateObjectsUsingBlock:^(QBLGeoData* geodata, NSUInteger idx, BOOL *stop) {
             CLLocationCoordinate2D coord = {.latitude = geodata.latitude,
                                             .longitude = geodata.longitude};
@@ -60,8 +60,7 @@
         [alert show];
 
     // Show alert for check in
-    }
-    else {
+    } else {
 
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter your message"
                                                         message:@"\n"
@@ -109,8 +108,7 @@
             [alert show];
             
         // Errors
-        }
-        else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in wasn't successful"
                                                         message:[result.errors description]
                                                         delegate:self 
@@ -147,10 +145,8 @@
             default:
                 break;
         }
-        
     // Check in   alert
-    }
-    else if(alertView.tag == 2){
+    } else if(alertView.tag == 2) {
         if (buttonIndex == 1) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             
@@ -164,7 +160,6 @@
             
             // post own location
             [QBLocation createGeoData:geoData delegate:self];
-
         }        
     }
 }

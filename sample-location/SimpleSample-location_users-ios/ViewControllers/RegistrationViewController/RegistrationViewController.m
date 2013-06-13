@@ -37,7 +37,7 @@
 }
 
 // User Sign Up
-- (IBAction)next:(id)sender  {
+- (IBAction)next:(id)sender {
     // Create QuickBlox User entity
     QBUUser *user = [QBUUser user];       
 	user.password = self.password.text;
@@ -58,13 +58,13 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+- (void)completedWithResult:(Result*)result {
     
     // QuickBlox User creation result
-    if([result isKindOfClass:[QBUUserResult class]]){
+    if ([result isKindOfClass:[QBUUserResult class]]) {
         
         // Success result
-		if(result.success){
+		if (result.success) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration was successful. Please now sign in."
                                                       message:nil
                                                       delegate:self
@@ -73,7 +73,7 @@
             [alert show];
 		
         // Errors
-        }else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errors" 
                                                             message:[NSString stringWithFormat:@"%@",result.errors] 
                                                             delegate:nil
@@ -107,7 +107,7 @@
 #pragma mark -
 #pragma mark Touches processing
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.password resignFirstResponder];
     [self.userName resignFirstResponder];
 }

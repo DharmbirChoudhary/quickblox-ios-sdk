@@ -18,7 +18,7 @@
 
 @implementation SplashViewController 
 
-- (void)viewDidUnload{
+- (void)viewDidUnload {
     self.wheel = nil;
 
     [super viewDidUnload];
@@ -31,7 +31,7 @@
     
     [super viewDidLoad];
     
-    if(IS_HEIGHT_GTE_568){
+    if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.wheel.frame;
         frame.origin.y += 44;
         [self.wheel setFrame:frame];
@@ -46,7 +46,7 @@
     });    
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -59,10 +59,10 @@
 - (void)completedWithResult:(Result *)result {
     
     // QuickBlox application authorization result
-    if([result isKindOfClass:[QBAAuthSessionCreationResult class]]){
+    if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
         
         // Success result
-        if(result.success){
+        if (result.success) {
                         
             // retrieve users' points
             // create QBLGeoDataSearchRequest entity
@@ -75,8 +75,7 @@
             [QBLocation geoDataWithRequest:getRequest delegate:self];
             
         // show Errors
-        }
-        else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                 message:[result.errors description]
                                                 delegate:nil
@@ -84,9 +83,8 @@
                                                 otherButtonTitles:nil];
             [alert show];
         }
-    }
-    // Retrieve users' points result
-	else if([result isKindOfClass:[QBLGeoDataPagedResult class]]){
+        // Retrieve users' points result
+    } else if ([result isKindOfClass:[QBLGeoDataPagedResult class]]) {
         
         // Success result
         if (result.success) {
@@ -96,8 +94,7 @@
 
             [self performSelector:@selector(hideSplash) withObject:nil afterDelay:1];
         // Errors
-        }
-        else{
+        } else{
             NSLog(@"Errors=%@", result.errors);
         }
     }

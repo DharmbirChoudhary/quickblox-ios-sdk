@@ -63,10 +63,10 @@
 // QuickBlox API queries delegate
 -(void)completedWithResult:(Result *)result {
     // QuickBlox User authenticate result
-    if([result isKindOfClass:[QBUUserLogInResult class]]){
+    if ([result isKindOfClass:[QBUUserLogInResult class]]) {
 
         // Success result
-		if(result.success){
+		if (result.success) {
             QBUUserLogInResult *res = (QBUUserLogInResult *)result;
             
             // save current user
@@ -81,7 +81,7 @@
             [alert show];
             
         // Errors
-        }else{
+        } else  {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errors"
                                                             message:[result.errors description]
                                                             delegate:self
@@ -109,7 +109,7 @@
 #pragma mark -
 #pragma mark Touches processing
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.password resignFirstResponder];
     [self.login resignFirstResponder];
 }
