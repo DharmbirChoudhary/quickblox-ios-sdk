@@ -16,17 +16,16 @@
 
 @implementation SplashController
 
-- (void)viewDidUnload{
+- (void)viewDidUnload {
     self.wheel = nil;
     [super viewDidUnload];
 }
 
-- (void) viewDidAppear:(BOOL)animated{
+- (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
     // Your app connects to QuickBlox server here.
     //
     // QuickBlox session creation
@@ -34,7 +33,7 @@
     
     [super viewDidLoad];
     
-    if(IS_HEIGHT_GTE_568){
+    if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.wheel.frame;
         frame.origin.y += 44;
         [self.wheel setFrame:frame];
@@ -46,7 +45,7 @@
     [self performSegueWithIdentifier:@"mainSegue" sender:self];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -57,19 +56,19 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
-- (void)completedWithResult:(Result *)result{
+- (void)completedWithResult:(Result *)result {
     
     // QuickBlox application authorization result
-    if([result isKindOfClass:[QBAAuthSessionCreationResult class]]){
+    if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
         
         // Success result
-        if(result.success){
+        if (result.success) {
             
             // Hide splash & show main controller
             [self performSelector:@selector(hideSplash) withObject:nil afterDelay:2];
             
         // show Errors
-        }else{
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                             message:[result.errors description]
                                                            delegate:nil

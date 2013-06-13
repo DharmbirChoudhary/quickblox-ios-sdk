@@ -73,8 +73,7 @@
             [alert show];
 		
         // Errors
-        }
-        else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errors" 
                                                             message:[result.errors description]
                                                            delegate:nil 

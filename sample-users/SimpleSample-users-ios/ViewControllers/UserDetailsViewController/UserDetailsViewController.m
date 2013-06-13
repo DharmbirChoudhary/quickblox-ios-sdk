@@ -56,11 +56,10 @@
     self.emailLabel.text = self.choosedUser.email;
     self.websiteLabel.text = self.choosedUser.website;
     
-    for(NSString *tag in self.choosedUser.tags) {
+    for (NSString *tag in self.choosedUser.tags) {
         if([self.tagLabel.text length] == 0) {
             self.tagLabel.text = tag;
-        }
-        else {
+        } else {
             self.tagLabel.text = [NSString stringWithFormat:@"%@, %@", self.tagLabel.text, tag];
         }
     }

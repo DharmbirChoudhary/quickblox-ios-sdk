@@ -33,7 +33,7 @@
     // e.g. self.myOutlet = nil;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.password resignFirstResponder];
     [self.login resignFirstResponder];
 }
@@ -68,13 +68,13 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result {
+- (void)completedWithResult:(Result *)result {
     
     // QuickBlox User authenticate result
-    if([result isKindOfClass:[QBUUserLogInResult class]]) {
+    if ([result isKindOfClass:[QBUUserLogInResult class]]) {
 		
         // Success result
-        if(result.success) {
+        if (result.success) {
             
             QBUUserLogInResult *res = (QBUUserLogInResult *)result;
             
@@ -85,8 +85,7 @@
             
 		
         // Errors
-        }
-        else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errors"
                                                             message:[result.errors description]
                                                            delegate:self
@@ -115,7 +114,7 @@
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag != 1){
+    if (alertView.tag != 1) {
         [self dismissModalViewControllerAnimated:YES];
     }
 }

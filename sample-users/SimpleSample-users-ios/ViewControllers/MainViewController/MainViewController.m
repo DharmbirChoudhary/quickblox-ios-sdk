@@ -82,9 +82,7 @@
         
         UserDetailsViewController *detailsController = segue.destinationViewController;
         detailsController.choosedUser = [self.searchUsers objectAtIndex:[selectedIndexPath row]];
-    }
-    
-    else if ([segue.identifier isEqualToString:@"editSegue"]) {
+    } else if ([segue.identifier isEqualToString:@"editSegue"]) {
         EditViewController *editController = segue.destinationViewController;
         
         editController.user = self.currentUser;
@@ -147,7 +145,7 @@
 // QuickBlox API queries delegate
 - (void)completedWithResult:(Result *)result {
     // Retrieve Users result
-    if([result isKindOfClass:[QBUUserPagedResult class]]) {
+    if ([result isKindOfClass:[QBUUserPagedResult class]]) {
         // Success result
         if (result.success) {
             // update table
@@ -157,8 +155,7 @@
             [self.myTableView reloadData];
         
         // Errors
-        }
-        else {
+        } else {
             NSLog(@"Errors=%@", result.errors); 
         }
         
@@ -193,8 +190,7 @@
     QBUUser* obtainedUser = [self.searchUsers objectAtIndex:[indexPath row]];
     if(obtainedUser.login != nil){
         cell.userLogin.text = obtainedUser.login;
-    }
-    else{
+    } else {
          cell.userLogin.text = obtainedUser.email;
     }
     
@@ -212,34 +208,34 @@
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
--(void) searchBarSearchButtonClicked:(UISearchBar *)SearchBar{
+- (void) searchBarSearchButtonClicked:(UISearchBar *)SearchBar {
     [self.searchBar resignFirstResponder];
 }
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     [self.searchUsers removeAllObjects];
     
-    if([searchText length] == 0){
-        
+    if ([searchText length] == 0) {
         [self.searchUsers addObjectsFromArray:self.users];
-        
-    }else{
-        for(QBUUser *user in self.users){
+    } else {
+        for (QBUUser *user in self.users) {
             
             NSRange loginRange = NSMakeRange(NSNotFound, 0);
-            if(user.login != nil){
+            if (user.login != nil) {
                 loginRange = [user.login rangeOfString:searchText options:NSCaseInsensitiveSearch];
             }
             NSRange fullNameRange = NSMakeRange(NSNotFound, 0);
-            if(user.fullName != nil){
+            if (user.fullName != nil) {
                 fullNameRange= [user.fullName rangeOfString:searchText options:NSCaseInsensitiveSearch];
             }
+            
             NSRange tagsRange = NSMakeRange(NSNotFound, 0);
-            if(user.tags != nil && [user.tags count] > 0){
+            
+            if (user.tags != nil && [user.tags count] > 0) {
                 tagsRange = [[user.tags description] rangeOfString:searchText options:NSCaseInsensitiveSearch];;
             }
-            if(loginRange.location != NSNotFound || fullNameRange.location != NSNotFound || tagsRange.location != NSNotFound){
+            if (loginRange.location != NSNotFound || fullNameRange.location != NSNotFound || tagsRange.location != NSNotFound) {
                 [self.searchUsers addObject:user];
             }
         }

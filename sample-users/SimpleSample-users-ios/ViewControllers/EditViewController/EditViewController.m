@@ -39,11 +39,9 @@
     [super viewDidUnload];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.loginFiled.text    = self.user.login;
@@ -52,10 +50,10 @@
     self.emailField.text    = self.user.email;
     self.websiteField.text  = self.user.website;
     
-    for(NSString *tag in self.user.tags) {
+    for (NSString *tag in self.user.tags) {
         if([self.tagsField.text length] == 0) {
             self.tagsField.text = tag;
-        }else{
+        } else {
             self.tagsField.text = [NSString stringWithFormat:@"%@, %@", self.tagsField.text, tag];
         }
     }
@@ -102,7 +100,7 @@
     // Your application might not need or want this behavior.
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin) ) {
+    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin)) {
         CGPoint scrollPoint = CGPointMake(0.0, self.activeField.frame.origin.y - kbSize.height);
         [self.scrollView setContentOffset:scrollPoint animated:YES];
     }
@@ -117,7 +115,7 @@
 
 // Update user
 - (void)update:(id)sender {    
-    if ( [self.loginFiled.text length] != 0) {
+    if ([self.loginFiled.text length] != 0) {
         self.user.login = self.loginFiled.text;
     }
     
@@ -137,7 +135,7 @@
         self.user.website = self.websiteField.text;
     }
     
-    if([self.tagsField.text length] != 0) {
+    if  ([self.tagsField.text length] != 0) {
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[[self.tagsField.text stringByReplacingOccurrencesOfString:@" " withString:@""] componentsSeparatedByString:@","]];
         self.user.tags = array;
     }
@@ -158,11 +156,11 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result *)result {
+- (void)completedWithResult:(Result *)result {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     // Edit user result
-    if([result isKindOfClass:[QBUUserResult class]]) {
+    if ([result isKindOfClass:[QBUUserResult class]]) {
         // Success result
         if (result.success) { 
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil 
@@ -175,8 +173,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"userUpdatedSuccessfully" object:nil userInfo:@{@"user" : self.user}];
         
         // Errors
-        }
-        else {
+        } else {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                     message:[result.errors description]
                                                     delegate:nil 
