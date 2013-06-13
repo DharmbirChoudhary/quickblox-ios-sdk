@@ -91,15 +91,15 @@
 }
 
 // Making table view using custom cells
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* SimpleTableIdentifier = @"SimpleTableIdentifier";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *simpleTableIdentifier = @"SimpleTableIdentifier";
     
-    CustomTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
+    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
    
     // set note name & status
     QBCOCustomObject* customObjectForCell = [self.searchArray objectAtIndex:indexPath.row];
-    NSString* noteText = [[customObjectForCell fields] objectForKey:@"note"];
-    NSString* statusText = [[customObjectForCell fields] objectForKey:@"status"];
+    NSString *noteText = customObjectForCell.fields[@"note"];
+    NSString *statusText = customObjectForCell.fields[@"status"];
     
     [cell.noteLabel setText:noteText];
     [cell.statusLabel setText:statusText];
@@ -114,8 +114,7 @@
     if ([customObject updatedAt]) {
         NSDate* updateDate = [[self.searchArray objectAtIndex:indexPath.row] updatedAt];
         stringFromDate = [formatter stringFromDate:updateDate];
-    }
-    else {
+    } else {
         NSDate* creationDate = [[self.searchArray objectAtIndex:indexPath.row] createdAt];
         stringFromDate = [formatter stringFromDate:creationDate];
     }
@@ -135,7 +134,7 @@
     
     [self.searchArray removeAllObjects];
     
-    if([searchText length] == 0) {
+    if ([searchText length] == 0) {
         [self.searchArray addObjectsFromArray:[[DataManager shared] notes]];
         [self.searchBar resignFirstResponder];
         
