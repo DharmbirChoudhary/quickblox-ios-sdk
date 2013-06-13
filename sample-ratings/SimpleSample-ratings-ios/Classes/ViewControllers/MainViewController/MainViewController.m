@@ -41,9 +41,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"movieDetailsSegue"]) {
         CustomTableViewCell *selectedCell = (CustomTableViewCell *)sender;
-        NSIndexPath* indexPath = [self.tableView indexPathForCell:selectedCell];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
         
-        MovieDetailsViewController* detailsController = segue.destinationViewController;
+        MovieDetailsViewController *detailsController = segue.destinationViewController;
         
         Movie *selectedMovie = [[DataManager shared].movies objectAtIndex:indexPath.row];
         [detailsController setMovie:selectedMovie];
@@ -54,12 +54,12 @@
 #pragma mark TableViewDataSource & TableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CustomTableViewCell* cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    CustomTableViewCell *cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"movieDetailsSegue" sender:cell];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    CustomTableViewCell* cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    CustomTableViewCell *cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"movieDetailsSegue" sender:cell];
 }
 
@@ -69,9 +69,9 @@
 
 // Making table view using custom cells
 - (UITableViewCell*)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* SimpleTableIdentifier = @"SimpleTableIdentifier";
+    static NSString *SimpleTableIdentifier = @"SimpleTableIdentifier";
     
-    CustomTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
+    CustomTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
     
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     

@@ -10,7 +10,6 @@
 		431EE5151600A42A00E85366 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 431EE5141600A42A00E85366 /* images.jpeg */; };
 		438146731600A13200A508F5 /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438146701600A13200A508F5 /* images.jpg */; };
 		43900C10162455930041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C0F162455930041381B /* Default-568h@2x.png */; };
-		43ECA73D1600984D005DC731 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43ECA73F1600984D005DC731 /* SplashViewController.xib */; };
 		61EB52D01769F35200DB9321 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61EB52CF1769F35200DB9321 /* MainStoryboard.storyboard */; };
 		ED3BA44B15AC1097002B8CFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3BA44A15AC1097002B8CFE /* UIKit.framework */; };
 		ED3BA44D15AC1097002B8CFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3BA44C15AC1097002B8CFE /* Foundation.framework */; };
@@ -42,8 +41,6 @@
 		FA023EF81602339A00948B7E /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA023EEC1602339A00948B7E /* SplashViewController.m */; };
 		FA023EF91602339A00948B7E /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA023EEF1602339A00948B7E /* CustomTableViewCell.m */; };
 		FA023EFA1602339A00948B7E /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA023EF11602339A00948B7E /* RateView.m */; };
-		FA023EFF160233E700948B7E /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA023EFB160233E700948B7E /* MainViewController.xib */; };
-		FA023F00160233E700948B7E /* MovieDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA023EFD160233E700948B7E /* MovieDetailsViewController.xib */; };
 		FA023F071602345300948B7E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA023F031602345300948B7E /* MainViewController.m */; };
 		FA023F081602345300948B7E /* MovieDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA023F061602345300948B7E /* MovieDetailsViewController.m */; };
 		FA023F0E1602348100948B7E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA023F0B1602348100948B7E /* DataManager.m */; };
@@ -65,7 +62,6 @@
 		431EE5141600A42A00E85366 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
 		438146701600A13200A508F5 /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
 		43900C0F162455930041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		43ECA73E1600984D005DC731 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SplashViewController.xib; sourceTree = "<group>"; };
 		61EB52CF1769F35200DB9321 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		ED3BA44615AC1097002B8CFE /* SimpleSample-ratings-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleSample-ratings-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED3BA44A15AC1097002B8CFE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -101,8 +97,6 @@
 		FA023EEF1602339A00948B7E /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		FA023EF01602339A00948B7E /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		FA023EF11602339A00948B7E /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
-		FA023EFC160233E700948B7E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainViewController.xib; sourceTree = "<group>"; };
-		FA023EFE160233E700948B7E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MovieDetailsViewController.xib; sourceTree = "<group>"; };
 		FA023F021602345300948B7E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		FA023F031602345300948B7E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		FA023F051602345300948B7E /* MovieDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailsViewController.h; sourceTree = "<group>"; };
@@ -289,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				FA6ECF5815BEA59D00833341 /* images */,
-				FA6ECF6115BEA59D00833341 /* xibs */,
 				61EB52CF1769F35200DB9321 /* MainStoryboard.storyboard */,
 			);
 			path = Resources;
@@ -308,16 +301,6 @@
 				43900C0F162455930041381B /* Default-568h@2x.png */,
 			);
 			path = images;
-			sourceTree = "<group>";
-		};
-		FA6ECF6115BEA59D00833341 /* xibs */ = {
-			isa = PBXGroup;
-			children = (
-				FA023EFB160233E700948B7E /* MainViewController.xib */,
-				FA023EFD160233E700948B7E /* MovieDetailsViewController.xib */,
-				43ECA73F1600984D005DC731 /* SplashViewController.xib */,
-			);
-			path = xibs;
 			sourceTree = "<group>";
 		};
 		FA6ECF6515BEA59D00833341 /* SimpleSample-ratings-ios */ = {
@@ -397,7 +380,6 @@
 				FA6ECF8115BEA59D00833341 /* Default.png in Resources */,
 				FA6ECF8215BEA59D00833341 /* icon.png in Resources */,
 				FA6ECF8315BEA59D00833341 /* logo.png in Resources */,
-				43ECA73D1600984D005DC731 /* SplashViewController.xib in Resources */,
 				FA6ECF9115BEA59D00833341 /* InfoPlist.strings in Resources */,
 				438146731600A13200A508F5 /* images.jpg in Resources */,
 				431EE5151600A42A00E85366 /* images.jpeg in Resources */,
@@ -416,8 +398,6 @@
 				FA023EDC1602335C00948B7E /* StarFull@2x.png in Resources */,
 				FA023EDD1602335C00948B7E /* StarFullLarge.png in Resources */,
 				FA023EDE1602335C00948B7E /* StarFullLarge@2x.png in Resources */,
-				FA023EFF160233E700948B7E /* MainViewController.xib in Resources */,
-				FA023F00160233E700948B7E /* MovieDetailsViewController.xib in Resources */,
 				43900C10162455930041381B /* Default-568h@2x.png in Resources */,
 				61EB52D01769F35200DB9321 /* MainStoryboard.storyboard in Resources */,
 			);
@@ -445,30 +425,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		43ECA73F1600984D005DC731 /* SplashViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43ECA73E1600984D005DC731 /* en */,
-			);
-			name = SplashViewController.xib;
-			sourceTree = "<group>";
-		};
-		FA023EFB160233E700948B7E /* MainViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA023EFC160233E700948B7E /* en */,
-			);
-			name = MainViewController.xib;
-			sourceTree = "<group>";
-		};
-		FA023EFD160233E700948B7E /* MovieDetailsViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA023EFE160233E700948B7E /* en */,
-			);
-			name = MovieDetailsViewController.xib;
-			sourceTree = "<group>";
-		};
 		FA6ECF7915BEA59D00833341 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

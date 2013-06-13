@@ -16,11 +16,10 @@
 @end
 
 @implementation SplashViewController
-@synthesize activityIndicator;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [activityIndicator startAnimating];  
+    [self.activityIndicator startAnimating];
     
     // Your app connects to QuickBlox server here.
     //
@@ -40,7 +39,6 @@
 }
 
 - (void)viewDidUnload {
-//    [self setDelegate:nil];
     [self setActivityIndicator:nil];
     [super viewDidUnload];
 }

@@ -10,13 +10,4 @@
 
 @implementation Movie
 
-@synthesize movieName;
-@synthesize movieImage;
-@synthesize movieRating;
-@synthesize movieDetails;
-@synthesize gameModeID;
-@synthesize rating;
-
-
-
 @end

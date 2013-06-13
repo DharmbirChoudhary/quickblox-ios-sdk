@@ -24,14 +24,6 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
 
 @implementation RateView
 
-@synthesize rate = _rate;
-@synthesize alignment = _alignment;
-@synthesize padding = _padding;
-@synthesize editable = _editable;
-@synthesize fullStarImage = _fullStarImage;
-@synthesize emptyStarImage = _emptyStarImage;
-@synthesize delegate = _delegate;
-
 - (RateView *)initWithFrame:(CGRect)frame {
     
     return [self initWithFrame:frame fullStar:[UIImage imageNamed:DefaultFullStarImageFilename] emptyStar:[UIImage imageNamed:DefaultEmptyStarImageFilename]];
