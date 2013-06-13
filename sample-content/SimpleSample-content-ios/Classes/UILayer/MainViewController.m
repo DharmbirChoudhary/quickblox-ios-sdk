@@ -43,7 +43,6 @@
     currentImageX = START_POSITION_X;
     currentImageY = START_POSITION_Y;
     picturesInRowCounter = 0;
-
     
     // Show toolbar
     UIBarButtonItem *uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"Add new image" style:UIBarButtonItemStyleBordered  target:self action:@selector(selectPicture)];
@@ -92,7 +91,7 @@
 
 - (void)downloadFile {
     int fileID = [(QBCBlob *)[[[DataManager instance] fileList] lastObject] ID];
-    if(fileID > 0) {
+    if (fileID > 0) {
         // Download file from QuickBlox server
         [QBContent TDownloadFileWithBlobID:fileID delegate:self];
     }
@@ -188,13 +187,10 @@
 
 // QuickBlox API queries delegate
 - (void)completedWithResult:(Result *)result {
-    NSLog(@" RESULT%@",result);
     // Download file result
     if ([result isKindOfClass:QBCFileDownloadTaskResult.class]) {
-        
         // Success result
         if (result.success) {
-            
             QBCFileDownloadTaskResult *res = (QBCFileDownloadTaskResult *)result;
             if ([res file]) {
                 // Add image to gallery

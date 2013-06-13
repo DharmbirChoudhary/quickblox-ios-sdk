@@ -81,8 +81,7 @@
             [QBContent blobsWithPagedRequest:pagedRequest delegate:self];
             
         // Get User's files result
-        }
-        else if ([result isKindOfClass:[QBCBlobPagedResult class]]) {
+        } else if ([result isKindOfClass:[QBCBlobPagedResult class]]) {
             QBCBlobPagedResult *res = (QBCBlobPagedResult *)result;
             
             // Save user's filelist

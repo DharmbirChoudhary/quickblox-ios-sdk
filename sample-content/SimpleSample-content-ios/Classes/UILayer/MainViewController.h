@@ -14,7 +14,5 @@
 #import <UIKit/UIKit.h>
 #import "SplashViewController.h"
 
-@interface MainViewController : UIViewController {
-}
-
+@interface MainViewController : UIViewController 
 @end
