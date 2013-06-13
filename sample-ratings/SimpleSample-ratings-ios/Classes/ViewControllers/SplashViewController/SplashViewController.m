@@ -31,7 +31,7 @@
     [QBAuth createSessionWithExtendedRequest:extendedAuthRequest delegate:self];
     
     
-    if(IS_HEIGHT_GTE_568) {
+    if (IS_HEIGHT_GTE_568) {
         CGRect frame = self.activityIndicator.frame;
         frame.origin.y += 44;
         [self.activityIndicator setFrame:frame];
@@ -47,7 +47,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)hideSplashScreen {
+- (void)hideSplashScreen {
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -55,19 +55,20 @@
 #pragma mark QBActionStatusDelegate
 
 // QuickBlox API queries delegate
--(void)completedWithResult:(Result*)result{
+- (void)completedWithResult:(Result*)result {
     
     // QuickBlox session creation result
-    if([result isKindOfClass:[QBAAuthSessionCreationResult class]]){
+    if ([result isKindOfClass:[QBAAuthSessionCreationResult class]]) {
         
         // Success result
-        if(result.success){
+        if (result.success) {
             
             // Get average ratings
             [QBRatings averagesForApplicationWithDelegate:self];
         
         // show Errors
-        }else{
+        }
+        else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", "")
                                                             message:[result.errors description]
                                                            delegate:nil
@@ -77,10 +78,11 @@
         }
         
     // Get average ratings result
-    }else if([result isKindOfClass:QBRAveragePagedResult.class]){
+    }
+    else if ([result isKindOfClass:QBRAveragePagedResult.class]) {
         
         // Success result
-        if(result.success){
+        if (result.success) {
             
             QBRAveragePagedResult *res = (QBRAveragePagedResult *)result;
             

@@ -18,6 +18,6 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
--(void)hideSplashScreen;
+- (void)hideSplashScreen;
 
 @end

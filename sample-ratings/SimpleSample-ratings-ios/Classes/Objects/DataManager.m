@@ -13,7 +13,7 @@
 
 static DataManager *dataManager = nil;
 
-+(DataManager *)shared{
++ (DataManager *)shared {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         dataManager = [[self alloc] init];

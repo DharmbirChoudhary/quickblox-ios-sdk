@@ -60,13 +60,7 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
     return self;
 }
 
-- (void)dealloc {
-     _fullStarImage = nil;
-     _emptyStarImage = nil;
-}
-
-- (void)commonSetup
-{
+- (void)commonSetup {
     // Include the initialization code that is common to initWithFrame:
     // and initWithCoder: here.
     _padding = 4;
@@ -75,20 +69,19 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
     self.editable = NO;
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     switch (_alignment) {
-        case RateViewAlignmentLeft:
-        {
+        case RateViewAlignmentLeft: {
             _origin = CGPointMake(0, 0);
             break;
         }
-        case RateViewAlignmentCenter:         {
+            
+        case RateViewAlignmentCenter: {
             _origin = CGPointMake((self.bounds.size.width - _numOfStars * _fullStarImage.size.width - (_numOfStars - 1) * _padding)/2, 0);
             break;
         }
-        case RateViewAlignmentRight:
-        {
+            
+        case RateViewAlignmentRight: {
             _origin = CGPointMake(self.bounds.size.width - _numOfStars * _fullStarImage.size.width - (_numOfStars - 1) * _padding, 0);
             return;
         }
@@ -120,8 +113,7 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
     [self notifyDelegate];
 }
 
-- (void)setAlignment:(RateViewAlignment)alignment
-{
+- (void)setAlignment:(RateViewAlignment)alignment {
     _alignment = alignment;
     [self setNeedsLayout];
 }
@@ -131,16 +123,14 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
     self.userInteractionEnabled = _editable;
 }
 
-- (void)setFullStarImage:(UIImage *)fullStarImage
-{
+- (void)setFullStarImage:(UIImage *)fullStarImage {
     if (fullStarImage != _fullStarImage) {
         _fullStarImage = fullStarImage;
         [self setNeedsDisplay];
     }
 }
 
-- (void)setEmptyStarImage:(UIImage *)emptyStarImage
-{
+- (void)setEmptyStarImage:(UIImage *)emptyStarImage {
     if (emptyStarImage != _emptyStarImage) {
         _emptyStarImage = emptyStarImage;
         [self setNeedsDisplay];
@@ -148,7 +138,7 @@ static NSString *DefaultEmptyBigStarImageFilename = @"StarEmptyLarge.png";
 }
 
 - (void)handleTouchAtLocation:(CGPoint)location {
-    for(int i = _numOfStars - 1; i > -1; i--) {
+    for (int i = _numOfStars - 1; i > -1; i--) {
         if (location.x > _origin.x + i * (_fullStarImage.size.width + _padding) - _padding / 2.) {
             self.rate = i + 1;
             return;
