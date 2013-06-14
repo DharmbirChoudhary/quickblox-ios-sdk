@@ -223,7 +223,8 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return ((QBUUser *)[_users objectAtIndex:row]).login;
+    QBUUser* user = [self.users objectAtIndex:row];
+    return user.login;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
