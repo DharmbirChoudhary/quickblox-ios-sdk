@@ -87,23 +87,28 @@
             
             QBRAveragePagedResult *res = (QBRAveragePagedResult *)result;
             
-            // set ratings for movies
-            for (QBRAverage *average in res.averages) {
-                for (int i = 0; i < [[[DataManager shared] movies] count]; i++) {
-                    Movie *movie = [[DataManager shared].movies objectAtIndex:i];
-                    if (average.gameModeID == [movie gameModeID]) {
-                        [movie setRating:average.value];
-
-                        break;
-                    }
-                }
-            }
-            
+            [res.averages enumerateObjectsUsingBlock:^(QBRAverage* average, NSUInteger idx, BOOL *stop) {
+                [self setFilmAverageValue:average];
+            }];
+           
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainControllerWillUpdateTable" object:nil];
             // hide splash
             [self performSelector:@selector(hideSplashScreen) withObject:self afterDelay:1];
         }
     }
+}
+
+- (void)setFilmAverageValue:(QBRAverage *)average {
+    NSSet *moviesSet = [NSSet setWithArray:[DataManager shared].movies];
+    
+    NSSet *foundObjects = [moviesSet objectsPassingTest:^BOOL(Movie *movie, BOOL *stop) {
+        return movie.gameModeID == average.gameModeID;
+    }];
+    
+    Movie *foundMovie = [foundObjects anyObject];
+    if (foundMovie) {
+        [foundMovie setRating:average.value];
+    }    
 }
 
 @end

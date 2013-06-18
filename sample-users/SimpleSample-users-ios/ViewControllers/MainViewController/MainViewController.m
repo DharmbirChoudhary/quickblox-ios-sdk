@@ -219,29 +219,31 @@
     if ([searchText length] == 0) {
         [self.searchUsers addObjectsFromArray:self.users];
     } else {
-        for (QBUUser *user in self.users) {
+       
+        [self.users enumerateObjectsUsingBlock:^(QBUUser* user, NSUInteger idx, BOOL *stop) {
+            BOOL result = [self field:user.login containsSearchText:searchText];
             
-            NSRange loginRange = NSMakeRange(NSNotFound, 0);
-            if (user.login != nil) {
-                loginRange = [user.login rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            }
-            NSRange fullNameRange = NSMakeRange(NSNotFound, 0);
-            if (user.fullName != nil) {
-                fullNameRange= [user.fullName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            result = result || [self field:user.fullName containsSearchText:searchText];
+            
+            if (user.tags.count > 0) {
+                result = result || [self field:user.tags.description containsSearchText:searchText];
             }
             
-            NSRange tagsRange = NSMakeRange(NSNotFound, 0);
-            
-            if (user.tags != nil && [user.tags count] > 0) {
-                tagsRange = [[user.tags description] rangeOfString:searchText options:NSCaseInsensitiveSearch];;
-            }
-            if (loginRange.location != NSNotFound || fullNameRange.location != NSNotFound || tagsRange.location != NSNotFound) {
+            if (result) {
                 [self.searchUsers addObject:user];
             }
-        }
+        }];
     }
     
     [self.myTableView reloadData];
+}
+
+- (BOOL)field:(NSString *)fieldText containsSearchText:(NSString *)searchBarText {
+    NSRange searchRange = NSMakeRange(NSNotFound, 0);
+    if (searchBarText && fieldText) {
+        searchRange = [fieldText rangeOfString:searchBarText options:NSCaseInsensitiveSearch];
+    }
+    return searchRange.location != NSNotFound;
 }
 
 
