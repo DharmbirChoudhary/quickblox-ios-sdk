@@ -62,10 +62,9 @@
             [imageView setBackgroundColor:[UIColor clearColor]];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             imageView.image = [UIImage imageWithData:res.file];
-            
+             
             [self.scrollView setContentSize:CGSizeMake(320, 420 * (imageNumber + 1))];
-            [self.scrollView addSubview:imageView];
-            
+            [self.scrollView addSubview:imageView];           
             
             ++imageNumber;
             

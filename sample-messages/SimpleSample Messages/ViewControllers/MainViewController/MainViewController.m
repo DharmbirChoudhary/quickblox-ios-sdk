@@ -92,7 +92,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return NO;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 // Send push notification
@@ -100,13 +100,11 @@
 
     // not selected receiver(user)
    if ([self.toUserName.text length] == 0 || [_users count] == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please select user." message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alert show];
-        
+       [self showAlertWithOKButtonAntText:@"Please select user."];
+       
     // empty text
     } else if([self.messageBody.text length] == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter some text" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alert show];
+        [self showAlertWithOKButtonAntText:@"Please enter some text"];
     
     // send push
     } else {
@@ -186,17 +184,27 @@
 
         // Success result
         if(result.success) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message sent successfully" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [alert show];
+            [self showAlertWithOKButtonAntText:@"Message sent successfully"];
+            [self.messageBody setText:@""];
             
         // Errors
         } else {
             NSLog(@"Errors=%@", result.errors);
+            
+            if ([result.errors.lastObject isEqualToString:@"No one can receive the message"]) {
+                [self showAlertWithOKButtonAntText:@"Message sent successfully"];
+                [self.messageBody setText:@""];
+            }
         }
     }
 }
 
-- (IBAction)buttonRichClicked:(UIButton*)tappedButton {
+- (void)showAlertWithOKButtonAntText:(NSString *)alertText {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertText message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alert show];
+}
+
+- (IBAction)buttonRichClicked:(UIButton *)tappedButton {
     // Show rich content
     [self performSegueWithIdentifier:@"richSegue" sender:tappedButton];
 }
