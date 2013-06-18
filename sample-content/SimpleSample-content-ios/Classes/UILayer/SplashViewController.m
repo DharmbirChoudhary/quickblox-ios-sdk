@@ -24,11 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_activityIndicator startAnimating];
-    
-    // Your app connects to QuickBlox server here.
-    //
-    // QuickBlox session creation   
-    
+       
     [self createQBSession];
     
     if (IS_HEIGHT_GTE_568) {
