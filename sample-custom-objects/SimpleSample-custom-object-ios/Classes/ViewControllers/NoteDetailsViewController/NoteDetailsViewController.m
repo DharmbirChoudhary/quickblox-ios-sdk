@@ -91,14 +91,16 @@
         [self.comentsTextView setText:nil];
         int count = 1;
         for (NSString *comment in comments) {
-            if (count == 1) {
-                NSString *str = [[NSString alloc] initWithFormat:@"#%d %@\n\n",count, comment];
-                [self.comentsTextView setText:str];
-            } else {
-                NSString *str = [[NSString alloc] initWithFormat:@"%@#%d %@\n\n", self.comentsTextView.text, count, comment];
-                [self.comentsTextView setText:str];
+            if (![comment isEqualToString:@""]) {
+                if (count == 1) {
+                    NSString *str = [[NSString alloc] initWithFormat:@"#%d %@\n\n",count, comment];
+                    [self.comentsTextView setText:str];
+                } else {
+                    NSString *str = [[NSString alloc] initWithFormat:@"%@#%d %@\n\n", self.comentsTextView.text, count, comment];
+                    [self.comentsTextView setText:str];
+                }
+                count++;
             }
-            count++;
         }
     }
 }
@@ -147,25 +149,43 @@
     } else {
         switch (buttonIndex) {
             case 1: {
+                
                 NSString* noteComment = self.customObject.fields[@"comment"];
                 NSString* alertText = ((UITextField *)[alertView viewWithTag:101]).text;
                 // change comments & update custom object
                 
-                NSString *comments = [[NSString alloc] initWithFormat:@"%@-c-%@", noteComment,alertText];
-
-                self.customObject.fields[@"comment"] = comments;
-            
-                [QBCustomObjects updateObject:self.customObject delegate:self];
-            
-                // refresh table
-                [self reloadData];
-            
+                if (alertText && ![alertText isEqualToString:@""]) {
+                    NSString *comments = nil;
+                    
+                    if (!noteComment || [noteComment isKindOfClass:[NSNull class]]) {
+                        comments = [[NSString alloc] initWithFormat:@"%@-c-",alertText];
+                    }
+                    
+                    else
+                        comments = [[NSString alloc] initWithFormat:@"%@-c-%@", noteComment,alertText];
+                    
+                    self.customObject.fields[@"comment"] = comments;
+                    
+                    [QBCustomObjects updateObject:self.customObject delegate:self];
+                    
+                    // refresh table
+                    [self reloadData];
+                }
+                else {
+                    [self showAlertWithOKButtonAndText:@"You cannot leave empty comment!"];
+                }
+                
                 break;
             }
             default:
                 break;
         }
     }
+}
+
+- (void)showAlertWithOKButtonAndText:(NSString *)text {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 

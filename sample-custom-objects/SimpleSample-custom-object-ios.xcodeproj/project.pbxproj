@@ -13,12 +13,9 @@
 		43658AF71603174E000F6748 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43658AF51603174E000F6748 /* InfoPlist.strings */; };
 		43658AF91603174E000F6748 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43658AF81603174E000F6748 /* main.m */; };
 		43658AFD1603174E000F6748 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43658AFC1603174E000F6748 /* AppDelegate.m */; };
-		43658B3B16031D8D000F6748 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43658B3916031D8D000F6748 /* MainViewController.xib */; };
 		43658B4516031E43000F6748 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 43658B4216031E43000F6748 /* Default.png */; };
 		43658B4616031E43000F6748 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 43658B4316031E43000F6748 /* icon.png */; };
 		43658B4716031E43000F6748 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 43658B4416031E43000F6748 /* logo.png */; };
-		43658B4E16031FC8000F6748 /* NoteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43658B4C16031FC8000F6748 /* NoteDetailsViewController.xib */; };
-		43658B5316031FE7000F6748 /* NewNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43658B5116031FE7000F6748 /* NewNoteViewController.xib */; };
 		4382D7601607474D00DA7A38 /* imagesbackground.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4382D75F1607474D00DA7A38 /* imagesbackground.jpeg */; };
 		43900C01162443CF0041381B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43900C00162443CF0041381B /* Default-568h@2x.png */; };
 		43E141461603340300891AD7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E141451603340300891AD7 /* CoreData.framework */; };
@@ -55,12 +52,9 @@
 		43658AFA1603174E000F6748 /* SimpleSample-custom-object-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleSample-custom-object-ios-Prefix.pch"; sourceTree = "<group>"; };
 		43658AFB1603174E000F6748 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		43658AFC1603174E000F6748 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		43658B3916031D8D000F6748 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		43658B4216031E43000F6748 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		43658B4316031E43000F6748 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		43658B4416031E43000F6748 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		43658B4C16031FC8000F6748 /* NoteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteDetailsViewController.xib; sourceTree = "<group>"; };
-		43658B5116031FE7000F6748 /* NewNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewNoteViewController.xib; sourceTree = "<group>"; };
 		4382D75F1607474D00DA7A38 /* imagesbackground.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imagesbackground.jpeg; sourceTree = "<group>"; };
 		43900C00162443CF0041381B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		43E141451603340300891AD7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -188,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				43658B3716031D8D000F6748 /* Images */,
-				43658B3816031D8D000F6748 /* Xibs */,
 				618D16881766235F001C638F /* MainStoryboard.storyboard */,
 			);
 			name = Resources;
@@ -205,16 +198,6 @@
 				43658B4416031E43000F6748 /* logo.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		43658B3816031D8D000F6748 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				43658B5116031FE7000F6748 /* NewNoteViewController.xib */,
-				43658B4C16031FC8000F6748 /* NoteDetailsViewController.xib */,
-				43658B3916031D8D000F6748 /* MainViewController.xib */,
-			);
-			path = Xibs;
 			sourceTree = "<group>";
 		};
 		FA8764EE160875E400EB1B58 /* Classes */ = {
@@ -345,12 +328,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				43658AF71603174E000F6748 /* InfoPlist.strings in Resources */,
-				43658B3B16031D8D000F6748 /* MainViewController.xib in Resources */,
 				43658B4516031E43000F6748 /* Default.png in Resources */,
 				43658B4616031E43000F6748 /* icon.png in Resources */,
 				43658B4716031E43000F6748 /* logo.png in Resources */,
-				43658B4E16031FC8000F6748 /* NoteDetailsViewController.xib in Resources */,
-				43658B5316031FE7000F6748 /* NewNoteViewController.xib in Resources */,
 				4382D7601607474D00DA7A38 /* imagesbackground.jpeg in Resources */,
 				43900C01162443CF0041381B /* Default-568h@2x.png in Resources */,
 				618D16891766235F001C638F /* MainStoryboard.storyboard in Resources */,
